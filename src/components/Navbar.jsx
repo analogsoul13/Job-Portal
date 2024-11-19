@@ -3,7 +3,7 @@ import React from 'react'
 function Navbar() {
     return (
         <>
-            <div className="navbar bg-transparent font-custom bg-base-100 px-6 text-slate-700">
+            <div className="navbar bg-transparent font-custom bg-base-100 sm:px-6 ">
                 <div className="navbar-start">
                     {/* Mobile */}
                     <div className="dropdown">
@@ -52,8 +52,17 @@ function Navbar() {
                         <li><a><i className="fa-solid fa-layer-group" />About Us</a></li>
                     </ul>
                 </div>
-                <div className="navbar-end">
-                    <a className="btn rounded-full shadow-xl px-6 text-slate-700 font-normal btn-accent"><i className="fa-solid fa-user-plus" />Register</a>
+                <div className="navbar-end me-4 sm:me-0">
+                    <label className="swap swap-rotate">
+                        {/* this hidden checkbox controls the state */}
+                        <input type="checkbox" className="theme-controller" value="dark" />
+
+                        {/* sun icon */}
+                        <i className="fa-solid swap-off fa-sun" />
+
+                        {/* moon icon */}
+                        <i className="fa-solid swap-on fa-moon" />
+                    </label>
                 </div>
             </div>
         </>
