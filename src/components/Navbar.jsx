@@ -29,7 +29,7 @@ function Navbar() {
                                 <a>Browse</a>
                                 <ul className="p-2">
                                     <li><a><i className="fa-solid fa-briefcase" />Jobs</a></li>
-                                    <li><a>Internships</a></li>
+                                    <li><a><i className="fa-solid fa-school" />Internships</a></li>
                                 </ul>
                             </li>
                             <li><a>Register</a></li>
@@ -45,11 +45,12 @@ function Navbar() {
                                 <summary><i className="fa-solid fa-magnifying-glass" />Browse</summary>
                                 <ul className="p-2">
                                     <li><a><i className="fa-solid fa-briefcase" />Jobs</a></li>
-                                    <li><a>Internships</a></li>
+                                    <li><a><i className="fa-solid fa-school" />Internships</a></li>
                                 </ul>
                             </details>
                         </li>
                         <li><a><i className="fa-solid fa-layer-group" />About Us</a></li>
+                        <li><a><i className="fa-solid fa-user-plus" />Register</a></li>
                     </ul>
                 </div>
                 <div className="navbar-end me-4 sm:me-0">
