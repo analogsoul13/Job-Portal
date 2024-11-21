@@ -10,7 +10,9 @@ export default {
         'custom' : ['Roboto']
       },
       backgroundImage : {
-        homeCover: "url('/bg-cover.jpg')"
+        homeCover: "url('/bg-cover.jpg')",
+        offerCover: "url('/offer-cover.jpg')",
+        offerCover2: "url('/offer-cover2.jpg')"
       },
     },
   },

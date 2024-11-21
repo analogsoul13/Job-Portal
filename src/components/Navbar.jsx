@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Navbar() {
     return (
@@ -24,7 +25,7 @@ function Navbar() {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li><a><i className="fa-solid fa-house" />Home</a></li>
+                            <li><Link to={'/'}><i className="fa-solid fa-house" />Home</Link></li>
                             <li>
                                 <a>Browse</a>
                                 <ul className="p-2">
@@ -32,14 +33,14 @@ function Navbar() {
                                     <li><a><i className="fa-solid fa-school" />Internships</a></li>
                                 </ul>
                             </li>
-                            <li><a>Register</a></li>
+                            <li><Link to={'/auth'}>Register</Link></li>
                         </ul>
                     </div>
                     <a className="btn btn-ghost text-3xl">Talent Link</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a><i className="fa-solid fa-house" />Home</a></li>
+                        <li><Link to={'/'}><i className="fa-solid fa-house" />Home</Link></li>
                         <li>
                             <details>
                                 <summary><i className="fa-solid fa-magnifying-glass" />Browse</summary>
@@ -50,7 +51,7 @@ function Navbar() {
                             </details>
                         </li>
                         <li><a><i className="fa-solid fa-layer-group" />About Us</a></li>
-                        <li><a><i className="fa-solid fa-user-plus" />Register</a></li>
+                        <li><Link to={'/auth'}><i className="fa-solid fa-user-plus" />Register</Link></li>
                     </ul>
                 </div>
                 <div className="navbar-end me-4 sm:me-0">
