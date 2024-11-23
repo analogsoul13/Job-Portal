@@ -13,7 +13,9 @@ export default {
         homeCover: "url('/bg-cover.jpg')",
         offerCover: "url('/offer-cover.jpg')",
         offerCover2: "url('/offer-cover2.jpg')",
-        authBg: "url('/auth-bg.jpg')"
+        authBg: "url('/auth-bg.jpg')",
+        candidate: "url('/bg-candidate.jpg')",
+        recruiter: "url('/bg-recruiter.jpg')"
       },
     },
   },

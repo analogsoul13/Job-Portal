@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 function Auth() {
     const [authStatus, setAuthStatus] = useState(false)
@@ -80,7 +81,10 @@ function Auth() {
                             <div className="form-control mt-6">
                                 {
                                     authStatus ?
-                                        <button className="btn btn-accent">Login</button>
+                                        <Link to={'/role'}>
+                                            <button className="btn btn-accent">Login</button>
+                                        </Link>
+
                                         :
                                         <button className="btn btn-accent">Register</button>
                                 }
