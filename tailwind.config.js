@@ -12,7 +12,8 @@ export default {
       backgroundImage : {
         homeCover: "url('/bg-cover.jpg')",
         offerCover: "url('/offer-cover.jpg')",
-        offerCover2: "url('/offer-cover2.jpg')"
+        offerCover2: "url('/offer-cover2.jpg')",
+        authBg: "url('/auth-bg.jpg')"
       },
     },
   },
