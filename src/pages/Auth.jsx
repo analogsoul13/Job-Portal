@@ -11,19 +11,19 @@ function Auth() {
 
     return (
         <>
-            <div className="hero bg-base-100 min-h-screen bg-authBg bg-cover bg-center fade-in">
-                <div className="hero-content flex-col glass rounded-lg lg:flex-row-reverse">
+            <div className="min-h-screen bg-center bg-cover hero bg-base-100 bg-authBg fade-in">
+                <div className="flex-col rounded-lg hero-content md:h-[600px] glass md:flex-row-reverse">
                     {/* Text Section */}
-                    <div className="w-full lg:w-1/2 flex items-center text-white p-8"
+                    <div className="flex items-center w-full p-8 text-white lg:w-1/2"
                         style={{ minHeight: "100%" }}>
-                        <div className="text-center lg:text-left p-4 rounded-lg text-slate-700">
+                        <div className="p-4 text-center rounded-lg lg:text-left text-slate-700">
                             <h1 className="text-5xl font-bold">Register now for full experience!</h1>
                             <p className="py-6">
                                 Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.
                             </p>
                         </div>
                     </div>
-                    <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+                    <div className="w-full max-w-sm shadow-2xl card bg-base-100 shrink-0">
                         <div className="card-body">
                             <div className="form-control">
                                 {
@@ -33,10 +33,10 @@ function Auth() {
                                         <h1 className='text-center'>Register</h1>
                                 }
 
-                                <label className="label">
-                                    <span className="label-text">Email</span>
+                                <label className="input input-bordered mt-2 flex items-center gap-2">
+                                    <i className="fa-solid fa-envelope" />
+                                    <input type="text" className="grow" placeholder="Email" />
                                 </label>
-                                <input type="email" placeholder="email" className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 {
@@ -59,12 +59,13 @@ function Auth() {
 
                                 <label className="label">
                                     <span className="label-text">Password</span>
+                                    <i className="fa-solid fa-sm fa-key" style={{ color: "#00002b", }} />
                                 </label>
-                                <input type="password" placeholder="password" className="input input-bordered" required />
+                                <input type="password" placeholder="Password" className="input input-bordered" required />
                                 <label className="label">
                                     {
                                         authStatus ?
-                                            <div className='flex flex-row w-full justify-between'>
+                                            <div className='flex flex-row justify-between w-full'>
                                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                                                 <a href="#" onClick={changeAuth} className="label-text-alt link link-hover">New User?</a>
                                             </div>
@@ -78,7 +79,7 @@ function Auth() {
 
                                 </label>
                             </div>
-                            <div className="form-control mt-6">
+                            <div className="mt-6 form-control">
                                 {
                                     authStatus ?
                                         <Link to={'/role'}>

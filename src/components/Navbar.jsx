@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 function Navbar() {
     return (
         <>
-            <div className="navbar bg-transparent font-custom bg-base-100 sm:px-6 ">
+            <div className="bg-transparent navbar font-custom bg-base-100 sm:px-6 ">
                 <div className="navbar-start">
                     {/* Mobile */}
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
-                                className="h-5 w-5"
+                                className="w-5 h-5"
                                 fill="none"
                                 viewBox="0 0 24 24"
                                 stroke="currentColor">
@@ -36,10 +36,11 @@ function Navbar() {
                             <li><Link to={'/auth'}>Register</Link></li>
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-3xl">Talent Link</a>
+                    <a className="text-3xl btn btn-ghost">Talent Link</a>
                 </div>
-                <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal px-1">
+                {/* Navbar Center */}
+                <div className="hidden navbar-center lg:flex">
+                    <ul className="px-1 menu menu-horizontal">
                         <li><Link to={'/'}><i className="fa-solid fa-house" />Home</Link></li>
                         <li>
                             <details>
@@ -54,7 +55,8 @@ function Navbar() {
                         <li><Link to={'/auth'}><i className="fa-solid fa-user-plus" />Register</Link></li>
                     </ul>
                 </div>
-                <div className="navbar-end me-4 sm:me-0">
+                {/* Theme Switch */}
+                <div className="hidden me-6 sm:me-0">
                     <label className="swap swap-rotate">
                         {/* this hidden checkbox controls the state */}
                         <input type="checkbox" className="theme-controller" value="dark" />
@@ -65,6 +67,46 @@ function Navbar() {
                         {/* moon icon */}
                         <i className="fa-solid swap-on fa-moon" />
                     </label>
+                </div>
+                {/* Search and Profile icon */}
+                <div className="navbar-end gap-2 ">
+                    <div className="form-control">
+                        <input type="text" placeholder="Search" className="w-24 input input-bordered md:w-auto" />
+                    </div>
+                    <div className="dropdown dropdown-end">
+                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                            <div className="w-10 rounded-full">
+                                <img
+                                    alt="Tailwind CSS Navbar component"
+                                    src="https://www.pngall.com/wp-content/uploads/5/Profile.png" />
+                            </div>
+                        </div>
+                        <ul
+                            tabIndex={0}
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                            <li>
+                                <a className="justify-between">
+                                    Profile
+                                    <span className="badge">Complete</span>
+                                </a>
+                            </li>
+                            <li><a>Settings</a></li>
+                            <li><a>Logout</a></li>
+                            {/* Theme Switch */}
+                            <li>
+                                <label className="swap swap-rotate">
+                                    {/* this hidden checkbox controls the state */}
+                                    <input type="checkbox" className="theme-controller" value="dark" />
+
+                                    {/* sun icon */}
+                                    <i className="fa-solid swap-off fa-sun" />
+
+                                    {/* moon icon */}
+                                    <i className="fa-solid swap-on fa-moon" />
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </>
