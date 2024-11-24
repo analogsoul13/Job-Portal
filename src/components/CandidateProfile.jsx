@@ -40,7 +40,7 @@ function CandidateProfile() {
                         </div>
                         {/* Qualification */}
                         <div className="flex space-x-2 my-2">
-                            <select className="select select-bordered text-slate-500 w-full w-1/2">
+                            <select className="select select-bordered text-slate-500 w-1/2">
                                 <option disabled selected>Qualification</option>
                                 <option>B-Tech</option>
                                 <option>Degree</option>
