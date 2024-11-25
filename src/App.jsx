@@ -9,9 +9,10 @@ import 'aos/dist/aos.css';
 import { Routes, Route } from 'react-router-dom';
 import CandidateProfile from './components/CandidateProfile';
 import RecruiterProfile from './components/RecruiterProfile';
-import SkillsSection from './components/SkillsSection';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import CandidateDashboard from './components/Dashboard/CandidateDashboard';
+import RecruiterDashboard from './components/Dashboard/RecruiterDashboard';
 
 AOS.init();
 
@@ -27,7 +28,8 @@ function App() {
       <Route path='/role' element={<Role/>}/>
       <Route path='/candidateprofile' element={<CandidateProfile/>} />
       <Route path='/recruiterprofile' element={<RecruiterProfile/>} />
-      <Route path='/skill' element={<SkillsSection/>} />
+      <Route path='/cdashboard' element={<CandidateDashboard/>}/>
+      <Route path='/rdashboard' element={<RecruiterDashboard/>}/>
     </Routes>
     <ToastContainer/>
     <Footer/>

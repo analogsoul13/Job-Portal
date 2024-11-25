@@ -1,5 +1,6 @@
 import React from 'react'
 import SkillsSection from './SkillsSection'
+import { Link } from 'react-router-dom'
 
 function CandidateProfile() {
     return (
@@ -13,7 +14,7 @@ function CandidateProfile() {
                             <img className="object-cover object-top w-full" src='https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='Mountain' />
                         </div>
                         <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
-                            <img className="object-cover object-center h-32" src='https://www.profilebakery.com/wp-content/uploads/2023/04/AI-Profile-Picture.jpg' alt='Woman looking front' />
+                            <img className="object-cover object-center" src='https://www.citimuzik.com/wp-content/uploads/2023/01/283208521_531376795134961_2948576342949021745_n-810x1013.jpg' alt='Profile Picture' />
                         </div>
                         <div className="text-center mt-2">
                             <h2 className="font-semibold">Sarah Smith</h2>
@@ -53,7 +54,7 @@ function CandidateProfile() {
                         {/* Other */}
                         <div className="flex space-x-2 my-2">
                             <select className="select w-1/2" disabled>
-                                <option>Selected Candidate</option>
+                                <option>Role : Selected as Candidate</option>
                             </select>
                             <label className="form-control w-1/2">
                                 <input type="file" className="file-input file-input-bordered file-input-accent-content w-full" />
@@ -81,7 +82,10 @@ function CandidateProfile() {
                         </div>
                         {/* Actions */}
                         <div className="flex space-x-2">
-                            <button className='btn btn-accent shadow'>Save</button>
+                            <Link to={'/cdashboard'}>
+                                <button className='btn btn-accent shadow'>Save</button>
+                            </Link>
+
                             <button className='btn btn-accent-content shadow'>Edit</button>
                         </div>
 

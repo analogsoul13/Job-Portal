@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 function Navbar() {
     return (
         <>
-            <div className="bg-transparent navbar font-custom bg-base-100 sm:px-6 ">
+            <div className="bg-base-100 navbar font-custom sm:px-6 ">
                 <div className="navbar-start">
                     {/* Mobile */}
                     <div className="dropdown">
@@ -70,9 +70,10 @@ function Navbar() {
                 </div>
                 {/* Search and Profile icon */}
                 <div className="navbar-end gap-2 ">
-                    <div className="form-control">
+                    <div className="hidden form-control">
                         <input type="text" placeholder="Search" className="w-24 input input-bordered md:w-auto" />
                     </div>
+                    
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-10 rounded-full">
