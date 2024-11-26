@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useState } from 'react'
+import HeroSection from './HeroSection'
 
 function CandidateDashboard() {
     return (
         <>
-            <div className='max-w-7xl fade-in bg-base-200 flex flex-col lg:flex-row mx-auto'>
+            <div className='max-w-7xl fade-in bg-base-200 flex flex-col lg:flex-row mx-auto mb-4'>
                 {/* LeftProfileSection */}
                 <div className='lg:w-1/4 p-4'>
                     <div className='bg-base-100 rounded-xl sm:col-span-1 p-4'>
@@ -36,6 +37,8 @@ function CandidateDashboard() {
                         <input type="text" className="w-full input input-bordered p-3 rounded-lg" placeholder="Search for jobs..." />
                         <h2 className="mt-4 text-2xl font-semibold">Welcome, <span className='text-accent'>Anne Hathaway</span></h2>
                     </div>
+                    {/* Hero Section */}
+                    <HeroSection/>
                     {/* Featured Jobs */}
                     <div className='flex flex-col bg-base-100 rounded-lg shadow-xl justify-center mt-6 items-center p-4'>
                         <h1 className='text-2xl font-bold'>Featured Jobs</h1>

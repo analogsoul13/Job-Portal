@@ -1,11 +1,23 @@
-import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Role() {
-    const [selectedRole, setSelectedRole] = useState(null)
 
-    const handleSelectRole = (role) => {
-        setSelectedRole(role)
+    const nav = useNavigate()
+
+    // saving the role to local storage
+    const setRole = (role) =>{
+        localStorage.setItem('userRole', role)
+    }
+
+    // Role selection handling
+    const handleRoleSelect = (role) => {
+        setRole(role)
+        if (role === 'Recruiter') {
+            nav('/rdashboard')
+        } else {
+            nav('/cdashboard')
+        }
     }
     return (
         <>
@@ -16,9 +28,7 @@ function Role() {
                     <div className='flex flex-col justify-end rounded-lg bg-candidate bg-cover bg-center p-4 min-h-[450px] w-full'>
                         <div className='flex flex-col items-center justify-center p-4 space-y-2 glass h-1/3'>
                             <p className='text-slate-100'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat, dolor?</p>
-                            <Link to={'/candidateprofile'}>
-                                <button className='btn btn-accent'>Candidate</button>
-                            </Link>
+                            <button onClick={() => handleRoleSelect('Candidate')} className='btn btn-accent'>Candidate</button>
 
                         </div>
                     </div>
@@ -26,10 +36,7 @@ function Role() {
                     <div className='flex flex-col justify-end rounded-lg bg-recruiter bg-cover bg-center p-4 min-h-[450px] w-full'>
                         <div className='flex flex-col items-center justify-center p-4 space-y-2 glass h-1/3'>
                             <p className='text-slate-100'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur, rerum?</p>
-                            <Link to={'/recruiterprofile'}>
-                                <button className='btn btn-neutral'>Recruiter</button>
-                            </Link>
-
+                            <button onClick={() => handleRoleSelect('Recruiter')} className='btn btn-neutral'>Recruiter</button>
                         </div>
                     </div>
                 </div>

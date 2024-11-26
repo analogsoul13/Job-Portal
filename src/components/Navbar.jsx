@@ -36,7 +36,7 @@ function Navbar() {
                             <li><Link to={'/auth'}>Register</Link></li>
                         </ul>
                     </div>
-                    <a className="text-3xl btn btn-ghost">Talent Link</a>
+                    <a className="text-3xl btn btn-ghost">Talent <span className='text-accent'>Link</span></a>
                 </div>
                 {/* Navbar Center */}
                 <div className="hidden navbar-center lg:flex">
