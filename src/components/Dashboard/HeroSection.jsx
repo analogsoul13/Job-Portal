@@ -41,7 +41,7 @@ function HeroSection() {
                 {/* Stats */}
                 <div className='flex flex-col items-center mt-4 justify-center w-full'>
                     <h1 className='text-base-content p-2'>Have a look here !</h1>
-                    <div className="stats shadow-xl">
+                    <div className="stats w-full shadow-xl">
                         <div className="stat place-items-center">
                             <div className="stat-title">Jobs</div>
                             <div className="stat-value">31K</div>

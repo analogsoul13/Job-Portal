@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 function CandidateProfile() {
     return (
         <>
-            <div className='max-w-7xl mx-auto border border-gray-200 shadow-2xl rounded-2xl my-4 p-2'>
+            <div className='max-w-7xl mx-auto border fade-in border-gray-200 shadow-2xl rounded-2xl my-4 p-2'>
                 <h1 className='text-2xl text-center font-semibold py-3'>Complete Your Profile</h1>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                     {/* Left Profile */}
@@ -19,6 +19,20 @@ function CandidateProfile() {
                         <div className="text-center mt-2">
                             <h2 className="font-semibold">Sarah Smith</h2>
                             <p className="text-gray-500">Freelance Web Designer</p>
+                        </div>
+                        <div className='bg-base-300 mt-4 rounded-lg p-2'>
+                            <ul className='text-sm font-semibold'>
+                                <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-house me-2" />Home</li>
+                                <Link to={'/jobs'}>
+                                    <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-briefcase me-2" />Jobs</li>
+                                </Link>
+                                <Link to={'/candidateprofile'}>
+                                    <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-id-card-clip me-2" />Profile</li>
+                                </Link>
+
+                                <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-list-check me-2" />My Applications</li>
+                                <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-gear me-2" />Settings</li>
+                            </ul>
                         </div>
 
 
@@ -86,7 +100,7 @@ function CandidateProfile() {
                                 <button className='btn btn-accent shadow'>Save</button>
                             </Link>
 
-                            <button className='btn btn-accent-content shadow'>Edit</button>
+                            <button className='btn btn-accent-content btn-outline shadow'>Edit</button>
                         </div>
 
                     </div>

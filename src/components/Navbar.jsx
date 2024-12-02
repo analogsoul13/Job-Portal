@@ -76,10 +76,10 @@ function Navbar() {
                     
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                                <img
+                            <div className="w-full h-full border-4 border-base-300 shadow-2xl rounded-full">
+                                <img className='object-cover object-center'
                                     alt="Tailwind CSS Navbar component"
-                                    src="https://www.pngall.com/wp-content/uploads/5/Profile.png" />
+                                    src="https://www.citimuzik.com/wp-content/uploads/2023/01/283208521_531376795134961_2948576342949021745_n-810x1013.jpg" />
                             </div>
                         </div>
                         <ul

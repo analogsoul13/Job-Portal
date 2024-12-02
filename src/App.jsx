@@ -13,6 +13,7 @@ import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CandidateDashboard from './components/Dashboard/CandidateDashboard';
 import RecruiterDashboard from './components/Dashboard/RecruiterDashboard';
+import Jobs from './components/Jobs';
 
 AOS.init();
 
@@ -30,6 +31,7 @@ function App() {
       <Route path='/recruiterprofile' element={<RecruiterProfile/>} />
       <Route path='/cdashboard' element={<CandidateDashboard/>}/>
       <Route path='/rdashboard' element={<RecruiterDashboard/>}/>
+      <Route path='/jobs' element={<Jobs/>} />
     </Routes>
     <ToastContainer/>
     <Footer/>
