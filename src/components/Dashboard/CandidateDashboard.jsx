@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import HeroSection from './HeroSection'
 import { Link } from 'react-router-dom'
+import ProfileCard from '../ProfileCard'
 
 function CandidateDashboard() {
     return (
@@ -8,39 +9,10 @@ function CandidateDashboard() {
             <div className='max-w-7xl fade-in bg-base-200 flex flex-col lg:flex-row mx-auto mb-4'>
                 {/* LeftProfileSection */}
                 <div className='lg:w-1/4 p-4'>
-                    <div className='bg-base-100 rounded-xl sm:col-span-1 p-4'>
-                        <div className="rounded-t-lg h-32 overflow-hidden">
-                            <img className="object-cover object-top w-full" src='https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='Mountain' />
-                        </div>
-                        <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
-                            <img className="object-cover object-center" src='https://www.citimuzik.com/wp-content/uploads/2023/01/283208521_531376795134961_2948576342949021745_n-810x1013.jpg' alt='Profile Picture' />
-                        </div>
-                        <div className="text-center mt-2">
-                            <h2 className="font-semibold">Anne Hathaway</h2>
-                            <p className="text-gray-500">Freelance Web Designer</p>
-                        </div>
-                        
-                        {/* Options */}
-                        <div className='bg-base-200 mt-4 rounded-lg p-2'>
-                            <ul className='text-sm font-semibold'>
-                                <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-house me-2" />Home</li>
-                                <Link to={'/jobs'}>
-                                    <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-briefcase me-2" />Jobs</li>
-                                </Link>
-                                <Link to={'/candidateprofile'}>
-                                    <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-id-card-clip me-2" />Profile</li>
-                                </Link>
-
-                                <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-list-check me-2" />My Applications</li>
-                                <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-gear me-2" />Settings</li>
-                            </ul>
-                        </div>
-
-
-                    </div>
+                    <ProfileCard/>
                 </div>
                 {/* Right Main Section */}
-                <div className='lg:w-3/4 p-4'>
+                <div className='lg:w-3/4 p-4 space-y-4'>
                     {/* Search */}
                     <div className="bg-base-100 shadow-xl p-6 rounded-lg">
                         <input type="text" className="w-full input input-bordered p-3 rounded-lg" placeholder="Search for jobs..." />
@@ -52,7 +24,7 @@ function CandidateDashboard() {
                     <div className='flex flex-col bg-base-100 rounded-lg shadow-xl justify-center mt-6 items-center p-4'>
                         <h1 className='text-2xl font-bold'>Featured Jobs</h1>
                         <div className='grid sm:grid-cols-2 gap-6 mt-4 sm:px-6'>
-                            {/* Card */}
+                            {/* Job Card */}
                             <div className='card bg-base-200 rounded-lg shadow hover:shadow-lg overflow-hidden w-[400px] h-full'>
                                 <div className="card-body">
                                     <div className='flex justify-between'>

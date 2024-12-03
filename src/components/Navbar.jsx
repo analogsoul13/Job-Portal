@@ -73,12 +73,12 @@ function Navbar() {
                     <div className="hidden form-control">
                         <input type="text" placeholder="Search" className="w-24 input input-bordered md:w-auto" />
                     </div>
-                    
+
                     <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-full h-full border-4 border-base-300 shadow-2xl rounded-full">
                                 <img className='object-cover object-center'
-                                    alt="Tailwind CSS Navbar component"
+                                    alt="Profile Picture"
                                     src="https://www.citimuzik.com/wp-content/uploads/2023/01/283208521_531376795134961_2948576342949021745_n-810x1013.jpg" />
                             </div>
                         </div>
@@ -86,10 +86,11 @@ function Navbar() {
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li>
-                                <a className="justify-between">
-                                    Profile
-                                    <span className="badge">Complete</span>
-                                </a>
+                                <Link to={'/candidateprofile'}>
+                                    <a>Profile</a>
+                                    <span className="badge badge-warning text-xs">Complete</span>
+                                </Link>
+
                             </li>
                             <li><a>Settings</a></li>
                             <li><a>Logout</a></li>

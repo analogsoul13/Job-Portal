@@ -3,7 +3,7 @@ import React from 'react'
 function HeroSection() {
     return (
         <>
-            <div className='flex flex-col bg-base-100 rounded-lg shadow-xl justify-center space-y-3 mt-6 items-center p-4'>
+            <div className='flex flex-col bg-base-100 rounded-lg shadow-xl justify-center space-y-3 items-center p-4'>
                 <span className='font-bold sm:text-xl md:text-2xl bg-base-200 px-4 mx-auto py-2 rounded-full'>Connecting Talent with Opportunities</span>
                 <p className='text-center text-xs md:text-md text-base-content p-1'>Join thousands of job seekers and recruiters connecting on our platform. Find your perfect match and take the next step in your journey.</p>
                 <div className='grid sm:grid-cols-2 gap-4'>
@@ -40,7 +40,7 @@ function HeroSection() {
                 </div>
                 {/* Stats */}
                 <div className='flex flex-col items-center mt-4 justify-center w-full'>
-                    <h1 className='text-base-content p-2'>Have a look here !</h1>
+                    <h1 className='text-base-content text-xl p-2'>What we achieved</h1>
                     <div className="stats w-full shadow-xl">
                         <div className="stat place-items-center">
                             <div className="stat-title">Jobs</div>

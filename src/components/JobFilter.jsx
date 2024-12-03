@@ -51,7 +51,7 @@ const JobFilter = () => {
   };
 
   const FilterSection = ({ title, children, sectionKey }) => (
-    <div className="border-b border-gray-200">
+    <div className="border-b border-gray-200" id='filtercard'>
       <button 
         onClick={() => toggleSection(sectionKey)}
         className="w-full text-left p-3 flex justify-between items-center hover:bg-gray-100 transition"
@@ -68,7 +68,7 @@ const JobFilter = () => {
   );
 
   return (
-    <div className="w-64 bg-white border rounded-lg shadow-md">
+    <div className="w-64 bg-base-100 border rounded-lg shadow-md">
       <h2 className="text-xl font-bold p-4 border-b">Filter Jobs</h2>
       
       {/* Salary Range Filter */}

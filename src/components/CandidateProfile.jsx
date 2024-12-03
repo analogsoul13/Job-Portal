@@ -17,12 +17,14 @@ function CandidateProfile() {
                             <img className="object-cover object-center" src='https://www.citimuzik.com/wp-content/uploads/2023/01/283208521_531376795134961_2948576342949021745_n-810x1013.jpg' alt='Profile Picture' />
                         </div>
                         <div className="text-center mt-2">
-                            <h2 className="font-semibold">Sarah Smith</h2>
+                            <h2 className="font-semibold">Anne Hathaway</h2>
                             <p className="text-gray-500">Freelance Web Designer</p>
                         </div>
                         <div className='bg-base-300 mt-4 rounded-lg p-2'>
                             <ul className='text-sm font-semibold'>
-                                <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-house me-2" />Home</li>
+                                <Link to={'/cdashboard'}>
+                                    <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-house me-2" />Home</li>
+                                </Link>
                                 <Link to={'/jobs'}>
                                     <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-briefcase me-2" />Jobs</li>
                                 </Link>
