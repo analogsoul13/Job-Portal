@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import HeroSection from './HeroSection'
 import { Link } from 'react-router-dom'
-import ProfileCard from '../ProfileCard'
+import ProfileCard from '../Candidate/ProfileCard'
 
 function CandidateDashboard() {
     return (

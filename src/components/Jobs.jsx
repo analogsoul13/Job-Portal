@@ -1,7 +1,7 @@
 import React from 'react'
 import JobFilter from './JobFilter'
 import { Link } from 'react-router-dom'
-import ProfileCard from './ProfileCard'
+import ProfileCard from './Candidate/ProfileCard'
 
 function Jobs() {
     return (

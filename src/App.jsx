@@ -7,8 +7,8 @@ import Home from './pages/Home'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Routes, Route } from 'react-router-dom';
-import CandidateProfile from './components/CandidateProfile';
-import RecruiterProfile from './components/RecruiterProfile';
+import CandidateProfile from './components/Candidate/CandidateProfile';
+import RecruiterProfile from './components/Recruiter/RecruiterProfile';
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CandidateDashboard from './components/Dashboard/CandidateDashboard';

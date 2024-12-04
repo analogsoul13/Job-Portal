@@ -57,11 +57,11 @@ function Auth() {
                                 }
 
 
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                    <i className="fa-solid fa-sm fa-key" style={{ color: "#00002b", }} />
+                                <label className="input input-bordered flex items-center gap-2 mt-4">
+                                    <i className="fa-solid fa-sm fa-key" />
+                                    <input type="password" placeholder="Password" className="grow" required />
                                 </label>
-                                <input type="password" placeholder="Password" className="input input-bordered" required />
+                                
                                 <label className="label">
                                     {
                                         authStatus ?

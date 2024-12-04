@@ -5,15 +5,15 @@ function Home() {
     return (
         <>
             <div className=''>
-                <div className='grid sm:grid-cols-2 sm:px-6'>
+                <div className='grid sm:grid-cols-2 px-2 sm:px-6'>
                     <div className='flex flex-col justify-center p-6 sm:mt-14 gap-6 items-start w-full h-[450px]'>
                         <h1 className='text-5xl font-bold slide-in'><span className='text-accent'>Connecting Talent</span> <br /> With <span>Opportunites</span></h1>
-                        <p className='font-thin slide-in'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, eligendi. Corrupti tempora, ipsa saepe nostrum quod earum nulla quisquam hic.</p>
+                        <p className='font-thin slide-in md:bg-transparent bg-slate-100 bg-opacity-75 rounded-lg shadow md:shadow-none p-2'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio, eligendi. Corrupti tempora, ipsa saepe nostrum quod earum nulla quisquam hic.</p>
                         <Link to={'/auth'}>
-                            <button className='btn shadow-2xl btn-outline slide-in'>Register</button>
+                            <button className='btn shadow-2xl btn-neutral md:btn-outline slide-in'>Register</button>
                         </Link>
                     </div>
-                    <div className='flex justify-center sm:my-10 overflow-hidden shadow-xl bg-blue-100 rounded-3xl items-center w-[650px] h-[550px]'>
+                    <div className='flex justify-center sm:my-10 overflow-hidden shadow-xl bg-blue-100 rounded-3xl items-center w-full h-[550px]'>
                         <img className='fade-in w-full h-full object-center object-cover' src="https://ideogram.ai/assets/image/lossless/response/pfsXsv5WScGeatbtCgrSXg" alt="" />
 
                     </div>
