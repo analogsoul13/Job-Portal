@@ -5,7 +5,6 @@ function ProfileCardRecruiter() {
     return (
         <>
             <div className='bg-base-100 rounded-xl sm:col-span-1 p-2'>
-                <h1 className='text-base-content p-2'>Profile</h1>
                 <div className="rounded-t-lg h-32 overflow-hidden">
                     <img 
                         className="object-cover object-top w-full" 
