@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 function HeroSectioRecruiter() {
-    const [isModalOpen, setIsModalOpen] = useState(true)
+    const [isModalOpen, setIsModalOpen] = useState(false)
     return (
         <>
             <div className='flex mt-4 flex-col bg-base-100 rounded-lg shadow-xl justify-center space-y-3 items-center p-4'>
