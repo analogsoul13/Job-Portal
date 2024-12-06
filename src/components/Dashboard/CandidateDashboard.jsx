@@ -6,7 +6,7 @@ import ProfileCard from '../Candidate/ProfileCard'
 function CandidateDashboard() {
     return (
         <>
-            <div className='max-w-7xl fade-in bg-base-200 flex flex-col lg:flex-row mx-auto mb-4'>
+            <div className='max-w-full fade-in bg-base-200 flex flex-col lg:flex-row mx- mb-4'>
                 {/* LeftProfileSection */}
                 <div className='lg:w-1/4 p-4'>
                     <ProfileCard/>

@@ -6,7 +6,7 @@ import ProfileCardRecruiter from './ProfileCardRecruiter'
 function RecruiterProfile() {
   return (
     <>
-      <div className='max-w-7xl mx-auto bg-base-300 border fade-in border-gray-200 shadow-2xl rounded-2xl my-4 p-2'>
+      <div className='max-w-7xl mx-auto bg-base-300 border fade-in border-gray-200 rounded-2xl my-4 p-2'>
         <h1 className='text-2xl text-center font-semibold py-2'>Complete Your Profile</h1>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
           {/* Left Profile */}

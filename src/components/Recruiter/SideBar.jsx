@@ -15,7 +15,7 @@ function SideBar({ onOptionSelect }) {
                 <div className="mx-auto hidden lg:flex rounded-lg border-2 border-white overflow-hidden">
                     <img
                         className="object-cover  object-center"
-                        src="https://ideogram.ai/assets/image/lossless/response/zCqZ63LMSqyNL1bbkXtP7Q"
+                        src="https://ideogram.ai/assets/image/lossless/response/N7roOFL6SFSpJ6ayjUiHzQ"
                         alt="Profile Picture"
                     />
                 </div>
