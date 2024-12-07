@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-function SideBar({ onOptionSelect }) {
+function SideBar({ onOptionSelect, activeId }) {
     const options = [
         { id: 'dashboard', icon: 'fa-th-large', label: 'Dashboard' },
         { id: 'analytics', icon: 'fa-chart-bar', label: 'Analytics' },
@@ -26,12 +27,17 @@ function SideBar({ onOptionSelect }) {
                         {options.map((option) => (
                             <li
                                 key={option.id}
-                                className="btn shadow bg-base-100 cursor-pointer"
+                                className={`btn shadow bg-base-100 ${activeId === option.id ? 'bg-base-content text-base-100' : ''}`}
                                 onClick={() => onOptionSelect(option.id)} // Call parent function with the option ID
                             >
                                 <i className={`fa-solid ${option.icon}`} />
                             </li>
                         ))}
+                        <li className="btn shadow bg-base-100 cursor-pointer">
+                            <Link to='/recruiterprofile'>
+                                <i className="fa-solid fa-user-pen" />
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </div>

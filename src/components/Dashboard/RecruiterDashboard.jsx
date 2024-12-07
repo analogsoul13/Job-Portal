@@ -3,20 +3,21 @@ import HeroSectioRecruiter from './HeroSectioRecruiter'
 import SideBar from '../Recruiter/SideBar'
 import RecruiterProfile from '../Recruiter/RecruiterProfile'
 import DataListsSection from '../Recruiter/DataListsSection'
+import Applicants from './Applicants'
 
 function RecruiterDashboard() {
   // To track the active section
   const [activeSection, setActiveSection] = useState('dashboard')
 
   // Dynamic Rendering
-  const rennderRightSection = () => {
+  const renderRightSection = () => {
     switch (activeSection) {
       case 'dashboard':
         return <HeroSectioRecruiter />
       case 'analytics':
         return <div>Analytics</div>
       case 'candidates':
-        return <div>Applicants</div>
+        return <Applicants />
       case 'settings':
         return <RecruiterProfile />
       default:
@@ -28,15 +29,18 @@ function RecruiterDashboard() {
       <div className='max-w-full fade-in bg-base-100 flex flex-col lg:flex-row mb-4'>
         {/* Left Section SideBar */}
         <div className='lg:w-1/12'>
-          <SideBar onOptionSelect={setActiveSection} />
+          <SideBar onOptionSelect={setActiveSection} activeId={activeSection} />
         </div>
-        {/* Data Lists Section */}
-        <div className='lg:w-3/12 bg-base-200 p-4 space-y-4'>
-          <DataListsSection/>
-        </div>
+        {/* Data Lists Section / shown only when clicked candidates */}
+        {activeSection == 'candidates' && (
+          <div className='lg:w-3/12 bg-base-200 p-4 space-y-4'>
+            <DataListsSection />
+          </div>
+        )}
+
         {/* RightMain Section */}
-        <div className='lg:w-8/12 bg-base-200 '>
-          {rennderRightSection()}
+        <div className={`${activeSection === 'candidates'? 'lg:w-8/12' : 'lg:w-11/12'} bg-base-200`}>
+          {renderRightSection()}
         </div>
       </div>
     </>

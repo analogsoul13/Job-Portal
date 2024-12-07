@@ -16,7 +16,8 @@ export default {
         authBg: "url('/auth-bg.jpg')",
         candidate: "url('/bg-candidate.jpg')",
         recruiter: "url('/bg-recruiter.jpg')",
-        home: "url('/bg-home.jpeg')"
+        home: "url('/bg-home.jpeg')",
+        heroCover: "url('/hero-cover.jpg')"
       },
     },
   },

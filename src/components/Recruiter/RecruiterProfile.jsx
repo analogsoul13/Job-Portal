@@ -37,7 +37,7 @@ function RecruiterProfile() {
                 <option>Degree</option>
                 <option>Diploma</option>
               </select>
-              <input type="text" placeholder='Branch' className='input input-bordered w-1/2' />
+              <input type="text" placeholder='Company Name' className='input input-bordered w-1/2' />
             </div>
             {/* Other */}
             <div className="flex space-x-2 my-2">
