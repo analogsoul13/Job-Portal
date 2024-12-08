@@ -47,7 +47,7 @@ function RecruiterProfile() {
               <label className="form-control w-1/2">
                 <input type="file" className="file-input file-input-bordered file-input-accent-content w-full" />
                 <div className="label">
-                  <span className="label-text-alt text-slate-500">Select Resume</span>
+                  <span className="label-text-alt text-slate-500">Select ID</span>
                 </div>
               </label>
             </div>
