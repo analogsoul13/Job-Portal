@@ -15,7 +15,7 @@ function ProfileCardRecruiter() {
                 <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
                     <img 
                         className="object-cover object-center" 
-                        src='https://ideogram.ai/assets/image/lossless/response/zCqZ63LMSqyNL1bbkXtP7Q' 
+                        src='https://www.icmibanking.com/images/career-profile/hrdm.jpg' 
                         alt='Profile Picture' 
                     />
                 </div>

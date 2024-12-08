@@ -16,7 +16,7 @@ function SideBar({ onOptionSelect, activeId }) {
                 <div className="mx-auto hidden lg:flex rounded-lg border-2 border-white overflow-hidden">
                     <img
                         className="object-cover  object-center"
-                        src="https://ideogram.ai/assets/image/lossless/response/N7roOFL6SFSpJ6ayjUiHzQ"
+                        src="https://www.icmibanking.com/images/career-profile/hrdm.jpg"
                         alt="Profile Picture"
                     />
                 </div>

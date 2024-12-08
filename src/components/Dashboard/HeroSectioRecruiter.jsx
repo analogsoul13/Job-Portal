@@ -9,7 +9,7 @@ function HeroSectioRecruiter() {
                 <div className='grid w-full sm:grid-cols-2 gap-4'>
                     {/* Modal */}
                     <div className='flex justify-center items-center bg-base-200 rounded-lg p-4 col-span-1'>
-                        <button onClick={() => { setIsModalOpen(true) }} className='btn btn-outline'><i className="fa-solid fa-square-plus" />Post an Opening</button>
+                        <button onClick={() => { setIsModalOpen(true) }} className='btn btn-neutral'><i className="fa-solid fa-square-plus" />Post an Opening</button>
                         {isModalOpen && (
                             <div className="fixed inset-0 bg-gray-900 bg-opacity-50 fade-in flex items-center justify-center z-50">
                                 <div className="bg-white w-full max-w-lg rounded-lg shadow-lg p-6">
@@ -79,8 +79,12 @@ function HeroSectioRecruiter() {
                     </div>
                     {/* ViewJObs */}
                     <div className='flex justify-center bg-base-200 rounded-lg p-4'>
-                        <button className='btn btn-outline'><i className="fa-solid fa-list" />View All Jobs Posted</button>
+                        <button className='btn btn-accent'><i className="fa-solid fa-list" />View All Jobs Posted</button>
                     </div>
+                </div>
+                {/* Image */}
+                <div className='flex bg-heroCover rounded-lg bg-cover w-full h-full lg:h-80'>
+                    <p className='text-center text-sm text-base-content rounded-t-lg p-2 glass lg:h-24'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nesciunt illum ab cum dicta vel deserunt reiciendis iusto alias ea perferendis, ratione accusamus repudiandae ut in aliquid ullam sed modi. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat voluptatum asperiores quidem architecto natus ratione amet quia doloremque cupiditate ullam.</p>
                 </div>
                 {/* Stats */}
                 <div className='flex flex-col  items-center bg-base-200 p-3 rounded-lg justify-center w-full'>
@@ -104,10 +108,6 @@ function HeroSectioRecruiter() {
                             <div className="stat-desc">↘︎ 90 (14%)</div>
                         </div>
                     </div>
-                </div>
-                {/* Image */}
-                <div className='flex bg-heroCover bg-cover w-full h-80'>
-                    <p className='text-center p-2 glass h-24'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo nesciunt illum ab cum dicta vel deserunt reiciendis iusto alias ea perferendis, ratione accusamus repudiandae ut in aliquid ullam sed modi.</p>
                 </div>
             </div>
         </>
