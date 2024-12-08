@@ -15,11 +15,11 @@ const JobFilter = () => {
   ];
 
   const locations = [
-    "New York", 
-    "San Francisco", 
-    "Remote", 
-    "Chicago", 
-    "Austin"
+    "Kerala", 
+    "Bangalore", 
+    "Kochi", 
+    "Calicut", 
+    "Chennai"
   ];
 
   const industries = [
@@ -51,10 +51,10 @@ const JobFilter = () => {
   };
 
   const FilterSection = ({ title, children, sectionKey }) => (
-    <div className="border-b border-gray-200" id='filtercard'>
+    <div className="border-b border-base-300" id='filtercard'>
       <button 
         onClick={() => toggleSection(sectionKey)}
-        className="w-full text-left p-3 flex justify-between items-center hover:bg-gray-100 transition"
+        className="w-full text-left p-3 flex justify-between items-center hover:bg-base-200 transition"
       >
         <span className="font-medium">{title}</span>
         <span>{activeSection === sectionKey ? <i className="fa-solid fa-xs fa-angle-up" /> : <i className="fa-solid fa-xs fa-angle-down" />}</span>

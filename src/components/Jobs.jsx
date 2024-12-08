@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import JobFilter from './JobFilter'
-import { Link } from 'react-router-dom'
 import ProfileCard from './Candidate/ProfileCard'
 
 function Jobs() {
+    const [isFilterVisible,setIsFilterVisible] = useState(false)
+
+    const toggleFilter = () => {
+         setIsFilterVisible(!isFilterVisible)
+    }
     return (
         <>
             <div className='max-w-full fade-in bg-base-200 flex flex-col lg:flex-row md:mx-6 mb-4'>
@@ -17,7 +21,16 @@ function Jobs() {
                     <div className="bg-base-100 shadow-xl p-2 rounded-lg">
                         <input type="text" className="w-full input input-bordered p-3 rounded-lg" placeholder="Search for jobs..." />
                         {/* <h2 className="mt-4 text-2xl font-semibold">Welcome, <span className='text-accent'>Anne Hathaway</span></h2> */}
-                        <button className='btn btn-xs text-accent-content btn-link'>Filter</button>
+                        <button onClick={toggleFilter} className='btn btn-xs text-base-content btn-link'>Filter</button>
+
+                        {/* Filter Card Rendering */}
+                        {
+                            isFilterVisible && (
+                                <div className='lg:hidden flex fade-in justify-center'>
+                                    <JobFilter/>
+                                </div>
+                            )
+                        }
                     </div>
                     {/* Jobs */}
                     <div className='flex flex-col bg-base-100 rounded-lg shadow-xl justify-center mt-6 items-center p-2'>
