@@ -4,6 +4,7 @@ import SideBar from '../Recruiter/SideBar'
 import RecruiterProfile from '../Recruiter/RecruiterProfile'
 import DataListsSection from '../Recruiter/DataListsSection'
 import Applicants from './Applicants'
+import ManageJobs from '../Recruiter/ManageJobs'
 
 function RecruiterDashboard() {
   // To track the active section
@@ -18,6 +19,8 @@ function RecruiterDashboard() {
         return <div>Analytics</div>
       case 'candidates':
         return <Applicants />
+      case 'managejobs':
+        return <ManageJobs/>
       case 'settings':
         return <RecruiterProfile />
       default:

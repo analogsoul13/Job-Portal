@@ -15,6 +15,7 @@ import CandidateDashboard from './components/Dashboard/CandidateDashboard';
 import RecruiterDashboard from './components/Dashboard/RecruiterDashboard';
 import Jobs from './components/Jobs';
 import AppliedJobList from './components/Candidate/AppliedJobList';
+import ApplyJob from './components/Candidate/ApplyJob';
 
 AOS.init();
 
@@ -34,6 +35,7 @@ function App() {
       <Route path='/rdashboard' element={<RecruiterDashboard/>}/>
       <Route path='/jobs' element={<Jobs/>} />
       <Route path='/appliedlist' element={<AppliedJobList/>} />
+      <Route path='/applyjob' element={<ApplyJob/>} />
     </Routes>
     <ToastContainer/>
     <Footer/>
