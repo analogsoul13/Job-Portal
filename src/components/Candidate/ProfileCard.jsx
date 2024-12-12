@@ -6,6 +6,7 @@ function ProfileCard({ onOptionSelect, activeId}) {
         { id: 'dashboard', icon: 'fa-house', label:'Dashboard'},
         { id: 'myapplications', icon: 'fa-list-check', label:'My Applications'},
         { id: 'findjobs', icon: 'fa-briefcase', label:'Find Jobs'},
+        { id: 'myprofile', icon: 'fa-id-card-clip', label:'My Profile'},
 
     ];
     return (
@@ -35,11 +36,6 @@ function ProfileCard({ onOptionSelect, activeId}) {
                                 {option.label}
                             </li>
                         ))}
-
-                        <Link to={'/candidateprofile'}>
-                            <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-id-card-clip me-2" />Profile</li>
-                        </Link>
-
 
                         <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-gear me-2" />Settings</li>
                     </ul>

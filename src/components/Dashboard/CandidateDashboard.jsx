@@ -3,6 +3,7 @@ import HeroSection from './HeroSection'
 import ProfileCard from '../Candidate/ProfileCard'
 import AppliedJobList from '../Candidate/AppliedJobList'
 import FindJobs from '../Candidate/FindJobs'
+import CandidateProfile from '../Candidate/CandidateProfile'
 
 function CandidateDashboard() {
     // To track active session
@@ -17,6 +18,8 @@ function CandidateDashboard() {
                 return <AppliedJobList/>
             case 'findjobs':
                 return <FindJobs/>
+            case 'myprofile':
+                return <CandidateProfile/>
             default:
                 return <div>Not Found</div>
                 
@@ -31,11 +34,6 @@ function CandidateDashboard() {
                 </div>
                 {/* Right Main Section */}
                 <div className='lg:w-3/4 p-4 space-y-4'>
-                    {/* Search */}
-                    <div className="bg-base-100 shadow-xl p-6 rounded-lg">
-                        <input type="text" className="w-full input input-bordered p-3 rounded-lg" placeholder="Search for jobs..." />
-                        <h2 className="mt-4 text-2xl font-semibold">Welcome, <span className='text-accent'>Anne Hathaway</span></h2>
-                    </div>
                     {/* Hero Section */}
                     {renderRightSection()}
                 </div>
