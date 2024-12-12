@@ -1,7 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-function ProfileCard() {
+function ProfileCard({ onOptionSelect, activeId}) {
+    const options = [
+        { id: 'dashboard', icon: 'fa-house', label:'Dashboard'},
+        { id: 'myapplications', icon: 'fa-list-check', label:'My Applications'},
+
+    ];
     return (
         <>
             <div className='bg-base-100 rounded-xl sm:col-span-1 p-2'>
@@ -19,9 +24,16 @@ function ProfileCard() {
                 {/* Options */}
                 <div className='bg-base-200 mt-4 rounded-lg p-2'>
                     <ul className='text-sm font-semibold'>
-                        <Link to={'/cdashboard'}>
-                            <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-house me-2" />Dashboard</li>
-                        </Link>
+                        {options.map((option) => (
+                            <li
+                                key={option.id}
+                                className={`p-2 cursor-pointer rounded-md ${activeId === option.id ? 'bg-base-content text-base-100' : ''}`}
+                                onClick={() => onOptionSelect(option.id)}
+                            >
+                                <i className={`fa-solid ${option.icon} me-2`} />
+                                {option.label}
+                            </li>
+                        ))}
 
                         <Link to={'/jobs'}>
                             <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-briefcase me-2" />Jobs</li>
@@ -31,7 +43,7 @@ function ProfileCard() {
                             <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-id-card-clip me-2" />Profile</li>
                         </Link>
 
-                        <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-list-check me-2" />My Applications</li>
+
                         <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-gear me-2" />Settings</li>
                     </ul>
                 </div>

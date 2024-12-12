@@ -3,7 +3,7 @@ import React from 'react'
 function JobCard() {
     return (
         <>
-            <div className='card rounded-lg shadow slide-in hover:shadow-lg overflow-hidden w-[400px] h-full'>
+            <div className='card rounded-lg shadow fade-in hover:shadow-lg overflow-hidden w-[400px] h-full'>
                 <div className="card-body">
                     <div className='flex justify-between'>
                         <img className='rounded-full h-6 w-6' src="https://e7.pngegg.com/pngimages/882/225/png-clipart-google-logo-google-logo-google-search-icon-google-text-logo.png" alt="" />
