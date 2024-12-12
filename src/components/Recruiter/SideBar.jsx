@@ -6,6 +6,7 @@ function SideBar({ onOptionSelect, activeId }) {
         { id: 'dashboard', icon: 'fa-th-large', label: 'Dashboard' },
         { id: 'analytics', icon: 'fa-chart-bar', label: 'Analytics' },
         { id: 'candidates', icon: 'fa-users', label: 'Users' },
+        { id: 'managejobs', icon: 'fa-briefcase', label: 'Manage Jobs' },
         { id: 'settings', icon: 'fa-gear', label: 'Settings' },
     ];
 

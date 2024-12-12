@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import HeroSection from './HeroSection'
 import ProfileCard from '../Candidate/ProfileCard'
 import AppliedJobList from '../Candidate/AppliedJobList'
+import FindJobs from '../Candidate/FindJobs'
 
 function CandidateDashboard() {
     // To track active session
@@ -14,6 +15,8 @@ function CandidateDashboard() {
                 return <HeroSection/>
             case 'myapplications':
                 return <AppliedJobList/>
+            case 'findjobs':
+                return <FindJobs/>
             default:
                 return <div>Not Found</div>
                 

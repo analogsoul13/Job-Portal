@@ -5,6 +5,7 @@ function ProfileCard({ onOptionSelect, activeId}) {
     const options = [
         { id: 'dashboard', icon: 'fa-house', label:'Dashboard'},
         { id: 'myapplications', icon: 'fa-list-check', label:'My Applications'},
+        { id: 'findjobs', icon: 'fa-briefcase', label:'Find Jobs'},
 
     ];
     return (
@@ -34,10 +35,6 @@ function ProfileCard({ onOptionSelect, activeId}) {
                                 {option.label}
                             </li>
                         ))}
-
-                        <Link to={'/jobs'}>
-                            <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-briefcase me-2" />Jobs</li>
-                        </Link>
 
                         <Link to={'/candidateprofile'}>
                             <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-id-card-clip me-2" />Profile</li>
