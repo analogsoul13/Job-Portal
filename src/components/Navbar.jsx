@@ -1,40 +1,31 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
+import ProfileCard from './Candidate/ProfileCard'
 
 function Navbar() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+
+    const handleToggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen)
+    }
     return (
         <>
             <div className="bg-base-100 navbar font-custom sm:px-6 ">
-                <div className="navbar-start">
-                    {/* Mobile */}
-                    <div className="dropdown">
-                        <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                className="w-5 h-5"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor">
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M4 6h16M4 12h8m-8 6h16" />
-                            </svg>
-                        </div>
-                        <ul
-                            tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li><Link to={'/'}><i className="fa-solid fa-house" />Home</Link></li>
-                            <li>
-                                <a>Browse</a>
-                                <ul className="p-2">
-                                    <li><a><i className="fa-solid fa-briefcase" />Jobs</a></li>
-                                    <li><a><i className="fa-solid fa-school" />Internships</a></li>
-                                </ul>
-                            </li>
-                            <li><Link to={'/auth'}>Register</Link></li>
-                        </ul>
+                < div className="navbar-start">
+                    {/* Hamburger Icon for Profile Card */}
+                    <div role="button" onClick={handleToggleMenu} className="btn btn-ghost lg:hidden">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-5 h-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
+                                d="M4 6h16M4 12h8m-8 6h16" />
+                        </svg>
                     </div>
                     <a className="text-3xl btn btn-ghost">Talent <span className='text-accent'>Link</span></a>
                 </div>
@@ -110,6 +101,13 @@ function Navbar() {
                         </ul>
                     </div>
                 </div>
+            </div>
+            <div className={`fixed top-0 right-0 w-64 shadow h-full z-50 transition-transform duration-300 ease-in-out 
+        ${isMenuOpen
+                        ? 'translate-x-0'
+                        : 'translate-x-full'}`}
+            >
+                <ProfileCard onClose={() => setIsMenuOpen(false)} />
             </div>
         </>
     )
