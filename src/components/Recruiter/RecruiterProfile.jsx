@@ -8,11 +8,9 @@ function RecruiterProfile() {
     <>
       <div className='max-w-7xl mx-auto bg-base-300 border fade-in border-gray-200 rounded-2xl my-4 p-2'>
         <h1 className='text-2xl text-center font-semibold py-2'>Complete Your Profile</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
-          {/* Left Profile */}
-          <ProfileCardRecruiter/>
+        <div className="grid grid-cols-1 gap-2">
           {/* Right Profile */}
-          <div className='rounded-xl sm:col-span-2 p-4 bg-base-200'>
+          <div className='rounded-xl sm:col-span-1 p-4 bg-base-200'>
             {/* Name */}
             <div className="flex space-x-2">
               <input type="text" placeholder="First Name" className="input input-bordered w-1/2" />
