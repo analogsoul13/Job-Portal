@@ -2,11 +2,16 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ProfileCard from './Candidate/ProfileCard'
 
-function Navbar() {
+function Navbar({ onOptionSelect, activeId }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
 
     const handleToggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
+    }
+
+    const handleOptionSelect = (id) => {
+        onOptionSelect(id) // Update active section in CandidateDashboard
+        setIsMenuOpen(false) // Close the sidebar
     }
     return (
         <>
@@ -104,10 +109,11 @@ function Navbar() {
             </div>
             <div className={`fixed md:hidden top-0 right-0 w-64 shadow h-full z-50 transition-transform duration-300 ease-in-out 
         ${isMenuOpen
-                        ? 'translate-x-0'
-                        : 'translate-x-full'}`}
+                    ? 'translate-x-0'
+                    : 'translate-x-full'}`}
             >
-                <ProfileCard onClose={() => setIsMenuOpen(false)} />
+                <ProfileCard onOptionSelect={handleOptionSelect}
+                    activeId={activeId} />
             </div>
         </>
     )

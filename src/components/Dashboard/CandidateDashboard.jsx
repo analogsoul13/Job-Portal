@@ -5,9 +5,8 @@ import AppliedJobList from '../Candidate/AppliedJobList'
 import FindJobs from '../Candidate/FindJobs'
 import CandidateProfile from '../Candidate/CandidateProfile'
 
-function CandidateDashboard() {
-    // To track active session
-    const [activeSection, setActiveSection] = useState('dashboard')
+function CandidateDashboard({activeSection, setActiveSection}) {
+
 
     // Dynamic Rendering
     const renderRightSection = () => {

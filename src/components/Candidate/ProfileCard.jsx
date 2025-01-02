@@ -11,7 +11,7 @@ function ProfileCard({ onOptionSelect, activeId}) {
     ];
     return (
         <>
-            <div className='bg-base-100 rounded-xl sm:col-span-1 p-2'>
+            <div className='bg-base-100 rounded-xl shadow-xl sm:col-span-1 p-2'>
                 <div className="rounded-t-lg h-32 overflow-hidden">
                     <img className="object-cover object-top w-full" src='https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='Mountain' />
                 </div>
