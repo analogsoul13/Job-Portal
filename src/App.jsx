@@ -32,12 +32,10 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route path='/auth' element={<Auth />} />
         <Route path='/role' element={<Role />} />
-        <Route path='/candidateprofile' element={<CandidateProfile />} />
         <Route path='/recruiterprofile' element={<RecruiterProfile />} />
         <Route path='/cdashboard' element={<CandidateDashboard activeSection={activeSection} setActiveSection={setActiveSection} />} />
         <Route path='/rdashboard' element={<RecruiterDashboard />} />
         <Route path='/jobs' element={<Jobs />} />
-        <Route path='/appliedlist' element={<AppliedJobList />} />
         <Route path='/applyjob' element={<ApplyJob />} />
       </Routes>
       <ToastContainer />
