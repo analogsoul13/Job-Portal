@@ -102,7 +102,7 @@ function Navbar() {
                     </div>
                 </div>
             </div>
-            <div className={`fixed top-0 right-0 w-64 shadow h-full z-50 transition-transform duration-300 ease-in-out 
+            <div className={`fixed md:hidden top-0 right-0 w-64 shadow h-full z-50 transition-transform duration-300 ease-in-out 
         ${isMenuOpen
                         ? 'translate-x-0'
                         : 'translate-x-full'}`}
