@@ -68,7 +68,7 @@ const JobFilter = () => {
   );
 
   return (
-    <div className="w-64 bg-base-100 border rounded-lg shadow-md">
+    <div className="w-full bg-base-100 border rounded-lg shadow-md">
       <h2 className="text-xl font-bold p-4 border-b">Filter Jobs</h2>
       
       {/* Salary Range Filter */}
