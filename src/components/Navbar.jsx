@@ -19,18 +19,7 @@ function Navbar({ onOptionSelect, activeId }) {
                 < div className="navbar-start">
                     {/* Hamburger Icon for Profile Card */}
                     <div role="button" onClick={handleToggleMenu} className="btn btn-ghost lg:hidden">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="w-5 h-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor">
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M4 6h16M4 12h8m-8 6h16" />
-                        </svg>
+                    <i className="fa-solid fa-tornado" />
                     </div>
                     <a className="text-3xl btn btn-ghost">Talent <span className='text-accent'>Link</span></a>
                 </div>
