@@ -1,26 +1,40 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import ProfileCard from './Candidate/ProfileCard'
+import { useSelector, useDispatch } from 'react-redux'
+import { logout } from '../redux/slices/authSlice'
 
 function Navbar({ onOptionSelect, activeId }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
+    // For user is logged in or not
+    const { isLoggedIn, userRole } = useSelector((state) => state.auth)
+    const dispatch = useDispatch()
 
     const handleToggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
+    }
+
+    const handleLogout = () => {
+        dispatch(logout()) // Dispatch logout action
+        setIsMenuOpen(false)
     }
 
     const handleOptionSelect = (id) => {
         onOptionSelect(id) // Update active section in CandidateDashboard
         setIsMenuOpen(false) // Close the sidebar
     }
+
     return (
         <>
             <div className="bg-base-100 navbar font-custom sm:px-6 ">
                 < div className="navbar-start">
                     {/* Hamburger Icon for Profile Card */}
-                    <div role="button" onClick={handleToggleMenu} className="btn btn-ghost lg:hidden">
-                    <i className="fa-solid fa-tornado" />
-                    </div>
+                    {isLoggedIn && (
+                        <div role="button" onClick={handleToggleMenu} className="btn btn-ghost lg:hidden">
+                            <i className="fa-solid fa-tornado" />
+                        </div>
+                    )}
+
                     <a className="text-3xl btn btn-ghost">Talent <span className='text-accent'>Link</span></a>
                 </div>
                 {/* Navbar Center */}
@@ -41,7 +55,7 @@ function Navbar({ onOptionSelect, activeId }) {
                     </ul>
                 </div>
                 {/* Theme Switch */}
-                <div className="hidden me-6 sm:me-0">
+                <div className=" me-6 sm:me-0">
                     <label className="swap swap-rotate">
                         {/* this hidden checkbox controls the state */}
                         <input type="checkbox" className="theme-controller" value="dark" />
@@ -53,13 +67,11 @@ function Navbar({ onOptionSelect, activeId }) {
                         <i className="fa-solid swap-on fa-moon" />
                     </label>
                 </div>
-                {/* Search and Profile icon */}
-                <div className="navbar-end gap-2 ">
-                    <div className="hidden form-control">
-                        <input type="text" placeholder="Search" className="w-24 input input-bordered md:w-auto" />
-                    </div>
 
-                    <div className="dropdown dropdown-end">
+                {/* Profile Icon (visible only when logged in) */}
+                    <div className="navbar-end gap-2 ">
+                        {isLoggedIn ? (
+                        <div className="dropdown dropdown-end">
                         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                             <div className="w-full h-full border-4 border-base-300 shadow-2xl rounded-full">
                                 <img className='object-cover object-center'
@@ -79,6 +91,7 @@ function Navbar({ onOptionSelect, activeId }) {
                             </li>
                             <li><a>Settings</a></li>
                             <li><a>Logout</a></li>
+
                             {/* Theme Switch */}
                             <li>
                                 <label className="swap swap-rotate">
@@ -94,16 +107,28 @@ function Navbar({ onOptionSelect, activeId }) {
                             </li>
                         </ul>
                     </div>
+                        ):(
+                        <div className="form-control">
+                            <input type="text" placeholder="Search" className="w-24 input input-bordered md:w-auto" />
+                        </div>
+                        
+                        )}
+
+                    </div>
+            </div>
+            {/* Mobile Sidebar (visible only when logged in) */}
+            {isLoggedIn && (
+                <div className={`fixed md:hidden top-0 right-0 w-64 shadow h-full z-50 transition-transform duration-300 ease-in-out 
+                ${isMenuOpen
+                        ? 'translate-x-0'
+                        : 'translate-x-full'}`}
+                >
+                    <ProfileCard onOptionSelect={handleOptionSelect}
+                        activeId={activeId} />
                 </div>
-            </div>
-            <div className={`fixed md:hidden top-0 right-0 w-64 shadow h-full z-50 transition-transform duration-300 ease-in-out 
-        ${isMenuOpen
-                    ? 'translate-x-0'
-                    : 'translate-x-full'}`}
-            >
-                <ProfileCard onOptionSelect={handleOptionSelect}
-                    activeId={activeId} />
-            </div>
+            )}
+
+
         </>
     )
 }
