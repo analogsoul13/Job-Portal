@@ -10,7 +10,7 @@ const authSlice = createSlice({
         //actions
         login: (state, action) => {
             state.isLoggedIn =true;
-            state.userRole = action.payload?.role || 'user' // Default to user role
+            state.userRole = action.payload?.role || 'candidate' // Default to user role
         },
         logout: (state) => {
             state.isLoggedIn = false,
