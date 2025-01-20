@@ -4,9 +4,19 @@ import ProfileCard from '../Candidate/ProfileCard'
 import AppliedJobList from '../Candidate/AppliedJobList'
 import FindJobs from '../Candidate/FindJobs'
 import CandidateProfile from '../Candidate/CandidateProfile'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function CandidateDashboard({activeSection, setActiveSection}) {
 
+    const nav = useNavigate()
+
+    useEffect(()=>{
+        const role = localStorage.getItem('role')
+        if(role !== 'candidate'){
+            nav('/auth')
+        }
+    },[nav])
 
     // Dynamic Rendering
     const renderRightSection = () => {

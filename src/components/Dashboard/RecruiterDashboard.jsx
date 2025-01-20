@@ -1,14 +1,23 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import HeroSectioRecruiter from './HeroSectioRecruiter'
 import SideBar from '../Recruiter/SideBar'
 import RecruiterProfile from '../Recruiter/RecruiterProfile'
 import DataListsSection from '../Recruiter/DataListsSection'
 import Applicants from './Applicants'
 import ManageJobs from '../Recruiter/ManageJobs'
+import { useNavigate } from 'react-router-dom'
 
 function RecruiterDashboard() {
   // To track the active section
   const [activeSection, setActiveSection] = useState('dashboard')
+  const nav = useNavigate()
+
+  useEffect(()=>{
+    const role = localStorage.getItem('role')
+    if(role !== 'recruiter'){
+      nav('/auth')
+    }
+  },[nav])
 
   // Dynamic Rendering
   const renderRightSection = () => {
