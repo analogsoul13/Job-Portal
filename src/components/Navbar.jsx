@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ProfileCard from './Candidate/ProfileCard'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../redux/slices/authSlice'
+import { toast } from 'react-toastify'
 
 function Navbar({ onOptionSelect, activeId }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     // For user is logged in or not
     const { isLoggedIn, userRole } = useSelector((state) => state.auth)
+    const nav = useNavigate()
     const dispatch = useDispatch()
 
     const handleToggleMenu = () => {
@@ -16,6 +18,11 @@ function Navbar({ onOptionSelect, activeId }) {
 
     const handleLogout = () => {
         dispatch(logout()) // Dispatch logout action
+        // Clear user data from localStorage
+        localStorage.removeItem("role");
+        localStorage.removeItem("token");
+        nav('/')
+        toast.warning("Logged out Succesfully!")
         setIsMenuOpen(false)
     }
 
@@ -90,7 +97,7 @@ function Navbar({ onOptionSelect, activeId }) {
 
                             </li>
                             <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
+                            <li onClick={handleLogout}><a>Logout</a></li>
 
                             {/* Theme Switch */}
                             <li>
