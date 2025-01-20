@@ -31,7 +31,6 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/auth' element={<Auth />} />
-        <Route path='/role' element={<Role />} />
         <Route path='/recruiterprofile' element={<RecruiterProfile />} />
         <Route path='/cdashboard' element={<CandidateDashboard activeSection={activeSection} setActiveSection={setActiveSection} />} />
         <Route path='/rdashboard' element={<RecruiterDashboard />} />
