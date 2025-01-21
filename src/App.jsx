@@ -1,7 +1,6 @@
 import './App.css'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar';
-import Role from './pages/Role';
 import Auth from './pages/Auth';
 import Home from './pages/Home'
 import AOS from 'aos';
