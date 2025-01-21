@@ -5,29 +5,37 @@ import { Link } from 'react-router-dom'
 function CandidateProfile() {
     return (
         <>
-            <div className='max-w-7xl mx-auto bg-base-300 border fade-in border-gray-200 shadow-2xl rounded-2xl p-2'>
+            <div className='max-w-7xl mx-auto bg-base-300 border fade-in border-gray-200 shadow-2xl rounded-2xl'>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
 
                     {/* Right Profile */}
                     <div className='rounded-xl sm:col-span-3 p-4 bg-base-200'>
-                        {/* Profile Picture */}
-                        <div className="flex justify-center bg-base-300 p-2 mb-4">
-                            <label className="flex flex-col items-center cursor-pointer">
-                                <div className="w-20 h-20 rounded-full border-4 border-base-300 shadow-2xl overflow-hidden mb-2">
-                                    <img
-                                        src="https://icon-library.com/images/edit-profile-icon/edit-profile-icon-15.jpg"
-                                        alt="Profile Picture"
-                                        className="object-cover w-full h-full"
+                        {/* Profile Picture and bio container*/}
+                        <div className='flex space-x-4'>
+                            <div className="flex justify-center bg-base-300 rounded-lg w-full p-2 mb-4">
+                                <label className="flex flex-col items-center cursor-pointer">
+                                    <div className="w-20 h-20 rounded-full border-4 border-base-300 shadow-2xl overflow-hidden mb-2">
+                                        <img
+                                            src="https://icon-library.com/images/edit-profile-icon/edit-profile-icon-15.jpg"
+                                            alt="Profile Picture"
+                                            className="object-cover w-full h-full"
+                                        />
+                                    </div>
+                                    <input
+                                        type="file"
+                                        className="hidden"
+                                        accept="image/*"
                                     />
-                                </div>
-                                <input
-                                    type="file"
-                                    className="hidden"
-                                    accept="image/*"
-                                />
-                                <span className="text-slate-500 text-xs">Upload Profile Picture</span>
-                            </label>
+                                    <span className="text-slate-500 text-xs">Upload Profile Picture</span>
+                                </label>
+                            </div>
+                            {/* bio */}
+                            <div className='flex w-full mb-4'>
+                                <textarea placeholder="Bio" className="textarea textarea-bordered textarea-xs  w-full max-w-xl"></textarea>
+                            </div>
                         </div>
+
+
                         {/* Name */}
                         <div className="flex space-x-2">
                             <input type="text" placeholder="First Name" className="input input-bordered w-1/2" />

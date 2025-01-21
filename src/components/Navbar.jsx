@@ -130,7 +130,7 @@ function Navbar({ onOptionSelect, activeId }) {
                                             <div className="flex justify-end gap-4">
                                                 <button
                                                     onClick={handleCancel}
-                                                    className="btn btn-neutral text-xs text-base-content"
+                                                    className="btn btn-neutral text-xs"
                                                 >
                                                     Cancel
                                                 </button>

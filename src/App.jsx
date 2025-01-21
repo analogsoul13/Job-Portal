@@ -16,6 +16,7 @@ import ApplyJob from './components/Candidate/ApplyJob';
 import { useState } from 'react';
 import Unauthorized from './pages/Unauthorized';
 import ProtectedRoute from './components/ProtectedRoute';
+import { Slide } from 'react-toastify';
 
 AOS.init();
 
@@ -30,7 +31,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/auth' element={<Auth />} />
-        <Route path='/unauthorized' element={<Unauthorized/>} />
+        <Route path='/unauthorized' element={<Unauthorized />} />
         <Route path='/recruiterprofile' element={<RecruiterProfile />} />
 
         <Route path='/cdashboard' element={
@@ -46,7 +47,19 @@ function App() {
         <Route path='/jobs' element={<Jobs />} />
         <Route path='/applyjob' element={<ApplyJob />} />
       </Routes>
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-center"
+        autoClose={2500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+        transition={Slide}
+      />
       <Footer />
     </>
   )

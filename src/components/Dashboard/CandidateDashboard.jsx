@@ -22,11 +22,11 @@ function CandidateDashboard({activeSection, setActiveSection}) {
         <>
             <div className='max-w-full fade-in bg-base-200 flex flex-col lg:flex-row mx- mb-4'>
                 {/* LeftProfileSection */}
-                <div className='hidden md:flex h-full lg:w-1/4 p-4'>
+                <div className='hidden md:flex h-full lg:w-1/4 p-2'>
                     <ProfileCard onOptionSelect={setActiveSection} activeId={activeSection}/>
                 </div>
                 {/* Right Main Section */}
-                <div className='lg:w-3/4 p-4 space-y-4'>
+                <div className='lg:w-3/4 py-2 pr-2 space-y-4'>
                     {/* Hero Section */}
                     {renderRightSection()}
                 </div>
