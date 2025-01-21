@@ -6,16 +6,16 @@ import Home from './pages/Home'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { Routes, Route } from 'react-router-dom';
-import CandidateProfile from './components/Candidate/CandidateProfile';
 import RecruiterProfile from './components/Recruiter/RecruiterProfile';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import CandidateDashboard from './components/Dashboard/CandidateDashboard';
 import RecruiterDashboard from './components/Dashboard/RecruiterDashboard';
 import Jobs from './components/Jobs';
-import AppliedJobList from './components/Candidate/AppliedJobList';
 import ApplyJob from './components/Candidate/ApplyJob';
 import { useState } from 'react';
+import Unauthorized from './pages/Unauthorized';
+import ProtectedRoute from './components/ProtectedRoute';
 
 AOS.init();
 
@@ -30,9 +30,19 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/auth' element={<Auth />} />
+        <Route path='/unauthorized' element={<Unauthorized/>} />
         <Route path='/recruiterprofile' element={<RecruiterProfile />} />
-        <Route path='/cdashboard' element={<CandidateDashboard activeSection={activeSection} setActiveSection={setActiveSection} />} />
-        <Route path='/rdashboard' element={<RecruiterDashboard />} />
+
+        <Route path='/cdashboard' element={
+          <ProtectedRoute role="candidate">
+            <CandidateDashboard activeSection={activeSection} setActiveSection={setActiveSection} />
+          </ProtectedRoute>
+        } />
+        <Route path='/rdashboard' element={
+          <ProtectedRoute role="recruiter">
+            <RecruiterDashboard />
+          </ProtectedRoute>} />
+
         <Route path='/jobs' element={<Jobs />} />
         <Route path='/applyjob' element={<ApplyJob />} />
       </Routes>

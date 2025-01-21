@@ -1,39 +1,23 @@
-import React, { useState } from 'react'
+import React from 'react'
 import HeroSection from './HeroSection'
 import ProfileCard from '../Candidate/ProfileCard'
 import AppliedJobList from '../Candidate/AppliedJobList'
 import FindJobs from '../Candidate/FindJobs'
 import CandidateProfile from '../Candidate/CandidateProfile'
-import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 
 function CandidateDashboard({activeSection, setActiveSection}) {
 
-    const nav = useNavigate()
-
-    useEffect(()=>{
-        const role = localStorage.getItem('role')
-        if(role !== 'candidate'){
-            nav('/auth')
-        }
-    },[nav])
 
     // Dynamic Rendering
-    const renderRightSection = () => {
-        switch (activeSection){
-            case 'dashboard':
-                return <HeroSection/>
-            case 'myapplications':
-                return <AppliedJobList/>
-            case 'findjobs':
-                return <FindJobs/>
-            case 'myprofile':
-                return <CandidateProfile/>
-            default:
-                return <div>Not Found</div>
-                
-        }
+    const sections = {
+        dashboard : <HeroSection />,
+        myapplications : <AppliedJobList />,
+        findjobs : <FindJobs />,
+        myprofile : <CandidateProfile />
     }
+    
+    const renderRightSection = ()=> sections[activeSection] || <div>Not Found</div> 
+
     return (
         <>
             <div className='max-w-full fade-in bg-base-200 flex flex-col lg:flex-row mx- mb-4'>
