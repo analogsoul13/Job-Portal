@@ -18,14 +18,12 @@ function Navbar({ onOptionSelect, activeId }) {
     };
 
     const handleLogout = () => {
-        if (window.confirm("Are you sure you want to log out?")) {
             dispatch(logout());
             localStorage.clear();
             nav('/');
             toast.warning("Logged out Successfully!");
             setShowPopup(false);
             setIsMenuOpen(false);
-        }
     };
 
     const handleCancel = () => {
