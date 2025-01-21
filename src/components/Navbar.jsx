@@ -62,7 +62,7 @@ function Navbar({ onOptionSelect, activeId }) {
                     </ul>
                 </div>
                 {/* Theme Switch */}
-                <div className=" me-6 sm:me-0">
+                <div className="hidden sm:flex me-6 sm:me-0">
                     <label className="swap swap-rotate">
                         {/* this hidden checkbox controls the state */}
                         <input type="checkbox" className="theme-controller" value="dark" />
@@ -91,13 +91,13 @@ function Navbar({ onOptionSelect, activeId }) {
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                             <li>
                                 <Link to={'/candidateprofile'}>
-                                    <a>Profile</a>
+                                    Profile
                                     <span className="badge badge-warning text-xs">Complete</span>
                                 </Link>
 
                             </li>
                             <li><a>Settings</a></li>
-                            <li onClick={handleLogout}><a>Logout</a></li>
+                            <li onClick={handleLogout}><button>Logout</button></li>
 
                             {/* Theme Switch */}
                             <li>
