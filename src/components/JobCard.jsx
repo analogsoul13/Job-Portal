@@ -21,8 +21,9 @@ function JobCard() {
                         <h3 className='text-sm text-slate-600'>Job Description</h3>
                         <p className='text-xs text-slate-500'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, incidunt!</p>
                     </div>
-                    <div>
+                    <div className='flex justify-between'>
                         <button className='btn hover:shadow-xl btn-accent text-slate-50'>Apply Now</button>
+                        <button className='btn btn-link text-base-content'>View</button>
                     </div>
 
 
