@@ -16,10 +16,10 @@ function CandidateProfile() {
                         <div className="w-32 h-32 border-4 border-white rounded-full overflow-hidden">
                             <img className="object-cover object-center" src='https://www.citimuzik.com/wp-content/uploads/2023/01/283208521_531376795134961_2948576342949021745_n-810x1013.jpg' alt='Profile Picture' />
                         </div>
-                        <div className='flex flex-col justify-center items-center'>
+                        <div className='flex flex-col justify-center items-start'>
                             <h1 className='text-xl font-semibold'>Anne Hathaway</h1>
                             <p className='text-gray-500 text-sm'>Full Stack Web Developer</p>
-                            <p className='text-base-content cursor-pointer hover:text-blue-400 text-xs'>anna34@gmail.com</p>
+                            <p className='text-base-content cursor-pointer hover:text-blue-400 text-xs'>anne34@gmail.com</p>
                         </div>
                     </div>
                     <div className='flex w-1/4 justify-center items-center'>
@@ -60,6 +60,12 @@ function CandidateProfile() {
                         </div>
 
                     </div>
+                </section>
+
+                <section className='flex flex-col p-4'>
+                    <h2 className='text-lg font-semibold mb-2'>Education</h2>
+
+                    <hr />
                 </section>
 
 
