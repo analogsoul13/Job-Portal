@@ -1,7 +1,24 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
 function Home() {
+    const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
+    const userRole = useSelector((state) => state.auth.userRole)
+    const dispatch = useDispatch()
+    const nav = useNavigate()
+
+    const handleButtonClick = () => {
+        if (isLoggedIn) {
+            if (userRole === 'candidate') {
+                nav("/cdashboard")
+            } else if (userRole === 'recruiter') {
+                nav("/rdashboard")
+            }
+        } else {
+            nav("/auth")
+        }
+    }
     return (
         <>
             <div className=''>
@@ -9,9 +26,9 @@ function Home() {
                     <div className='flex flex-col justify-center p-6 sm:mt-14 gap-6 items-start w-full h-[450px]'>
                         <h1 className='text-5xl font-bold slide-in'><span className='text-accent'>Connecting Talent</span> <br /> With <span>Opportunites</span></h1>
                         <p className='font-thin slide-in md:bg-transparent bg-slate-100 bg-opacity-75 rounded-lg shadow md:shadow-none p-2'>We bridge the gap between ambition and achievement. Find opportunities that align with your goals or hire talent to elevate your business.</p>
-                        <Link to={'/auth'}>
-                            <button className='btn shadow-2xl btn-neutral md:btn-outline slide-in'>Register</button>
-                        </Link>
+
+                        <button onClick={handleButtonClick} className='btn shadow-2xl btn-neutral md:btn-outline slide-in'>{isLoggedIn ? "Dashboard" : "Register"}</button>
+
                     </div>
                     <div className='flex justify-center sm:my-10 overflow-hidden shadow-xl bg-blue-100 rounded-3xl items-center w-full h-[550px]'>
                         <img className='fade-in w-full h-full object-center object-cover' src="https://ideogram.ai/assets/image/lossless/response/pfsXsv5WScGeatbtCgrSXg" alt="" />

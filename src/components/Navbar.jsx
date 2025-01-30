@@ -18,12 +18,12 @@ function Navbar({ onOptionSelect, activeId }) {
     };
 
     const handleLogout = () => {
-            dispatch(logout());
-            localStorage.clear();
-            nav('/');
-            toast.warning("Logged out Successfully!");
-            setShowPopup(false);
-            setIsMenuOpen(false);
+        dispatch(logout());
+        localStorage.clear();
+        nav('/');
+        toast.warning("Logged out Successfully!");
+        setShowPopup(false);
+        setIsMenuOpen(false);
     };
 
     const handleCancel = () => {
@@ -95,10 +95,20 @@ function Navbar({ onOptionSelect, activeId }) {
                                 tabIndex={0}
                                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                                 <li>
-                                    <Link to={'/candidateprofile'}>
+                                    <button
+                                        onClick={() => {
+                                            if (userRole === "candidate") {
+                                                nav("/cdashboard"); 
+                                                onOptionSelect("myprofile"); // Set "My Profile" as the active section
+                                            } else if (userRole === "recruiter") {
+                                                nav("/rdashboard");
+                                                onOptionSelect("settings"); // Set "My Profile" as the active section
+                                            }
+                                        }}
+                                    >
                                         Profile
                                         <span className="badge badge-warning text-xs">Complete</span>
-                                    </Link>
+                                    </button>
 
                                 </li>
                                 <li><a>Settings</a></li>
