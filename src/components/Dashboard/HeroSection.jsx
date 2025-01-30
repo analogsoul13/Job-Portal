@@ -62,7 +62,7 @@ function HeroSection() {
                     </div>
                 </div>
                 {/* Featured Jobs */}
-                <div className='flex flex-col bg-base-100 rounded-lg shadow-xl justify-center mt-6 items-center p-4'>
+                <div className='flex flex-col bg-base-100 w-full rounded-lg shadow-xl justify-center mt-6 items-center p-4'>
                     <h1 className='text-2xl font-bold'>Featured Jobs</h1>
                     <div className='grid sm:grid-cols-2 gap-6 mt-4 sm:px-6'>
                         {/* Job Card */}
