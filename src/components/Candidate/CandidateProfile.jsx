@@ -64,7 +64,7 @@ function CandidateProfile() {
 
                 <section className='flex flex-col p-4'>
                     <h2 className='text-lg font-semibold mb-2'>Education</h2>
-
+                        <p className='txet-md mb-4'>B-tech</p>
                     <hr />
                 </section>
 
