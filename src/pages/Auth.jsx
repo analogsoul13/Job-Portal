@@ -76,11 +76,11 @@ function Auth() {
 
         try {
             const res = await loginApi(input);
-            if (res.status === 200) {
+            if (res?.status === 200) {
                 toast.success("Login Successful!!");
 
                 const { role, token } = res.data;
-                console.log("Role and Token:", role, token); // ok
+                //console.log("Role and Token:", role, token); // ok
 
                 // Save role to Redux and local storage
                 dispatch(login({ role }));
@@ -139,7 +139,7 @@ function Auth() {
                     <div className="flex items-center w-full p-8 text-white lg:w-1/2"
                         style={{ minHeight: "100%" }}>
                         <div className="p-4 text-center rounded-lg lg:text-left text-slate-700">
-                            <h1 className="text-5xl font-bold">
+                            <h1 className="text-5xl fade-in font-bold">
                                 {authStatus ? 'Welcome Back!' : 'Register now for full experience!'}
                             </h1>
                             <p className="py-6">
