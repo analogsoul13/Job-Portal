@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 function ProfileCard({ onOptionSelect, activeId}) {
     const options = [
@@ -9,6 +9,9 @@ function ProfileCard({ onOptionSelect, activeId}) {
         { id: 'myprofile', icon: 'fa-id-card-clip', label:'My Profile'},
 
     ];
+
+    const user = useSelector((state) => state.auth.userInfo);
+    const fullName = user ? `${user.first_name} ${user.last_name}` : null;
     return (
         <>
             <div className='bg-base-100 rounded-xl shadow-xl sm:col-span-1 p-2'>
@@ -19,7 +22,7 @@ function ProfileCard({ onOptionSelect, activeId}) {
                     <img className="object-cover object-center" src='https://www.citimuzik.com/wp-content/uploads/2023/01/283208521_531376795134961_2948576342949021745_n-810x1013.jpg' alt='Profile Picture' />
                 </div>
                 <div className="text-center mt-2">
-                    <h2 className="font-semibold">Anne Hathaway</h2>
+                    <h2 className="font-semibold">{fullName}</h2>
                     <p className="text-gray-500">Freelance Web Designer</p>
                 </div>
 
