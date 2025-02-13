@@ -47,7 +47,7 @@ function Navbar({ onOptionSelect, activeId }) {
                         </div>
                     )}
 
-                    <a className="text-3xl btn btn-ghost">Talent <span className='text-accent'>Link</span></a>
+                    <a href='/' className="text-3xl btn btn-ghost">Talent <span className='text-accent'>Link</span></a>
                 </div>
                 {/* Navbar Center */}
                 <div className="hidden navbar-center lg:flex">
@@ -67,7 +67,7 @@ function Navbar({ onOptionSelect, activeId }) {
                     </ul>
                 </div>
                 {/* Theme Switch */}
-                <div className="hidden sm:flex me-6 sm:me-0">
+                <div className=" sm:flex ms-6 me-6 sm:me-0">
                     <label className="swap swap-rotate">
                         {/* this hidden checkbox controls the state */}
                         <input type="checkbox" className="theme-controller" value="dark" />
