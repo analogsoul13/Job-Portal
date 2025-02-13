@@ -67,7 +67,7 @@ function Navbar({ onOptionSelect, activeId }) {
                     </ul>
                 </div>
                 {/* Theme Switch */}
-                <div className=" sm:flex ms-6 me-6 sm:me-0">
+                <div className=" sm:flex ms-14 me-6 sm:me-0">
                     <label className="swap swap-rotate">
                         {/* this hidden checkbox controls the state */}
                         <input type="checkbox" className="theme-controller" value="dark" />
