@@ -76,25 +76,22 @@ function Auth() {
 
         try {
             const res = await loginApi(input);
+            console.log("Full Response", res);
+
             if (res?.status === 200) {
                 toast.success("Login Successful!!");
 
-                const { role, token } = res.data;
-                //console.log("Role and Token:", role, token); // ok
+                const { user, role, token } = res.data;
 
                 // Save role to Redux and local storage
-                dispatch(login({ role }));
+                dispatch(login({ role, user }));
+
                 localStorage.setItem("role", role);
                 localStorage.setItem("token", token);
 
-                // Double-check role before navigation
-                if (role === "admin") {
-                    nav("/admin/dashboard");
-                } else if (role === "recruiter") {
-                    nav("/rdashboard");
-                } else {
-                    nav("/cdashboard"); // Default for candidates
-                }
+                // Redirect based on role
+                nav(role === 'admin' ? "/admin/dashboard" : role === 'recruiter' ? "/rdashboard" : "/cdashboard")
+
             } else {
                 const errorMessage = res.response?.data?.message || "Something went wrong!!";
                 toast.error(errorMessage);
