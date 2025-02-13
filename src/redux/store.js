@@ -7,6 +7,7 @@ import persistReducer from "redux-persist/es/persistReducer";
 const persistConfig = {
   key: 'root',
   storage,
+  whitelist : ['auth']
 };
 
 const rootReducer = combineReducers({
@@ -17,6 +18,10 @@ const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = configureStore({
   reducer: persistedReducer,
+  middleware : (getDefaultMiddleware) => 
+    getDefaultMiddleware({
+      serializableCheck: false
+    })
 })
 export const persistor = persistStore(store)
 export default store
