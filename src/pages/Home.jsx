@@ -21,7 +21,7 @@ function Home() {
     }
     return (
         <>
-            <div className=''>
+            <div className='w-full overflow-hidden'>
                 <div className='grid sm:grid-cols-2 px-2 sm:px-6'>
                     <div className='flex flex-col justify-end md:justify-center md:bg-none bg-home rounded-lg bg-cover bg-center mt-6 md:p-6 shadow-xl md:shadow-none sm:mt-14 gap-4 items-start w-full h-[450px]'>
                         {/* Mobile Screen */}
