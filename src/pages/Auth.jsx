@@ -81,13 +81,12 @@ function Auth() {
             if (res?.status === 200) {
                 toast.success("Login Successful!!");
 
-                const { user, role, token } = res.data;
+                const { user, role } = res.data;
 
                 // Save role to Redux and local storage
                 dispatch(login({ role, user }));
 
                 localStorage.setItem("role", role);
-                localStorage.setItem("token", token);
 
                 // Redirect based on role
                 nav(role === 'admin' ? "/admin/dashboard" : role === 'recruiter' ? "/rdashboard" : "/cdashboard")
