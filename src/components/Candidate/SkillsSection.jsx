@@ -1,16 +1,15 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-const SkillsSection = () => {
+const SkillsSection = ({ skills, setSkills }) => {
     const [skill, setSkill] = useState("");
-    const [skills, setSkills] = useState([]);
 
     const addSkill = () => {
         if (skill && !skills.includes(skill)) {
             setSkills([...skills, skill]);
             setSkill("");
         } else if (skills.includes(skill)) {
-            toast.warning("Skill Already Used!!",{position: "top-left",autoClose: 1000})
+            toast.warning("Skill Already Used!!", { position: "top-left", autoClose: 1000 })
         }
     };
 
