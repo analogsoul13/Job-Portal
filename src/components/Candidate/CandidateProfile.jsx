@@ -1,12 +1,175 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import SkillsSection from './SkillsSection'
 import { Link } from 'react-router-dom'
+import { getUserProfile, updateProfileApi } from '../../services/profileServices'
+import { toast } from 'react-toastify'
+import BASE_URL from '../../services/baseUrl'
 
 function CandidateProfile() {
     const [editProfile, setEditProfile] = useState(false)
+    const [profile, setProfile] = useState(null)
+    const [preview, setPreview] = useState(null)
+    const [skills, setSkills] = useState([])
+    const [loading, setLoading] = useState(true)
+    const [updateProfile, setUpdateProfile] = useState({
+        first_name: '',
+        last_name: '',
+        email: '',
+        phoneNumber: '',
+        profile: {
+            bio: '',
+            place: '',
+            pin: '',
+            qualification: '',
+            skills: [],
+            resume: '',
+            profilePhoto: '',
+            socialLinks: {
+                github: '',
+                x: '',
+                portfolio: ''
+            }
+        }
+    });
+
+
+    const fetchProfile = async () => {
+        try {
+            const response = await getUserProfile();
+            console.log("Fetched Profile :",response.data)
+            if (response.status === 200) {
+                setProfile(response.data);
+                setSkills(response.data.profile?.skills || []) // Extract skills from profile
+            } else {
+                toast.error(`Error loading profile: ${response.data?.message || "Something went wrong"}`);
+            }
+        } catch (error) {
+            toast.error(`Error loading profile: ${error.message || "Something went wrong"}`);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchProfile();
+    }, []);
+
+
     const toggleEdit = () => {
-        setEditProfile(!editProfile)
+        if (!editProfile && profile) {
+            setUpdateProfile({
+                first_name: profile.first_name || '',
+                last_name: profile.last_name || '',
+                email: profile.email || '',
+                phoneNumber: profile.phoneNumber || '',
+                profile: profile.profile || {
+                    bio: '', place: '', pin: '', qualification: '',
+                    skills: [], resume: '', profilePhoto: '',
+                    socialLinks: { github: '', x: '', portfolio: '' }
+                }
+            });
+        }
+        setEditProfile(!editProfile);
+    };
+
+
+
+const handleUpdateProfile = async () => {
+    try {
+        updateProfile.profile.skills = skills
+        const formData = new FormData();
+
+        // Append top-level fields (first_name, last_name, email)
+        Object.keys(updateProfile).forEach((key) => {
+            if (key !== "profile") {
+                formData.append(key, updateProfile[key]);
+            }
+        });
+
+        Object.keys(updateProfile.profile).forEach((key) => {
+            if (key !== "profilePhoto" && key !== "socialLinks") {
+                if (key === "skills" && Array.isArray(updateProfile.profile.skills)) {
+                    formData.append("skills", updateProfile.profile.skills.join(","));
+                } else {
+                    formData.append(key, updateProfile.profile[key]);
+                    
+                }
+            }
+        });
+
+
+        // Append socialLinks fields explicitly
+        if (updateProfile.profile.socialLinks) {
+            formData.append("github", updateProfile.profile.socialLinks.github || "");
+            formData.append("x", updateProfile.profile.socialLinks.x || "");
+            formData.append("portfolio", updateProfile.profile.socialLinks.portfolio || "");
+        }
+
+        // Append profilePhoto
+        if (updateProfile.profile.profilePhoto) {
+            formData.append("profilePhoto", updateProfile.profile.profilePhoto);
+        }
+
+        const response = await updateProfileApi(formData);
+        console.log("Profile update response:", response);
+
+        if (response.status === 200) {
+            toast.success("Profile updated succesfully!");
+            fetchProfile();
+            setEditProfile(false);
+        }
+    } catch (error) {
+        console.error("Error updating profile.", error);
+        toast.error(error?.response?.data?.message || "Something went wrong!");
     }
+};
+
+
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const fileURL = URL.createObjectURL(file)
+            setPreview(fileURL)
+
+            const formData = new FormData()
+            formData.append('file', file)
+
+            setUpdateProfile((prev) => ({
+                ...prev,
+                profile: {
+                    ...prev.profile,
+                    profilePhoto: file
+                }
+            }));
+        }
+    };
+
+
+
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+
+        setUpdateProfile((prev) => {
+            const keys = name.split('.');
+            let newState = { ...prev };
+
+            let temp = newState;
+            for (let i = 0; i < keys.length - 1; i++) {
+                if (!temp[keys[i]]) temp[keys[i]] = {}; // Ensure the nested object exists
+                temp = temp[keys[i]];
+            }
+            temp[keys[keys.length - 1]] = value; // Assign value
+
+            return { ...newState }; // Return the updated state
+        });
+    };
+
+
+
+    if (loading) return <div className="flex justify-center items-center h-screen"><span className="loading loading-spinner loading-lg"></span></div>;
+
     return (
         <>
             {/* Profile View Mode */}
@@ -14,12 +177,12 @@ function CandidateProfile() {
                 <div className='flex p-2 w-full'>
                     <div className='flex w-3/4 space-x-4 p-3'>
                         <div className="w-32 h-32 border-4 border-white rounded-full overflow-hidden">
-                            <img className="object-cover object-center" src='https://www.citimuzik.com/wp-content/uploads/2023/01/283208521_531376795134961_2948576342949021745_n-810x1013.jpg' alt='Profile Picture' />
+                            <img className="object-cover object-center" src={`${BASE_URL}${profile.profile.profilePhoto}`} alt='Profile Picture' />
                         </div>
                         <div className='flex flex-col justify-center items-start'>
-                            <h1 className='text-xl font-semibold'>Anne Hathaway</h1>
+                            <h1 className='text-xl text-base-content font-semibold'>{profile?.first_name} {profile?.last_name}</h1>
                             <p className='text-gray-500 text-sm'>Full Stack Web Developer</p>
-                            <p className='text-base-content cursor-pointer hover:text-blue-400 text-xs'>anne34@gmail.com</p>
+                            <p className='text-base-content cursor-pointer hover:text-blue-400 text-xs'>{profile?.email}</p>
                         </div>
                     </div>
                     <div className='flex w-1/4 justify-center items-center'>
@@ -29,34 +192,38 @@ function CandidateProfile() {
                 <div className='flex flex-col p-4'>
                     <h2 className='text-lg font-semibold mb-2'>Professional Summary</h2>
                     <hr />
-                    <p className='text-sm'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium labore doloribus eum quo vitae vel aperiam ipsam dolore officiis nulla?</p>
+                    <p className='text-sm'>{profile?.profile.bio || "Not added"}</p>
                 </div>
 
                 <section className='flex flex-col px-4'>
                     <h2 className='text-lg font-semibold mb-2'>Skills</h2>
                     <hr />
-                    <div className='flex space-x-3 py-2 flex-wrap'>
-                        <span className='badge p-4 badge-neutral'>HTML</span>
-                        <span className='badge p-4 badge-neutral'>CSS</span>
-                        <span className='badge p-4 badge-neutral'>JS</span>
-                        <span className='badge p-4 badge-neutral'>Python</span>
-                    </div>
+                    {skills.length > 0 ? (
+                        <div className='flex space-x-3 py-2 flex-wrap'>
+                            {skills.map((item, index) => (
+                                <span key={index} className='badge p-4 badge-neutral'>{item}</span>
+                            ))}
+                        </div>
+                    ) : (
+                        <p className="text-gray-500">No skills added yet.</p>
+                    )}
+
                 </section>
 
                 <section className='flex flex-col p-2 py-2 bg-base-200 rounded-xl shadow-xl mb-4 mx-4'>
                     <h2>Contact Information</h2>
                     <div className='flex flex-col sm:flex-row p-2 space-y-4 sm:space-y-0 sm:space-x-4'>
                         <div className='flex flex-col bg-base-100 rounded-lg space-y-3 text-sm p-2'>
-                            <span><i className="fa-solid fa-envelope me-2" />Email : anctest@gmail.com</span>
-                            <span><i className="fa-solid fa-location-dot me-2" />Place : Kakkoor</span>
-                            <span><i className="fa-solid fa-location-arrow me-2" />State : Kerala</span>
-                            <span><i className="fa-solid fa-location-crosshairs me-2" />PIN : 686661</span>
+                            <span><i className="fa-solid fa-envelope me-2" />Email : {profile.email}</span>
+                            <span><i className="fa-solid fa-location-dot me-2" />Place : {profile?.profile.place || "Not provided"}</span>
+                            <span><i className="fa-solid fa-location-arrow me-2" />State : Not implemented</span>
+                            <span><i className="fa-solid fa-location-crosshairs me-2" />PIN : {profile?.profile.pin || "Not Provided"}</span>
                         </div>
                         <div className='flex flex-col bg-base-100 rounded-lg text-sm space-y-3 p-2'>
-                            <span><i className="fa-brands fa-github me-2" />Github : https://github.com</span>
-                            <span><i className="fa-solid fa-briefcase me-2" />Portfolio : https://portfolio.com</span>
-                            <span><i className="fa-brands fa-linkedin me-2" />LinkedIn : https://linkedin.com</span>
-                            <span><i className="fa-brands fa-x-twitter me-2" />X : https://x.com</span>
+                            <span><i className="fa-brands fa-github me-2" />Github : {profile?.profile?.socialLinks?.github || "Not added yet!"}</span>
+                            <span><i className="fa-solid fa-briefcase me-2" />Portfolio : {profile?.profile?.socialLinks?.portfolio || "Not added yet!"}</span>
+                            <span><i className="fa-brands fa-linkedin me-2" />LinkedIn : Not implemented</span>
+                            <span><i className="fa-brands fa-x-twitter me-2" />X : {profile?.profile?.socialLinks?.x || "Not added yet!"}</span>
                         </div>
 
                     </div>
@@ -64,7 +231,7 @@ function CandidateProfile() {
 
                 <section className='flex flex-col p-4'>
                     <h2 className='text-lg font-semibold mb-2'>Education</h2>
-                        <p className='txet-md mb-4'>B-tech</p>
+                    <p className='txet-md uppercase mb-4'>{profile?.profile?.qualification || "Not added yet!"}</p>
                     <hr />
                 </section>
 
@@ -91,7 +258,7 @@ function CandidateProfile() {
                                     <label className="flex flex-col items-center cursor-pointer">
                                         <div className="w-20 h-20 rounded-full border-4 border-base-300 shadow-2xl overflow-hidden mb-2">
                                             <img
-                                                src="https://icon-library.com/images/edit-profile-icon/edit-profile-icon-15.jpg"
+                                                src={preview ||`${BASE_URL}${profile.profile.profilePhoto}`}
                                                 alt="Profile Picture"
                                                 className="object-cover w-full h-full"
                                             />
@@ -100,6 +267,7 @@ function CandidateProfile() {
                                             type="file"
                                             className="hidden"
                                             accept="image/*"
+                                            onChange={handleFileChange}
                                         />
                                         <span className="text-slate-500 text-xs">
                                             Upload Profile Picture
@@ -111,6 +279,9 @@ function CandidateProfile() {
                                 <div className="flex w-full mb-4">
                                     <textarea
                                         placeholder="Bio"
+                                        name='profile.bio'
+                                        value={updateProfile.profile.bio}
+                                        onChange={handleChange}
                                         className="textarea textarea-bordered textarea-xs w-full max-w-xl"
                                     ></textarea>
                                 </div>
@@ -120,12 +291,18 @@ function CandidateProfile() {
                             <div className="flex space-x-2">
                                 <input
                                     type="text"
+                                    name='first_name'
                                     placeholder="First Name"
+                                    value={updateProfile?.first_name}
+                                    onChange={handleChange}
                                     className="input input-bordered w-1/2"
                                 />
                                 <input
                                     type="text"
+                                    name='last_name'
                                     placeholder="Last Name"
+                                    value={updateProfile?.last_name}
+                                    onChange={handleChange}
                                     className="input input-bordered w-1/2"
                                 />
                             </div>
@@ -134,12 +311,18 @@ function CandidateProfile() {
                             <div className="flex space-x-2 my-2">
                                 <input
                                     type="text"
+                                    name='phoneNumber'
                                     placeholder="Phone"
+                                    value={updateProfile?.phoneNumber}
+                                    onChange={handleChange}
                                     className="input input-bordered w-1/2"
                                 />
                                 <input
                                     type="email"
+                                    name='email'
                                     placeholder="Email"
+                                    value={updateProfile?.email}
+                                    onChange={handleChange}
                                     className="input input-bordered w-1/2"
                                 />
                             </div>
@@ -148,6 +331,9 @@ function CandidateProfile() {
                             <div className="flex space-x-2 my-2">
                                 <input
                                     type="text"
+                                    name='profile.place'
+                                    value={updateProfile.profile.place}
+                                    onChange={handleChange}
                                     placeholder="Place"
                                     className="input input-bordered w-1/3"
                                 />
@@ -158,7 +344,10 @@ function CandidateProfile() {
                                 />
                                 <input
                                     type="number"
+                                    name='profile.pin'
                                     placeholder="PIN Code"
+                                    value={updateProfile.profile.pin}
+                                    onChange={handleChange}
                                     className="input input-bordered w-1/3"
                                     style={{
                                         appearance: 'none',
@@ -169,16 +358,20 @@ function CandidateProfile() {
 
                             {/* Qualification */}
                             <div className="flex space-x-2 my-2">
-                                <select className="select select-bordered text-slate-500 w-1/2">
-                                    <option disabled selected>
+                                <select onChange={handleChange} name='profile.qualification' 
+                                value={updateProfile.profile.qualification} 
+                                className="select select-bordered text-slate-500 w-1/2" 
+                                >
+                                    <option disabled>
                                         Qualification
                                     </option>
-                                    <option>B-Tech</option>
-                                    <option>Degree</option>
-                                    <option>Diploma</option>
+                                    <option value="btech">B-Tech</option>
+                                    <option value="degree">Degree</option>
+                                    <option value="diploma">Diploma</option>
                                 </select>
                                 <input
                                     type="text"
+                                    name='profile.branch'
                                     placeholder="Branch"
                                     className="input input-bordered w-1/2"
                                 />
@@ -193,6 +386,7 @@ function CandidateProfile() {
                                     <input
                                         type="file"
                                         className="file-input file-input-bordered file-input-accent-content w-full"
+                                        onChange={handleFileChange}
                                     />
                                     <div className="label">
                                         <span className="label-text-alt text-slate-500">
@@ -203,7 +397,7 @@ function CandidateProfile() {
                             </div>
 
                             {/* Skills Section */}
-                            <SkillsSection />
+                            <SkillsSection skills={skills} setSkills={setSkills} />
 
                             {/* Socials */}
                             <div className="flex space-x-2 my-2 mb-4">
@@ -211,6 +405,9 @@ function CandidateProfile() {
                                     <i className="fa-brands fa-sm fa-github" />
                                     <input
                                         type="text"
+                                        name='profile.socialLinks.github'
+                                        value={updateProfile?.profile?.socialLinks?.github || ""}
+                                        onChange={handleChange}
                                         className="grow text-sm"
                                         placeholder="Github Link"
                                     />
@@ -219,6 +416,9 @@ function CandidateProfile() {
                                     <i className="fa-brands fa-sm fa-x-twitter" />
                                     <input
                                         type="text"
+                                        name="profile.socialLinks.x"
+                                        value={updateProfile?.profile?.socialLinks?.x || ""}
+                                        onChange={handleChange}
                                         className="grow text-sm"
                                         placeholder="Twitter Link"
                                     />
@@ -227,6 +427,9 @@ function CandidateProfile() {
                                     <i className="fa-solid fa-sm fa-user-tie" />
                                     <input
                                         type="text"
+                                        name="profile.socialLinks.portfolio"
+                                        value={updateProfile?.profile?.socialLinks?.portfolio || ""}
+                                        onChange={handleChange}
                                         className="grow text-sm"
                                         placeholder="Portfolio Link"
                                     />
@@ -236,7 +439,7 @@ function CandidateProfile() {
                             {/* Actions */}
                             <div className="flex space-x-2">
                                 <Link to={'/cdashboard'}>
-                                    <button className="btn btn-accent shadow">
+                                    <button onClick={handleUpdateProfile} className="btn btn-accent shadow">
                                         Save
                                     </button>
                                 </Link>
