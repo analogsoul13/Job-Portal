@@ -4,12 +4,14 @@ import ProfileCard from './Candidate/ProfileCard'
 import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../redux/slices/authSlice'
 import { toast } from 'react-toastify'
+import BASE_URL from '../services/baseUrl'
 
 function Navbar({ onOptionSelect, activeId }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [showPopup, setShowPopup] = useState(false)
     // For user is logged in or not
-    const { isLoggedIn, userRole } = useSelector((state) => state.auth)
+    const { isLoggedIn, userRole, userInfo } = useSelector((state) => state.auth)
+    const userName = userInfo?.first_name
     const nav = useNavigate()
     const dispatch = useDispatch()
 
@@ -63,7 +65,12 @@ function Navbar({ onOptionSelect, activeId }) {
                             </details>
                         </li>
                         <li><a><i className="fa-solid fa-layer-group" />About Us</a></li>
-                        <li><Link to={'/auth'}><i className="fa-solid fa-user-plus" />Register</Link></li>
+                        {isLoggedIn ? (
+                            <li><a><i className="fa-solid fa-web-awesome text-yellow-500" /><span className='font-bold text-base-content'>{userName}</span></a></li>
+                        ) : (
+                            <li><Link to={'/auth'}><i className="fa-solid fa-user-plus" />Register</Link></li>
+                        )}
+
                     </ul>
                 </div>
                 {/* Theme Switch */}
@@ -86,9 +93,14 @@ function Navbar({ onOptionSelect, activeId }) {
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                                 <div className="w-full h-full border-4 border-base-300 shadow-2xl rounded-full">
-                                    <img className='object-cover object-center'
-                                        alt="Profile Picture"
-                                        src="https://www.citimuzik.com/wp-content/uploads/2023/01/283208521_531376795134961_2948576342949021745_n-810x1013.jpg" />
+                                    {userInfo?.profilePic ? (
+                                        <img className='object-cover object-center'
+                                            alt="Profile Picture"
+                                            src={`${BASE_URL}${userInfo.profilePic}`} />
+                                    ) : (
+                                        <span>{userInfo?.first_name?.[0]?.toUpperCase() || "U"}</span>
+                                    )
+                                    }
                                 </div>
                             </div>
                             <ul
@@ -98,7 +110,7 @@ function Navbar({ onOptionSelect, activeId }) {
                                     <button
                                         onClick={() => {
                                             if (userRole === "candidate") {
-                                                nav("/cdashboard"); 
+                                                nav("/cdashboard");
                                                 onOptionSelect("myprofile"); // Set "My Profile" as the active section
                                             } else if (userRole === "recruiter") {
                                                 nav("/rdashboard");
