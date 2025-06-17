@@ -81,10 +81,10 @@ function Auth() {
             if (res?.status === 200) {
                 toast.success("Login Successful!!");
 
-                const { user, role } = res.data;
+                const { user, role, token } = res.data;
 
                 // Save role to Redux and local storage
-                dispatch(login({ role, user }));
+                dispatch(login({ role, user, token }));
 
                 localStorage.setItem("role", role);
 
