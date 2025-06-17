@@ -1,166 +1,225 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getJobLocationsApi } from '../services/jobServices';
 
-const JobFilter = () => {
-  const [salaryRange, setSalaryRange] = useState([20000, 200000]);
-  const [activeSection, setActiveSection] = useState(null);
-  const [selectedJobTypes, setSelectedJobTypes] = useState([]);
-  const [selectedLocations, setSelectedLocations] = useState([]);
+const JobFilter = ({ filters, setFilters }) => {
+  const [openDropdown, setOpenDropdown] = useState(null);
 
-  const jobTypes = [
-    "Full-time", 
-    "Part-time", 
-    "Contract", 
-    "Freelance", 
-    "Internship"
+  const salaryOptions = [
+    { value: '', label: 'Any' },
+    { value: '3', label: '3 LPA' },
+    { value: '5', label: '5 LPA' },
+    { value: '7', label: '7 LPA' },
+    { value: '10', label: '10 LPA' },
+    { value: '15', label: '15 LPA+' }
   ];
 
-  const locations = [
-    "Kerala", 
-    "Bangalore", 
-    "Kochi", 
-    "Calicut", 
-    "Chennai"
+  const maxSalaryOptions = [
+    { value: '', label: 'Any' },
+    { value: '6', label: '6 LPA' },
+    { value: '8', label: '8 LPA' },
+    { value: '12', label: '12 LPA' },
+    { value: '20', label: '20 LPA' },
+    { value: '30', label: '30 LPA+' }
   ];
 
-  const industries = [
-    "Technology", 
-    "Finance", 
-    "Healthcare", 
-    "Education", 
-    "Marketing"
+  const [locationOptions, setLocationOptions] = useState([
+    { value: '', label: 'Anywhere' }
+  ])
+
+
+  const experienceOptions = [
+    { value: '', label: 'Any Level' },
+    { value: '1', label: 'Entry (0-1y)' },
+    { value: '4', label: 'Mid (2-4y)' },
+    { value: '9', label: 'Senior (5-9y)' },
+    { value: '10', label: 'Lead (10y+)' }
   ];
 
-  const toggleSection = (section) => {
-    setActiveSection(activeSection === section ? null : section);
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+      try {
+        const res = await getJobLocationsApi()
+        if (res.status === 200) {
+          const dynamicOptions = res.data.locations.map(loc => ({
+            value: loc,
+            label: loc.charAt(0).toUpperCase() + loc.slice(1)
+          }))
+          setLocationOptions([{value: '', label: 'Anywhere'}, ...dynamicOptions])
+        }
+      } catch (error) {
+        console.error("Failed to load locations")
+      }
+    }
+
+    fetchLocations()
+  }, [])
+
+
+  const handleFilterChange = (filterType, value) => {
+    setFilters(prev => ({ ...prev, [filterType]: value }))
+    setOpenDropdown(null);
   };
 
-  const handleJobTypeChange = (jobType) => {
-    setSelectedJobTypes(prev => 
-      prev.includes(jobType)
-        ? prev.filter(type => type !== jobType)
-        : [...prev, jobType]
-    );
+  const toggleDropdown = (dropdownName) => {
+    setOpenDropdown(openDropdown === dropdownName ? null : dropdownName);
   };
 
-  const handleLocationChange = (location) => {
-    setSelectedLocations(prev => 
-      prev.includes(location)
-        ? prev.filter(loc => loc !== location)
-        : [...prev, location]
-    );
+  const getDisplayValue = (filterType, options) => {
+    const selected = filters[filterType];
+    if (!selected) return options[0].label;
+    return options.find(opt => opt.value === selected)?.label || options[0].label;
   };
 
-  const FilterSection = ({ title, children, sectionKey }) => (
-    <div className="border-b border-base-300" id='filtercard'>
-      <button 
-        onClick={() => toggleSection(sectionKey)}
-        className="w-full text-left p-3 flex justify-between items-center hover:bg-base-200 transition"
-      >
-        <span className="font-medium">{title}</span>
-        <span>{activeSection === sectionKey ? <i className="fa-solid fa-xs fa-angle-up" /> : <i className="fa-solid fa-xs fa-angle-down" />}</span>
-      </button>
-      {activeSection === sectionKey && (
-        <div className="p-3">
-          {children}
-        </div>
-      )}
-    </div>
-  );
+  const clearFilters = () => {
+    setFilters(prev => ({
+      ...prev,
+      minSalary: '',
+      maxSalary: '',
+      location: '',
+      experienceLevel: ''
+    }));
+    setOpenDropdown(null);
+  };
+
+  const hasActiveFilters = filters.minSalary || filters.maxSalary || filters.location || filters.experienceLevel;
 
   return (
-    <div className="w-full bg-base-100 border rounded-lg shadow-md">
-      <h2 className="text-xl font-bold p-4 border-b">Filter Jobs</h2>
-      
-      {/* Salary Range Filter */}
-      <FilterSection title="Salary Range" sectionKey="salary">
-        <div className="flex flex-col space-y-2">
-          <input 
-            type="range"
-            min="10000"
-            max="250000"
-            value={salaryRange[1]}
-            onChange={(e) => setSalaryRange([salaryRange[0], parseInt(e.target.value)])}
-            className="w-full range range-xs"
-          />
-          <div className="flex justify-between text-sm">
-            <span>${salaryRange[0].toLocaleString()}</span>
-            <span>${salaryRange[1].toLocaleString()}</span>
-          </div>
+    <div className="bg-base-100 rounded-b-lg shadow-md">
+      <div className="flex flex-wrap items-center justify-center gap-2 pb-1">
+        {/* Min Salary */}
+        <div className="relative">
+          <button
+            onClick={() => toggleDropdown('minSalary')}
+            className="flex items-center gap-1 px-3 py-1.5 text-xs text-base-content hover:bg-base-300 rounded-lg transition-colors"
+          >
+            <span className="text-xs text-gray-500">Min:</span>
+            {getDisplayValue('minSalary', salaryOptions)}
+            <svg className={`w-3 h-3 transition-transform ${openDropdown === 'minSalary' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          {openDropdown === 'minSalary' && (
+            <div className="absolute top-full left-0 mt-1 bg-base-100 border border-gray-200 rounded-lg shadow-lg z-20 min-w-24">
+              {salaryOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => handleFilterChange('minSalary', option.value)}
+                  className="w-full text-left px-3 py-2 text-xs text-base-content hover:bg-base-300 first:rounded-t-lg last:rounded-b-lg"
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
-      </FilterSection>
 
-      {/* Job Type Filter */}
-      <FilterSection title="Job Type" sectionKey="job-type">
-        {jobTypes.map(type => (
-          <div key={type} className="flex items-center space-x-2 mb-2">
-            <input
-              type="checkbox"
-              id={type}
-              checked={selectedJobTypes.includes(type)}
-              onChange={() => handleJobTypeChange(type)}
-              className="mr-2"
-            />
-            <label htmlFor={type} className="text-sm">{type}</label>
-          </div>
-        ))}
-      </FilterSection>
+        <div className="w-px h-4 bg-gray-300" />
 
-      {/* Location Filter */}
-      <FilterSection title="Location" sectionKey="location">
-        {locations.map(location => (
-          <div key={location} className="flex items-center space-x-2 mb-2">
-            <input
-              type="checkbox"
-              id={location}
-              checked={selectedLocations.includes(location)}
-              onChange={() => handleLocationChange(location)}
-              className="mr-2"
-            />
-            <label htmlFor={location} className="text-sm">{location}</label>
-          </div>
-        ))}
-      </FilterSection>
+        {/* Max Salary */}
+        <div className="relative">
+          <button
+            onClick={() => toggleDropdown('maxSalary')}
+            className="flex items-center gap-1 px-3 py-1.5 text-xs text-base-content hover:bg-base-300 rounded-lg transition-colors"
+          >
+            <span className="text-xs text-gray-500">Max:</span>
+            {getDisplayValue('maxSalary', maxSalaryOptions)}
+            <svg className={`w-3 h-3 transition-transform ${openDropdown === 'maxSalary' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          {openDropdown === 'maxSalary' && (
+            <div className="absolute top-full left-0 mt-1 bg-base-100 border border-gray-200 rounded-lg shadow-lg z-20 min-w-24">
+              {maxSalaryOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => handleFilterChange('maxSalary', option.value)}
+                  className="w-full text-left px-3 py-2 text-xs text-base-content hover:bg-base-300 first:rounded-t-lg last:rounded-b-lg"
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
-      {/* Industry Filter */}
-      <FilterSection title="Industry" sectionKey="industry">
-        <select className="w-full p-2 border rounded">
-          <option value="">Select Industry</option>
-          {industries.map(industry => (
-            <option key={industry} value={industry}>
-              {industry}
-            </option>
-          ))}
-        </select>
-      </FilterSection>
+        <div className="w-px h-4 bg-gray-300" />
 
-      {/* Experience Level Filter */}
-      <FilterSection title="Experience Level" sectionKey="experience">
-        <select className="w-full p-2 border rounded">
-          <option value="">Select Experience</option>
-          <option value="entry">Entry Level</option>
-          <option value="mid">Mid Level</option>
-          <option value="senior">Senior Level</option>
-        </select>
-      </FilterSection>
+        {/* Location */}
+        <div className="relative">
+          <button
+            onClick={() => toggleDropdown('location')}
+            className="flex items-center gap-1 px-3 py-1.5 text-xs text-base-content hover:bg-base-300 rounded-lg transition-colors"
+          >
+            {getDisplayValue('location', locationOptions)}
+            <svg className={`w-3 h-3 transition-transform ${openDropdown === 'location' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          {openDropdown === 'location' && (
+            <div className="absolute top-full left-0 mt-1 bg-base-100 border border-gray-200 rounded-lg shadow-lg z-20 min-w-32">
+              {locationOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => handleFilterChange('location', option.value)}
+                  className="w-full text-left px-3 py-2 text-xs text-base-content hover:bg-base-300 first:rounded-t-lg last:rounded-b-lg"
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
 
-      {/* Reset and Apply Buttons */}
-      <div className="p-4 flex justify-between space-x-2">
-        <button 
-          className="btn btn-outline transition"
-          onClick={() => {
-            setSalaryRange([20000, 200000]);
-            setSelectedJobTypes([]);
-            setSelectedLocations([]);
-          }}
-        >
-          Reset
-        </button>
-        <button 
-          className="btn btn-accent transition"
-        >
-          Apply
-        </button>
+        <div className="w-px h-4 bg-gray-300" />
+
+        {/* Experience Level */}
+        <div className="relative">
+          <button
+            onClick={() => toggleDropdown('experienceLevel')}
+            className="flex items-center gap-1 px-3 py-1.5 text-xs text-base-content hover:bg-base-300 rounded-lg transition-colors"
+          >
+            {getDisplayValue('experienceLevel', experienceOptions)}
+            <svg className={`w-3 h-3 transition-transform ${openDropdown === 'experienceLevel' ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          {openDropdown === 'experienceLevel' && (
+            <div className="absolute top-full left-0 mt-1 bg-base-100 border border-gray-200 rounded-lg shadow-lg z-20 min-w-28">
+              {experienceOptions.map((option) => (
+                <button
+                  key={option.value}
+                  onClick={() => handleFilterChange('experienceLevel', option.value)}
+                  className="w-full text-left px-3 py-2 text-xs text-base-content hover:bg-base-300 first:rounded-t-lg last:rounded-b-lg"
+                >
+                  {option.label}
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Clear Filters */}
+        {hasActiveFilters && (
+          <>
+            <div className="w-px h-4 bg-gray-900 ml-2" />
+            <button
+              onClick={clearFilters}
+              className="px-2 py-1 text-xs text-gray-500 hover:text-base-content hover:bg-base-300 rounded transition-colors"
+            >
+              Clear
+            </button>
+          </>
+        )}
       </div>
+
+      {/* Close dropdowns when clicking outside */}
+      {openDropdown && (
+        <div
+          className="fixed inset-0 z-10"
+          onClick={() => setOpenDropdown(null)}
+        />
+      )}
     </div>
   );
 };
