@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
+import BASE_URL from '../../services/baseUrl';
 
 function ProfileCard({ onOptionSelect, activeId}) {
     const options = [
@@ -10,8 +11,8 @@ function ProfileCard({ onOptionSelect, activeId}) {
 
     ];
 
-    const user = useSelector((state) => state.auth.userInfo);
-    const fullName = user ? `${user.first_name} ${user.last_name}` : null;
+    const userInfo = useSelector((state) => state.auth.userInfo);
+    const fullName = userInfo ? `${userInfo.first_name} ${userInfo.last_name}` : null;
     return (
         <>
             <div className='bg-base-100 rounded-xl shadow-xl sm:col-span-1 p-2'>
@@ -19,7 +20,7 @@ function ProfileCard({ onOptionSelect, activeId}) {
                     <img className="object-cover object-top w-full" src='https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='Mountain' />
                 </div>
                 <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
-                    <img className="object-cover object-center" src='https://www.citimuzik.com/wp-content/uploads/2023/01/283208521_531376795134961_2948576342949021745_n-810x1013.jpg' alt='Profile Picture' />
+                    <img className="object-cover object-center" src={`${BASE_URL}${userInfo.profilePic}`} alt='Profile Picture' />
                 </div>
                 <div className="text-center mt-2">
                     <h2 className="font-semibold">{fullName}</h2>
