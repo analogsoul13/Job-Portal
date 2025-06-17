@@ -4,13 +4,17 @@ import { Link } from 'react-router-dom'
 import { getUserProfile, updateProfileApi } from '../../services/profileServices'
 import { toast } from 'react-toastify'
 import BASE_URL from '../../services/baseUrl'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateProfileInfo } from '../../redux/slices/authSlice'
 
 function CandidateProfile() {
     const [editProfile, setEditProfile] = useState(false)
-    const [profile, setProfile] = useState(null)
+    const [profile, setProfile] = useState({})
     const [preview, setPreview] = useState(null)
     const [skills, setSkills] = useState([])
     const [loading, setLoading] = useState(true)
+    const token = useSelector((state) => state.auth.token)
+    const dispatch = useDispatch()
     const [updateProfile, setUpdateProfile] = useState({
         first_name: '',
         last_name: '',
@@ -35,8 +39,11 @@ function CandidateProfile() {
 
     const fetchProfile = async () => {
         try {
-            const response = await getUserProfile();
-            console.log("Fetched Profile :",response.data)
+            const headers = {
+                Authorization: `Bearer ${token}`
+            };
+            const response = await getUserProfile(headers);
+            console.log("Fetched Profile :", response.data)
             if (response.status === 200) {
                 setProfile(response.data);
                 setSkills(response.data.profile?.skills || []) // Extract skills from profile
@@ -74,55 +81,64 @@ function CandidateProfile() {
 
 
 
-const handleUpdateProfile = async () => {
-    try {
-        updateProfile.profile.skills = skills
-        const formData = new FormData();
-
-        // Append top-level fields (first_name, last_name, email)
-        Object.keys(updateProfile).forEach((key) => {
-            if (key !== "profile") {
-                formData.append(key, updateProfile[key]);
+    const handleUpdateProfile = async () => {
+        try {
+            const headers = {
+                Authorization: `Bearer ${token}`
             }
-        });
+            // Sync local skills state to the updateProfile object
+            updateProfile.profile.skills = skills
+            const formData = new FormData();
 
-        Object.keys(updateProfile.profile).forEach((key) => {
-            if (key !== "profilePhoto" && key !== "socialLinks") {
-                if (key === "skills" && Array.isArray(updateProfile.profile.skills)) {
-                    formData.append("skills", updateProfile.profile.skills.join(","));
-                } else {
-                    formData.append(key, updateProfile.profile[key]);
-                    
+            // Append top-level fields (first_name, last_name, email)
+            Object.keys(updateProfile).forEach((key) => {
+                if (key !== "profile") {
+                    formData.append(key, updateProfile[key]);
                 }
+            });
+
+            Object.keys(updateProfile.profile).forEach((key) => {
+                if (key !== "profilePhoto" && key !== "socialLinks") {
+                    if (key === "skills" && Array.isArray(updateProfile.profile.skills)) {
+                        formData.append("skills", updateProfile.profile.skills.join(","));
+                    } else {
+                        formData.append(key, updateProfile.profile[key]);
+
+                    }
+                }
+            });
+
+
+            // Append socialLinks fields explicitly
+            if (updateProfile.profile.socialLinks) {
+                formData.append("github", updateProfile.profile.socialLinks.github || "");
+                formData.append("x", updateProfile.profile.socialLinks.x || "");
+                formData.append("portfolio", updateProfile.profile.socialLinks.portfolio || "");
             }
-        });
 
+            // Append profilePhoto
+            if (updateProfile.profile.profilePhoto) {
+                formData.append("profilePhoto", updateProfile.profile.profilePhoto);
+            }
 
-        // Append socialLinks fields explicitly
-        if (updateProfile.profile.socialLinks) {
-            formData.append("github", updateProfile.profile.socialLinks.github || "");
-            formData.append("x", updateProfile.profile.socialLinks.x || "");
-            formData.append("portfolio", updateProfile.profile.socialLinks.portfolio || "");
+            const response = await updateProfileApi(formData, headers);
+            console.log("Profile update response:", response);
+
+            if (response.status === 200) {
+                toast.success("Profile updated succesfully!");
+                dispatch(updateProfileInfo({
+                    first_name: response.data.user.first_name,
+                    last_name: response.data.user.last_name,
+                    profilePic: response.data.user.profile?.profilePhoto || "",
+                }));
+                fetchProfile();
+                setEditProfile(false);
+            }
+        } catch (error) {
+            console.error("Error updating profile.", error);
+            toast.error(error?.response?.data?.message || "Something went wrong!");
         }
-
-        // Append profilePhoto
-        if (updateProfile.profile.profilePhoto) {
-            formData.append("profilePhoto", updateProfile.profile.profilePhoto);
-        }
-
-        const response = await updateProfileApi(formData);
-        console.log("Profile update response:", response);
-
-        if (response.status === 200) {
-            toast.success("Profile updated succesfully!");
-            fetchProfile();
-            setEditProfile(false);
-        }
-    } catch (error) {
-        console.error("Error updating profile.", error);
-        toast.error(error?.response?.data?.message || "Something went wrong!");
-    }
-};
+    };
 
 
 
@@ -168,7 +184,7 @@ const handleUpdateProfile = async () => {
 
 
 
-    if (loading) return <div className="flex justify-center items-center h-screen"><span className="loading loading-spinner loading-lg"></span></div>;
+    if (loading || !profile || !profile.profile) return <div className="flex justify-center items-center h-screen"><span className="loading loading-spinner loading-lg"></span></div>;
 
     return (
         <>
@@ -177,7 +193,7 @@ const handleUpdateProfile = async () => {
                 <div className='flex p-2 w-full'>
                     <div className='flex w-3/4 space-x-4 p-3'>
                         <div className="w-32 h-32 border-4 border-white rounded-full overflow-hidden">
-                            <img className="object-cover object-center" src={`${BASE_URL}${profile.profile.profilePhoto}`} alt='Profile Picture' />
+                            <img className="object-cover object-center" src={`${BASE_URL}${profile?.profile?.profilePhoto}`} alt='Profile Picture' />
                         </div>
                         <div className='flex flex-col justify-center items-start'>
                             <h1 className='text-xl text-base-content font-semibold'>{profile?.first_name} {profile?.last_name}</h1>
@@ -258,7 +274,7 @@ const handleUpdateProfile = async () => {
                                     <label className="flex flex-col items-center cursor-pointer">
                                         <div className="w-20 h-20 rounded-full border-4 border-base-300 shadow-2xl overflow-hidden mb-2">
                                             <img
-                                                src={preview ||`${BASE_URL}${profile.profile.profilePhoto}`}
+                                                src={preview || `${BASE_URL}${profile.profile.profilePhoto}`}
                                                 alt="Profile Picture"
                                                 className="object-cover w-full h-full"
                                             />
@@ -358,9 +374,9 @@ const handleUpdateProfile = async () => {
 
                             {/* Qualification */}
                             <div className="flex space-x-2 my-2">
-                                <select onChange={handleChange} name='profile.qualification' 
-                                value={updateProfile.profile.qualification} 
-                                className="select select-bordered text-slate-500 w-1/2" 
+                                <select onChange={handleChange} name='profile.qualification'
+                                    value={updateProfile.profile.qualification}
+                                    className="select select-bordered text-slate-500 w-1/2"
                                 >
                                     <option disabled>
                                         Qualification
