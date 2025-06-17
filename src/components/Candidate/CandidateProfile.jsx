@@ -184,7 +184,7 @@ function CandidateProfile() {
 
 
 
-    if (loading || !profile || !profile.profile) return <div className="flex justify-center items-center h-screen"><span className="loading loading-spinner loading-lg"></span></div>;
+    if (loading || !profile || !profile.profile) return <div className="flex justify-center items-center h-screen"><span className="loading loading-bars loading-xl"></span></div>;
 
     return (
         <>
