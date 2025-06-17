@@ -25,25 +25,25 @@ function Home() {
                 <div className='grid sm:grid-cols-2 px-2 sm:px-6'>
                     <div className='flex flex-col justify-end md:justify-center md:bg-none bg-home rounded-lg bg-cover bg-center mt-6 md:p-6 shadow-xl md:shadow-none sm:mt-14 gap-4 items-start w-full h-[450px]'>
                         {/* Mobile Screen */}
-                        <div className='glass md:bg-none md:hidden flex flex-col space-y-3 rounded-b-lg justify-center items-start px-6 py-2'>
+                        <div className='glass md:bg-none md:hidden flex flex-col space-y-2 rounded-b-lg justify-center items-start px-2 py-2'>
                             <h1 className='text-2xl md:text-5xl font-bold slide-in'><span className='text-accent'>Connecting Talent</span> <br /> With <span>Opportunites</span></h1>
                             <p className='font-thin text-xs md:text-lg slide-in glass rounded-lg shadow md:shadow-none p-2'>We bridge the gap between ambition and achievement. Find opportunities that align with your goals or hire talent to elevate your business.</p>
 
                             <button onClick={handleButtonClick} className='btn shadow-2xl btn-neutral md:btn-outline slide-in'>{isLoggedIn ? "Dashboard" : "Register"}</button>
                         </div>
-                        
+
                         {/* Large Screen */}
                         <div className='hidden md:flex flex-col justify-center items-start px-6 py-2'>
                             <h1 className='text-2xl md:text-5xl font-bold slide-in'><span className='text-accent'>Connecting Talent</span> <br /> With <span>Opportunites</span></h1>
                             <p className='font-thin text-xs md:text-lg slide-in rounded-lg shadow md:shadow-none p-2'>We bridge the gap between ambition and achievement. Find opportunities that align with your goals or hire talent to elevate your business.</p>
 
-                            <button onClick={handleButtonClick} className='btn shadow-2xl btn-neutral md:btn-outline slide-in'>{isLoggedIn ? "Dashboard" : "Register"}</button>
+                            <button onClick={handleButtonClick} className='btn shadow-2xl btn-neutral md:btn-outline slide-in'>{isLoggedIn ? "Dashboard" : "Dive In"}</button>
                         </div>
 
 
                     </div>
-                    <div className='hidden md:flex justify-center sm:my-10 overflow-hidden shadow-xl bg-blue-100 rounded-3xl items-center w-full h-[550px]'>
-                        <img className='fade-in w-full h-full object-center object-cover' src="https://ideogram.ai/assets/image/lossless/response/pfsXsv5WScGeatbtCgrSXg" alt="" />
+                    <div className='hidden md:flex justify-center sm:my-10 overflow-hidden bg-blue-100 rounded-3xl items-center w-full h-[550px]'>
+                        <img className='fade-in w-full h-full object-center object-cover' src="https://i.pinimg.com/originals/63/0d/59/630d59a4d2c80c1d8ab2503b69a4a421.png" alt="" />
 
                     </div>
                 </div>
@@ -52,7 +52,7 @@ function Home() {
                     <h1 className='text-2xl font-bold'>Featured Jobs</h1>
                     <div className='grid sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-4 sm:px-6'>
                         {/* Card */}
-                        <div className='card rounded-lg shadow hover:shadow-lg overflow-hidden w-[400px] h-full opacity-0' data-aos="fade-right">
+                        <div className='card rounded-lg shadow hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full opacity-0' data-aos="fade-right">
                             <div className="card-body">
                                 <div className='flex justify-between'>
                                     <img className='rounded-full h-6 w-6' src="https://e7.pngegg.com/pngimages/882/225/png-clipart-google-logo-google-logo-google-search-icon-google-text-logo.png" alt="" />
@@ -78,7 +78,7 @@ function Home() {
                             </div>
                         </div>
                         {/* Card */}
-                        <div className='card rounded-lg shadow slide-in hover:shadow-lg overflow-hidden w-[400px] h-full'>
+                        <div className='card rounded-lg shadow slide-in hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full'>
                             <div className="card-body">
                                 <div className='flex justify-between'>
                                     <img className='rounded-full h-6 w-6' src="https://iconape.com/wp-content/png_logo_vector/amazon-icon.png" alt="" />
@@ -104,7 +104,7 @@ function Home() {
                             </div>
                         </div>
                         {/* Card */}
-                        <div className='card rounded-lg shadow hover:shadow-lg overflow-hidden w-[400px] h-full opacity-0' data-aos="fade-left">
+                        <div className='card rounded-lg shadow hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full opacity-0' data-aos="fade-left">
                             <div className="card-body">
                                 <div className='flex justify-between'>
                                     <img className='rounded-full h-6 w-6' src="https://shreecomputers.co.in/wp-content/uploads/2020/12/microsoft-icon-logo--1024x1024.png" alt="" />
