@@ -52,85 +52,140 @@ function Home() {
                     <h1 className='text-2xl font-bold'>Featured Jobs</h1>
                     <div className='grid sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-4 sm:px-6'>
                         {/* Card */}
-                        <div className='card rounded-lg shadow-lg hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full opacity-0' data-aos="fade-right">
-                            <div className="card-body">
-                                <div className='flex justify-between'>
-                                    <img className='rounded-full h-6 w-6' src="https://e7.pngegg.com/pngimages/882/225/png-clipart-google-logo-google-logo-google-search-icon-google-text-logo.png" alt="" />
-                                    <div className="badge badge-warning text-slate-100 text-xs">Featured</div>
+                        <div className='card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-base-300' data-aos="fade-right">
+                            <div className="card-body p-6">
+                                <div className='flex justify-between items-start mb-4'>
+                                    <div className='flex items-center space-x-3'>
+                                        <div className='w-12 h-12 rounded-full overflow-hidden shadow-lg'>
+                                            <img className='w-full h-full object-cover' src="https://e7.pngegg.com/pngimages/882/225/png-clipart-google-logo-google-logo-google-search-icon-google-text-logo.png" alt="Google" />
+                                        </div>
+                                        <div>
+                                            <h4 className='font-semibold text-base-content'>Google LLM</h4>
+                                        </div>
+                                    </div>
+                                    <div className="badge badge-warning text-slate-100 text-xs font-medium">Featured</div>
                                 </div>
 
-                                <h4>Google LLM</h4>
-                                <h2 className="card-title text-base-content">MERN Stack Developer</h2>
-                                <div className='flex justify-between'>
-                                    <p className='text-xs text-slate-500'><i className="fa-solid fa-location-dot me-2" />Mumbai</p>
-                                    <p className='text-xs text-slate-500'><i className="fa-solid fa-clock me-2" />Full-Time</p>
-                                    <p className='text-xs text-slate-500'><i className="fa-solid fa-sack-dollar me-2" />45LPA</p>
-                                </div>
-                                <div>
-                                    <h3 className='text-sm text-slate-600'>Job Description</h3>
-                                    <p className='text-xs text-slate-500'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, incidunt!</p>
-                                </div>
-                                <div>
-                                    <button className='btn hover:shadow-xl btn-accent text-slate-50'>Apply Now</button>
+                                <h2 className="card-title text-xl mb-4 text-base-content">MERN Stack Developer</h2>
+
+                                <div className='grid grid-cols-1 gap-2 mb-4'>
+                                    <div className='flex items-center space-x-2'>
+                                        <i className="fa-solid fa-location-dot text-accent" />
+                                        <span className='text-sm text-slate-500'>Mumbai</span>
+                                    </div>
+                                    <div className='flex items-center space-x-2'>
+                                        <i className="fa-solid fa-clock text-accent" />
+                                        <span className='text-sm text-slate-500'>Full-Time</span>
+                                    </div>
+                                    <div className='flex items-center space-x-2'>
+                                        <i className="fa-solid fa-sack-dollar text-accent" />
+                                        <span className='text-sm text-slate-500 font-semibold'>45LPA</span>
+                                    </div>
                                 </div>
 
+                                <div className='mb-6'>
+                                    <h3 className='text-sm font-semibold text-slate-600 mb-2'>Job Description</h3>
+                                    <p className='text-xs text-slate-500 leading-relaxed'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, incidunt!</p>
+                                </div>
 
+                                <div className='card-actions'>
+                                    <button className='btn btn-accent text-slate-50 w-full hover:shadow-xl transition-all duration-300'>
+                                        Apply Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         {/* Card */}
-                        <div className='card rounded-lg shadow-lg slide-in hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full'>
-                            <div className="card-body">
-                                <div className='flex justify-between'>
-                                    <img className='rounded-full h-6 w-6' src="https://iconape.com/wp-content/png_logo_vector/amazon-icon.png" alt="" />
-                                    <div className="badge badge-warning text-slate-100 text-xs">Featured</div>
+                        <div className='card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-base-300' data-aos="fade-in">
+                            <div className="card-body p-6">
+                                <div className='flex justify-between items-start mb-4'>
+                                    <div className='flex items-center space-x-3'>
+                                        <div className='w-12 h-12 rounded-full overflow-hidden shadow-lg'>
+                                            <img className='w-full h-full object-cover' src="https://iconape.com/wp-content/png_logo_vector/amazon-icon.png" alt="Amazon" />
+                                        </div>
+                                        <div>
+                                            <h4 className='font-semibold text-base-content'>Amazon</h4>
+                                        </div>
+                                    </div>
+                                    <div className="badge badge-warning text-slate-100 text-xs font-medium">Featured</div>
                                 </div>
 
-                                <h4>Amazon</h4>
-                                <h2 className="card-title text-base-content">MERN Stack Developer</h2>
-                                <div className='flex justify-between'>
-                                    <p className='text-xs text-slate-500'><i className="fa-solid fa-location-dot me-2" />Mumbai</p>
-                                    <p className='text-xs text-slate-500'><i className="fa-solid fa-clock me-2" />Full-Time</p>
-                                    <p className='text-xs text-slate-500'><i className="fa-solid fa-sack-dollar me-2" />45LPA</p>
-                                </div>
-                                <div>
-                                    <h3 className='text-sm text-slate-600'>Job Description</h3>
-                                    <p className='text-xs text-slate-500'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, incidunt!</p>
-                                </div>
-                                <div>
-                                    <button className='btn hover:shadow-xl btn-accent text-slate-50'>Apply Now</button>
+                                <h2 className="card-title text-xl mb-4 text-base-content">MERN Stack Developer</h2>
+
+                                <div className='grid grid-cols-1 gap-2 mb-4'>
+                                    <div className='flex items-center space-x-2'>
+                                        <i className="fa-solid fa-location-dot text-accent" />
+                                        <span className='text-sm text-slate-500'>Mumbai</span>
+                                    </div>
+                                    <div className='flex items-center space-x-2'>
+                                        <i className="fa-solid fa-clock text-accent" />
+                                        <span className='text-sm text-slate-500'>Full-Time</span>
+                                    </div>
+                                    <div className='flex items-center space-x-2'>
+                                        <i className="fa-solid fa-sack-dollar text-accent" />
+                                        <span className='text-sm text-slate-500 font-semibold'>45LPA</span>
+                                    </div>
                                 </div>
 
+                                <div className='mb-6'>
+                                    <h3 className='text-sm font-semibold text-slate-600 mb-2'>Job Description</h3>
+                                    <p className='text-xs text-slate-500 leading-relaxed'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, incidunt!</p>
+                                </div>
 
+                                <div className='card-actions'>
+                                    <button className='btn btn-accent text-slate-50 w-full hover:shadow-xl transition-all duration-300'>
+                                        Apply Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
                         {/* Card */}
-                        <div className='card rounded-lg shadow-lg hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full opacity-0' data-aos="fade-left">
-                            <div className="card-body">
-                                <div className='flex justify-between'>
-                                    <img className='rounded-full h-6 w-6' src="https://shreecomputers.co.in/wp-content/uploads/2020/12/microsoft-icon-logo--1024x1024.png" alt="" />
-                                    <div className="badge badge-warning text-slate-100 text-xs">Featured</div>
+                        <div className='card bg-base-100 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border border-base-300' data-aos="fade-left">
+                            <div className="card-body p-6">
+                                <div className='flex justify-between items-start mb-4'>
+                                    <div className='flex items-center space-x-3'>
+                                        <div className='w-12 h-12 rounded-full overflow-hidden shadow-lg'>
+                                            <img className='w-full h-full object-cover' src="https://shreecomputers.co.in/wp-content/uploads/2020/12/microsoft-icon-logo--1024x1024.png" alt="Microsoft" />
+                                        </div>
+                                        <div>
+                                            <h4 className='font-semibold text-base-content'>Microsoft</h4>
+                                        </div>
+                                    </div>
+                                    <div className="badge badge-warning text-slate-100 text-xs font-medium">Featured</div>
                                 </div>
 
-                                <h4>Microsoft</h4>
-                                <h2 className="card-title text-base-content">MERN Stack Developer</h2>
-                                <div className='flex justify-between'>
-                                    <p className='text-xs text-slate-500'><i className="fa-solid fa-location-dot me-2" />Mumbai</p>
-                                    <p className='text-xs text-slate-500'><i className="fa-solid fa-clock me-2" />Full-Time</p>
-                                    <p className='text-xs text-slate-500'><i className="fa-solid fa-sack-dollar me-2" />45LPA</p>
-                                </div>
-                                <div>
-                                    <h3 className='text-sm text-slate-600'>Job Description</h3>
-                                    <p className='text-xs text-slate-500'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, incidunt!</p>
-                                </div>
-                                <div>
-                                    <button className='btn hover:shadow-xl btn-accent text-slate-50'>Apply Now</button>
+                                <h2 className="card-title text-xl mb-4 text-base-content">MERN Stack Developer</h2>
+
+                                <div className='grid grid-cols-1 gap-2 mb-4'>
+                                    <div className='flex items-center space-x-2'>
+                                        <i className="fa-solid fa-location-dot text-accent" />
+                                        <span className='text-sm text-slate-500'>Mumbai</span>
+                                    </div>
+                                    <div className='flex items-center space-x-2'>
+                                        <i className="fa-solid fa-clock text-accent" />
+                                        <span className='text-sm text-slate-500'>Full-Time</span>
+                                    </div>
+                                    <div className='flex items-center space-x-2'>
+                                        <i className="fa-solid fa-sack-dollar text-accent" />
+                                        <span className='text-sm text-slate-500 font-semibold'>45LPA</span>
+                                    </div>
                                 </div>
 
+                                <div className='mb-6'>
+                                    <h3 className='text-sm font-semibold text-slate-600 mb-2'>Job Description</h3>
+                                    <p className='text-xs text-slate-500 leading-relaxed'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. In, incidunt!</p>
+                                </div>
 
+                                <div className='card-actions'>
+                                    <button className='btn btn-accent text-slate-50 w-full hover:shadow-xl transition-all duration-300'>
+                                        Apply Now
+                                    </button>
+                                </div>
                             </div>
                         </div>
-
                     </div>
+
+
                 </div>
 
                 {/* What we offer */}
@@ -152,13 +207,19 @@ function Home() {
                             <img className='w-20 h-20' src="https://static.vecteezy.com/system/resources/previews/017/396/814/original/netflix-mobile-application-logo-free-png.png" alt="" />
                             <img className='w-20 h-20' src="http://pluspng.com/img-png/google-logo-png-open-2000.png" alt="" />
                         </div>
-                        <div className='flex justify-center rounded-lg sm:rounded-l-lg items-center bg-offerCover2 bg-cover bg-center w-full h-[400px]'>
-                            <h1 className='text-4xl text-center text-slate-100 mt-4 font-bold'>Employer Partnerships</h1>
+                        <div className='relative overflow-hidden rounded-2xl shadow-2xl'>
+                            <div className='absolute inset-0 bg-offerCover2 bg-cover bg-center'></div>
+                            <div className='absolute inset-0 bg-black bg-opacity-50'></div>
+                            <div className='relative z-10 flex justify-center items-center h-[400px] p-8'>
+                                <h3 className='text-3xl lg:text-4xl text-center text-slate-100 font-bold leading-tight'>
+                                    Employer<br />Partnerships
+                                </h3>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-            </div>
+            </div >
 
 
         </>
