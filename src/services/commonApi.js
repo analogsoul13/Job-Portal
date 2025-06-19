@@ -7,7 +7,12 @@ const commonApi = async (reqUrl, reqMethod, reqHeader, reqBody) => {
         headers: reqHeader ? reqHeader : { 'Content-Type': 'application/json' },
         data: reqBody
     }
-    return await axios(config).then(res => res).catch(err => err)
+    try {
+        const res = await axios(config);
+        return res
+    } catch (err) {
+        return err.response || { status: 500, data: { message: "Unknown error" } }
+    }
 }
 
 export default commonApi;
