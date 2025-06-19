@@ -20,7 +20,7 @@ function ProfileCard({ onOptionSelect, activeId}) {
                     <img className="object-cover object-top w-full" src='https://images.unsplash.com/photo-1549880338-65ddcdfd017b?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=400&fit=max&ixid=eyJhcHBfaWQiOjE0NTg5fQ' alt='Mountain' />
                 </div>
                 <div className="mx-auto w-32 h-32 relative -mt-16 border-4 border-white rounded-full overflow-hidden">
-                    <img className="object-cover object-center" src={`${BASE_URL}${userInfo.profilePic}`} alt='Profile Picture' />
+                    <img className="object-cover object-center" src={`${BASE_URL}${userInfo?.profilePic}`} alt='Profile Picture' />
                 </div>
                 <div className="text-center mt-2">
                     <h2 className="font-semibold">{fullName}</h2>
