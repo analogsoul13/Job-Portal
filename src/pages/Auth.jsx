@@ -92,7 +92,7 @@ function Auth() {
                 nav(role === 'admin' ? "/admin/dashboard" : role === 'recruiter' ? "/rdashboard" : "/cdashboard")
 
             } else {
-                const errorMessage = res.response?.data?.message || "Something went wrong!!";
+                const errorMessage = res?.data?.message;
                 toast.error(errorMessage);
             }
 
