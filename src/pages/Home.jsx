@@ -23,13 +23,13 @@ function Home() {
         <>
             <div className='w-full overflow-hidden'>
                 <div className='grid sm:grid-cols-2 px-2 sm:px-6'>
-                    <div className='flex flex-col justify-end md:justify-center md:bg-none bg-home rounded-lg bg-cover bg-center mt-6 md:p-6 shadow-xl md:shadow-none sm:mt-14 gap-4 items-start w-full h-[450px]'>
+                    <div className='flex flex-col justify-end md:justify-center md:bg-none bg-home rounded-lg bg-cover bg-center mt-0 md:p-6 shadow-xl md:shadow-none sm:mt-14 gap-4 items-start w-full h-[600px]'>
                         {/* Mobile Screen */}
-                        <div className='glass md:bg-none md:hidden flex flex-col space-y-2 rounded-b-lg justify-center items-start px-2 py-2'>
-                            <h1 className='text-2xl md:text-5xl font-bold slide-in'><span className='text-accent'>Connecting Talent</span> <br /> With <span>Opportunites</span></h1>
-                            <p className='font-thin text-xs md:text-lg slide-in glass rounded-lg shadow md:shadow-none p-2'>We bridge the gap between ambition and achievement. Find opportunities that align with your goals or hire talent to elevate your business.</p>
+                        <div className=' md:hidden flex glass flex-col space-y-2 rounded-b-lg justify-center items-start px-2 py-2'>
+                            <h1 className='text-2xl md:text-5xl font-bold slide-in'><span className='text-accent'>Connecting Talent</span> <br /> With <span className='text-gray-50'>Opportunities</span></h1>
+                            <p className='font-thin glass text-gray-50 text-xs md:text-lg slide-in rounded-lg p-2'>We bridge the gap between ambition and achievement. Find opportunities that align with your goals or hire talent to elevate your business.</p>
 
-                            <button onClick={handleButtonClick} className='btn shadow-2xl btn-neutral md:btn-outline slide-in'>{isLoggedIn ? "Dashboard" : "Register"}</button>
+                            <button onClick={handleButtonClick} className='btn shadow-2xl btn-accent md:btn-outline slide-in'>{isLoggedIn ? "Dashboard" : "Register"}</button>
                         </div>
 
                         {/* Large Screen */}
@@ -52,7 +52,7 @@ function Home() {
                     <h1 className='text-2xl font-bold'>Featured Jobs</h1>
                     <div className='grid sm:grid-cols-2 xl:grid-cols-3 gap-6 mt-4 sm:px-6'>
                         {/* Card */}
-                        <div className='card rounded-lg shadow hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full opacity-0' data-aos="fade-right">
+                        <div className='card rounded-lg shadow-lg hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full opacity-0' data-aos="fade-right">
                             <div className="card-body">
                                 <div className='flex justify-between'>
                                     <img className='rounded-full h-6 w-6' src="https://e7.pngegg.com/pngimages/882/225/png-clipart-google-logo-google-logo-google-search-icon-google-text-logo.png" alt="" />
@@ -60,7 +60,7 @@ function Home() {
                                 </div>
 
                                 <h4>Google LLM</h4>
-                                <h2 className="card-title text-slate-700">MERN Stack Developer</h2>
+                                <h2 className="card-title text-base-content">MERN Stack Developer</h2>
                                 <div className='flex justify-between'>
                                     <p className='text-xs text-slate-500'><i className="fa-solid fa-location-dot me-2" />Mumbai</p>
                                     <p className='text-xs text-slate-500'><i className="fa-solid fa-clock me-2" />Full-Time</p>
@@ -78,7 +78,7 @@ function Home() {
                             </div>
                         </div>
                         {/* Card */}
-                        <div className='card rounded-lg shadow slide-in hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full'>
+                        <div className='card rounded-lg shadow-lg slide-in hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full'>
                             <div className="card-body">
                                 <div className='flex justify-between'>
                                     <img className='rounded-full h-6 w-6' src="https://iconape.com/wp-content/png_logo_vector/amazon-icon.png" alt="" />
@@ -86,7 +86,7 @@ function Home() {
                                 </div>
 
                                 <h4>Amazon</h4>
-                                <h2 className="card-title text-slate-700">MERN Stack Developer</h2>
+                                <h2 className="card-title text-base-content">MERN Stack Developer</h2>
                                 <div className='flex justify-between'>
                                     <p className='text-xs text-slate-500'><i className="fa-solid fa-location-dot me-2" />Mumbai</p>
                                     <p className='text-xs text-slate-500'><i className="fa-solid fa-clock me-2" />Full-Time</p>
@@ -104,7 +104,7 @@ function Home() {
                             </div>
                         </div>
                         {/* Card */}
-                        <div className='card rounded-lg shadow hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full opacity-0' data-aos="fade-left">
+                        <div className='card rounded-lg shadow-lg hover:shadow-lg overflow-hidden w-[340px] sm:w-[400px] h-full opacity-0' data-aos="fade-left">
                             <div className="card-body">
                                 <div className='flex justify-between'>
                                     <img className='rounded-full h-6 w-6' src="https://shreecomputers.co.in/wp-content/uploads/2020/12/microsoft-icon-logo--1024x1024.png" alt="" />
@@ -112,7 +112,7 @@ function Home() {
                                 </div>
 
                                 <h4>Microsoft</h4>
-                                <h2 className="card-title text-slate-700">MERN Stack Developer</h2>
+                                <h2 className="card-title text-base-content">MERN Stack Developer</h2>
                                 <div className='flex justify-between'>
                                     <p className='text-xs text-slate-500'><i className="fa-solid fa-location-dot me-2" />Mumbai</p>
                                     <p className='text-xs text-slate-500'><i className="fa-solid fa-clock me-2" />Full-Time</p>
