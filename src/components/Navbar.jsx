@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../redux/slices/authSlice'
 import { toast } from 'react-toastify'
 import BASE_URL from '../services/baseUrl'
+import { persistor } from '../redux/store'
 
 function Navbar({ onOptionSelect, activeId }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -21,6 +22,7 @@ function Navbar({ onOptionSelect, activeId }) {
 
     const handleLogout = () => {
         dispatch(logout());
+        persistor.purge()
         localStorage.clear();
         nav('/');
         toast.warning("Logged out Successfully!");
