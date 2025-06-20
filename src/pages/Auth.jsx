@@ -1,13 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { loginApi, registerApi } from '../services/authServices'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { login } from '../redux/slices/authSlice'
 
 function Auth() {
     const [authStatus, setAuthStatus] = useState(false)
+    const token = useSelector((state) => state.auth.token)
+    const role = useSelector((state) => state.auth.userRole)
+
+    useEffect(() => {
+        if (token && role) {
+            if (role === 'candidate') {
+                nav('/cdashboard');
+            } else if (role === 'recruiter') {
+                nav('/rdashboard');
+            } else if (role === 'admin') {
+                nav('/admin/dashboard');
+            }
+        }
+    }, [token, role]);
 
     // Get data from inputs
     const [input, setInput] = useState({
@@ -42,16 +56,7 @@ function Auth() {
             console.log(res)
             if (res.status == 201) {
                 toast.success("Registration Succesful!!")
-
-                dispatch(login({ role }))  // Redux  Do Redux-Persist Later
-
-                if (role === "admin") {
-                    nav("/admin/dashboard")
-                } else if (role === "candidate") {
-                    nav("/cdashboard")
-                } else {
-                    nav("/rdashboard")
-                }
+                changeAuth()
 
             } else {
                 const errorMessage = res.response?.data?.message || "Something went wrong!!"
