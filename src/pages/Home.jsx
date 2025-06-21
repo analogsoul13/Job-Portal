@@ -33,11 +33,41 @@ function Home() {
                         </div>
 
                         {/* Large Screen */}
-                        <div className='hidden md:flex flex-col justify-center items-start px-6 py-2'>
-                            <h1 className='text-2xl md:text-5xl font-bold slide-in'><span className='text-accent'>Connecting Talent</span> <br /> With <span>Opportunites</span></h1>
-                            <p className='font-thin text-xs md:text-lg slide-in rounded-lg shadow md:shadow-none p-2'>We bridge the gap between ambition and achievement. Find opportunities that align with your goals or hire talent to elevate your business.</p>
+                        <div className='relative z-10 hidden md:flex flex-col justify-center items-start px-8 py-4 space-y-6'>
+                            <div className="relative">
+                                <h1 className='text-6xl font-bold slide-in leading-tight tracking-tight'>
+                                    <span className='text-accent bg-gradient-to-r from-accent to-accent/80 bg-clip-text text-transparent'>
+                                        Connecting Talent
+                                    </span>
+                                    <br />
+                                    <span className='text-base-content'>With</span>
+                                    <br />
+                                    <span className='text-base-content'>Opportunities</span>
+                                </h1>
+                                {/* Enhanced accent elements */}
+                                <div className="absolute -bottom-4 left-0 w-24 h-1.5 bg-gradient-to-r from-accent to-accent/60 rounded-full"></div>
+                                <div className="absolute -bottom-2 left-6 w-16 h-0.5 bg-accent/40 rounded-full"></div>
+                            </div>
 
-                            <button onClick={handleButtonClick} className='btn shadow-2xl btn-neutral md:btn-outline slide-in'>{isLoggedIn ? "Dashboard" : "Dive In"}</button>
+                            <div className="relative">
+                                <p className='font-light text-base-content text-lg leading-relaxed slide-in max-w-md'>
+                                    We bridge the gap between ambition and achievement. Find opportunities that align with your goals or hire talent to elevate your business.
+                                </p>
+                                {/* Subtle side accent */}
+                                <div className="absolute -left-4 top-2 w-0.5 h-16 bg-gradient-to-b from-accent/60 to-transparent rounded-full"></div>
+                            </div>
+
+                            <button
+                                onClick={handleButtonClick}
+                                className='group btn shadow-xl hover:shadow-2xl bg-gray-800 hover:bg-gray-900 text-white border-0 rounded-xl px-10 py-4 transform hover:scale-105 hover:-translate-y-1 transition-all duration-300 ease-out slide-in'
+                            >
+                                <span className="relative z-10">{isLoggedIn ? "Dashboard" : "Dive In"}</span>
+                                <svg className="w-5 h-5 ml-3 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                                </svg>
+                                {/* Button glow effect */}
+                                <div className="absolute inset-0 bg-gradient-to-r from-accent/20 to-blue-200/20 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                            </button>
                         </div>
 
 
