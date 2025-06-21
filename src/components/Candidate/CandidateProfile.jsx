@@ -6,6 +6,7 @@ import { toast } from 'react-toastify'
 import BASE_URL from '../../services/baseUrl'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateProfileInfo } from '../../redux/slices/authSlice'
+import ResumePreview from '../ResumePreview'
 
 function CandidateProfile() {
     const [editProfile, setEditProfile] = useState(false)
@@ -121,6 +122,11 @@ function CandidateProfile() {
                 formData.append("profilePhoto", updateProfile.profile.profilePhoto);
             }
 
+            // Append resume
+            if(updateProfile.profile.resume) {
+                formData.append("resume", updateProfile.profile.resume)
+            }
+
             const response = await updateProfileApi(formData, headers);
             console.log("Profile update response:", response);
 
@@ -142,21 +148,20 @@ function CandidateProfile() {
 
 
 
-    const handleFileChange = (e) => {
+    const handleFileChange = (e, type) => {
         const file = e.target.files[0];
         if (file) {
-            const fileURL = URL.createObjectURL(file)
-            setPreview(fileURL)
+            if (type === "profilePhoto") {
+                const fileURL = URL.createObjectURL(file)
+                setPreview(fileURL)
+            }
 
             const formData = new FormData()
             formData.append('file', file)
 
             setUpdateProfile((prev) => ({
                 ...prev,
-                profile: {
-                    ...prev.profile,
-                    profilePhoto: file
-                }
+                [type]: file
             }));
         }
     };
@@ -192,12 +197,12 @@ function CandidateProfile() {
             <div className='max-w-7xl mx-auto bg-base-100 border fade-in border-gray-200 shadow-xl rounded-2xl'>
                 <div className='flex p-2 w-full'>
                     <div className='flex w-3/4 space-x-4 p-3'>
-                        <div className="w-32 h-32 border-4 border-white rounded-full overflow-hidden">
+                        <div className="w-32 h-32 border-4 border-white ring-4 ring-accent/20 rounded-full overflow-hidden">
                             <img className="object-cover object-center" src={`${BASE_URL}${profile?.profile?.profilePhoto}`} alt='Profile Picture' />
                         </div>
                         <div className='flex flex-col justify-center items-start'>
-                            <h1 className='text-xl text-base-content font-semibold'>{profile?.first_name} {profile?.last_name}</h1>
-                            <p className='text-gray-500 text-sm'>Full Stack Web Developer</p>
+                            <h1 className='text-md md:text-xl text-base-content font-semibold'>{profile?.first_name} {profile?.last_name}</h1>
+                            <p className='text-gray-500 text-xs md:text-sm'>Full Stack Web Developer</p>
                             <p className='text-base-content cursor-pointer hover:text-blue-400 text-xs'>{profile?.email}</p>
                         </div>
                     </div>
@@ -224,6 +229,11 @@ function CandidateProfile() {
                         <p className="text-gray-500">No skills added yet.</p>
                     )}
 
+                </section>
+
+                {/* Resume */}
+                <section className='p-4'>
+                    <ResumePreview resumeUrl={profile?.profile?.resume ? `${BASE_URL}${profile.profile.resume}` : null}/>
                 </section>
 
                 <section className='flex flex-col p-2 py-2 bg-base-200 rounded-xl shadow-xl mb-4 mx-4'>
@@ -283,7 +293,7 @@ function CandidateProfile() {
                                             type="file"
                                             className="hidden"
                                             accept="image/*"
-                                            onChange={handleFileChange}
+                                            onChange={(e) => handleFileChange(e, 'profilePhoto')}
                                         />
                                         <span className="text-slate-500 text-xs">
                                             Upload Profile Picture
@@ -402,7 +412,7 @@ function CandidateProfile() {
                                     <input
                                         type="file"
                                         className="file-input file-input-bordered file-input-accent-content w-full"
-                                        onChange={handleFileChange}
+                                        onChange={(e) => handleFileChange(e, 'resume')}
                                     />
                                     <div className="label">
                                         <span className="label-text-alt text-slate-500">
