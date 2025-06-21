@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 function ResumeSection({ resumeUrl }) {
   const [showPreview, setShowPreview] = useState(false);
 
-  // If no resume URL, early return UI
   if (!resumeUrl) {
     return (
       <div className="flex items-center gap-3 p-4 bg-base-200 rounded-lg border-2 border-dashed border-base-300">
@@ -13,8 +12,9 @@ function ResumeSection({ resumeUrl }) {
     );
   }
 
-  // Safe values only after confirming resumeUrl is defined
-  const resumeName = resumeUrl.split('/').pop() || 'Resume.pdf';
+  const resumeName = resumeUrl
+  ? resumeUrl.split('/').pop().split('-').slice(1).join('-')  // Remove the prefix timestamp
+  : 'No Resume';
   const isPDF = resumeUrl?.toLowerCase().endsWith('.pdf');
 
   const handleDownload = () => {
