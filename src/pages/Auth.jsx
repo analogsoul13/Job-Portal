@@ -176,7 +176,7 @@ function Auth() {
                                                 <label className='flex text-xs  items-center gap-2'>Candidate
                                                     <input type="radio" name="role" value="candidate" onChange={handleChange} checked={input.role === "candidate"} className="radio radio-xs" />
                                                 </label>
-                                                <span className='text-xs'>Select your role</span>
+                                                <span className='text-xs'>Select Role</span>
                                                 <label className='flex flex-row-reverse text-xs items-center gap-2'>Recruiter
                                                     <input type="radio" name="role" value="recruiter" onChange={handleChange} checked={input.role === "recruiter"} className="radio radio-xs" />
                                                 </label>
