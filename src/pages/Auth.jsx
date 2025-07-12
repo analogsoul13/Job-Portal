@@ -134,10 +134,10 @@ function Auth() {
 
     return (
         <>
-            <div className="min-h-screen bg-center bg-cover hero bg-base-100 bg-authBg fade-in">
-                <div className="flex-col hero-content md:h-full glass md:flex-row-reverse">
+            <div className="min-h-screen w-full max-w-full overflow-x-hidden bg-center bg-cover md:hero bg-base-100 bg-authBg fade-in">
+                <div className="flex-col hero-content items-center justify-center md:h-full glass md:flex-row-reverse">
                     {/* Text Section */}
-                    <div className="flex items-center w-full p-8 text-white lg:w-1/2"
+                    <div className="flex items-center justify-center w-full p-8 text-white md:w-1/2"
                         style={{ minHeight: "100%" }}>
                         <div className="p-4 text-center rounded-lg lg:text-left text-slate-700">
                             <h1 className="text-5xl fade-in font-bold">
