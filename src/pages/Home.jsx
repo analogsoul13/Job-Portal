@@ -23,11 +23,12 @@ function Home() {
         <>
             <div className='w-full overflow-hidden'>
                 <div className='grid sm:grid-cols-2 px-2 sm:px-6'>
-                    <div className='flex flex-col justify-end md:justify-center md:bg-none bg-home rounded-lg bg-cover bg-center mt-0 md:p-6 shadow-xl md:shadow-none sm:mt-14 gap-4 items-start w-full h-[500px]'>
+                    <div className='flex flex-col justify-end md:justify-center rounded-md shadow-lg md:bg-none bg-home  bg-cover bg-center mt-0 md:p-6  md:shadow-none sm:mt-14 gap-4 items-start w-full h-[500px]'>
+                        
                         {/* Mobile Screen */}
-                        <div className=' md:hidden flex flex-col space-y-2 rounded-b-lg justify-center items-start px-2 py-2'>
-                            <h1 className='text-2xl md:text-5xl font-bold slide-in'><span className='text-accent'>Connecting Talent</span> <br /> With <span className='text-gray-50'>Opportunities</span></h1>
-                            <p className='font-thin glass text-gray-50 text-xs md:text-lg slide-in rounded-lg p-2'>We bridge the gap between ambition and achievement. Find opportunities that align with your goals or hire talent to elevate your business.</p>
+                        <div className=' md:hidden backdrop-blur-md flex flex-col space-y-2 rounded-b-lg justify-center items-start px-2 py-2'>
+                            <h1 className='text-2xl md:text-5xl font-bold slide-in drop-shadow-lg'><span className='text-accent '>Connecting Talent</span> <br /> With <span className='text-gray-50'>Opportunities</span></h1>
+                            <p className='font-thin bg-white/10 backdrop-blur-sm text-gray-300 text-xs md:text-lg slide-in rounded-lg p-2'>We bridge the gap between ambition and achievement. Find opportunities that align with your goals or hire talent to elevate your business.</p>
 
                             <button onClick={handleButtonClick} className='btn shadow-2xl btn-accent md:btn-outline slide-in'>{isLoggedIn ? "Dashboard" : "Register"}</button>
                         </div>
