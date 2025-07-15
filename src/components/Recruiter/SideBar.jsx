@@ -1,7 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import BASE_URL from '../../services/baseUrl';
 
 function SideBar({ onOptionSelect, activeId }) {
+    const userInfo = useSelector((state) => state.auth.userInfo);
+    const fullName = userInfo ? `${userInfo.first_name} ${userInfo.last_name}` : null;
     const options = [
         { id: 'dashboard', icon: 'fa-th-large', label: 'Dashboard' },
         { id: 'analytics', icon: 'fa-chart-bar', label: 'Analytics' },
@@ -14,12 +17,20 @@ function SideBar({ onOptionSelect, activeId }) {
         <>
             <div className='bg-base-100 rounded-xl sm:col-span-1 p-2 w-full'>
                 {/* Profile Picture */}
-                <div className="mx-auto hidden lg:flex rounded-lg border-2 border-white overflow-hidden">
-                    <img
-                        className="object-cover  object-center"
-                        src="https://www.icmibanking.com/images/career-profile/hrdm.jpg"
-                        alt="Profile Picture"
-                    />
+                <div className="mx-auto hidden lg:flex lg:flex-col items-center rounded-lg border-2 p-4 border-base-300 overflow-hidden">
+                    {userInfo?.profilePic ? (
+                        <img className='object-cover object-center rounded-lg'
+                            alt="Profile Picture"
+                            src={`${BASE_URL}${userInfo.profilePic}`} />
+                    ) : (
+                        <span>{userInfo?.first_name?.[0]?.toUpperCase() || "U"}</span>
+                    )
+                    }
+                    <h1 className='mt-2 text-base-content text-lg'>{fullName}</h1>
+                    <div className="flex items-center justify-center gap-2">
+                        <p className='text-xs'>Recruiter</p>
+                        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                    </div>
                 </div>
 
                 {/* Sidebar Options */}
@@ -28,17 +39,17 @@ function SideBar({ onOptionSelect, activeId }) {
                         {options.map((option) => (
                             <li
                                 key={option.id}
-                                className={`btn shadow bg-base-100 ${activeId === option.id ? 'bg-base-content text-base-100' : ''}`}
+                                className={`btn shadow bg-base-100 lg:w-full  ${activeId === option.id ? 'bg-base-content text-base-100' : ''}`}
                                 onClick={() => onOptionSelect(option.id)} // Call parent function with the option ID
                             >
-                                <i className={`fa-solid ${option.icon}`} />
+                                <i className={`fa-solid ${option.icon}`} /> <span className='hidden lg:flex'>{option.label}</span>
                             </li>
                         ))}
-                        <li className="btn shadow bg-base-100 cursor-pointer">
+                        {/* <li className="btn shadow bg-base-100 cursor-pointer">
                             <Link to='/recruiterprofile'>
                                 <i className="fa-solid fa-user-pen" />
                             </Link>
-                        </li>
+                        </li> */}
                     </ul>
                 </div>
             </div>
