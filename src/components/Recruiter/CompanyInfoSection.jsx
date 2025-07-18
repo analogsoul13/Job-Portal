@@ -60,7 +60,7 @@ function CompanyInfoSection({
 
             {/* If company exists */}
             {companyData ? (
-                <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-3xl p-6">
+                <div className="bg-base-200 rounded-3xl p-6">
                     <div className="flex items-start space-x-4">
                         {companyData?.logo && (
                             <img
@@ -70,10 +70,10 @@ function CompanyInfoSection({
                             />
                         )}
                         <div className="flex-1">
-                            <h3 className="text-xl font-bold text-gray-800 mb-2">{companyData.name}</h3>
+                            <h3 className="text-xl font-bold text-base-content mb-2">{companyData.name}</h3>
 
                             {companyData.location && (
-                                <p className="text-gray-600 mb-2 flex items-center">
+                                <p className="text-base-content mb-2 flex items-center">
                                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -94,7 +94,7 @@ function CompanyInfoSection({
                             )}
 
                             {companyData.description && (
-                                <p className="text-gray-700 leading-relaxed">{companyData.description}</p>
+                                <p className="text-base-content leading-relaxed">{companyData.description}</p>
                             )}
                         </div>
                     </div>
@@ -139,9 +139,9 @@ function CompanyInfoSection({
     {
         showCompanyModel && (
             <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-                <div className="bg-white rounded-3xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+                <div className="bg-base-100 rounded-3xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
                     <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-2xl font-bold text-gray-800">{isEditing ? 'Edit Company' : '🏢 Add New Company'}</h3>
+                        <h3 className="text-2xl font-bold text-base-content">{isEditing ? 'Edit Company' : '🏢 Add New Company'}</h3>
                         <button
                             onClick={() => setShowCompanyModel(false)}
                             className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors duration-200"
@@ -155,7 +155,7 @@ function CompanyInfoSection({
                     <div className="space-y-6">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                                <label className="block text-sm font-semibold text-base-content mb-2">
                                     Company Name <span className="text-red-500">*</span>
                                 </label>
                                 <input
@@ -168,7 +168,7 @@ function CompanyInfoSection({
                             </div>
 
                             <div>
-                                <label className="block text-sm font-semibold text-gray-700 mb-2">Website</label>
+                                <label className="block text-sm font-semibold text-base-content mb-2">Website</label>
                                 <input
                                     type="url"
                                     value={newCompany?.website}
@@ -180,7 +180,7 @@ function CompanyInfoSection({
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">
+                            <label className="block text-sm font-semibold text-base-content mb-2">
                                 Location <span className="text-red-500">*</span>
                             </label>
                             <input
@@ -193,7 +193,7 @@ function CompanyInfoSection({
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Description</label>
+                            <label className="block text-sm font-semibold text-base-content mb-2">Description</label>
                             <textarea
                                 value={newCompany?.description}
                                 onChange={(e) => setNewCompany({ ...newCompany, description: e.target.value })}
@@ -204,7 +204,7 @@ function CompanyInfoSection({
                         </div>
 
                         <div>
-                            <label className="block text-sm font-semibold text-gray-700 mb-2">Company Logo</label>
+                            <label className="block text-sm font-semibold text-base-content mb-2">Company Logo</label>
                             <div className="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:border-purple-400 transition-colors duration-200">
 
                                 <label className="flex flex-col items-center cursor-pointer">
@@ -217,7 +217,7 @@ function CompanyInfoSection({
                                         accept="image/*"
                                         onChange={handleCompanyLogoChange}
                                     />
-                                    <span className="text-slate-500 text-xs">
+                                    <span className="text-base-content text-xs">
                                         Upload Profile Picture
                                     </span>
                                 </label>
