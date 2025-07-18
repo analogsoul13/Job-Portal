@@ -1,85 +1,294 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import ProfileCardRecruiter from './ProfileCardRecruiter'
-
+import React, { useState } from 'react'
+import { useEffect } from 'react';
+import { useSelector } from 'react-redux'
+import { getUserProfile } from '../../services/profileServices'
+import { createCompanyApi, getCompaniesByUser, updateCompanyApi } from '../../services/companyServices';
+import { toast } from 'react-toastify';
+import PersonalInfoSection from './PersonalInfoSection';
+import CompanyInfoSection from './CompanyInfoSection';
+import { updateProfileApi } from '../../services/profileServices';
+import { UserPen } from 'lucide-react';
+import { useDispatch } from 'react-redux';
+import { updateProfileInfo } from '../../redux/slices/authSlice';
 
 function RecruiterProfile() {
+  const [editProfile, setEditProfile] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const [profile, setProfile] = useState(null)
+
+  const [companyData, setCompanyData] = useState(null)
+  const [showCompanyModel, setShowCompanyModel] = useState(false)
+  const [logoFile, setLogoFile] = useState(null);
+  const [isEditing, setIsEditing] = useState(null)
+
+  const token = useSelector((state) => state.auth.token)
+  const [preview, setPreview] = useState(null)
+
+  const [newCompany, setNewCompany] = useState({
+    name: '',
+    website: '',
+    description: '',
+    location: '',
+    logo: null
+  })
+
+  const [updateProfile, setUpdateProfile] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    phoneNumber: '',
+    profile: {
+      bio: '',
+      place: '',
+      pin: '',
+      qualification: '',
+      resume: '',
+      profilePhoto: '',
+      socialLinks: {
+        github: '',
+        x: '',
+        portfolio: ''
+      }
+    }
+  })
+
+  const dispatch = useDispatch()
+
+  const fetchData = async () => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${token}`
+      };
+      // Fetch Profile Data and Companies
+      const [profileRes, companiesRes] = await Promise.all([
+        getUserProfile(headers),
+        getCompaniesByUser(headers)
+      ])
+
+      setProfile(profileRes.data)
+      setCompanyData(companiesRes.data.companies[0] || null)
+
+      console.log("Profile Fetched:", profileRes.data)
+      console.log("Companies Fetched:", companiesRes.data.companies)
+
+    } catch (error) {
+      console.error("Error fetching recruiter profile or companies :", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  useEffect(() => {
+    fetchData()
+  }, [token])
+
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    const keys = name.split(".");
+
+    setUpdateProfile((prev) => {
+      const updated = { ...prev };
+      let current = updated;
+
+      for (let i = 0; i < keys.length - 1; i++) {
+        current[keys[i]] = { ...current[keys[i]] };
+        current = current[keys[i]];
+      }
+
+      current[keys[keys.length - 1]] = value;
+      return updated;
+    });
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setUpdateProfile((prev) => ({
+        ...prev,
+        profile: {
+          ...prev.profile,
+          profilePhoto: file
+        }
+      }));
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  // Profile Updation
+  const handleUpdateProfile = async () => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${token}`
+      }
+
+      const formData = new FormData()
+
+      // Append top-level fields (first_name, last_name, email)
+      Object.keys(updateProfile).forEach((key) => {
+        if (key !== "profile") {
+          formData.append(key, updateProfile[key]);
+        }
+      });
+
+      Object.keys(updateProfile.profile).forEach((key) => {
+        if (
+          ["profilePhoto", "socialLinks", "skills", "resume"].includes(key)
+        ) return;
+
+        formData.append(key, updateProfile.profile[key]);
+      });
+
+      // Append socialLinks fields explicitly
+      if (updateProfile.profile.socialLinks) {
+        formData.append("github", updateProfile.profile.socialLinks.github || "");
+        formData.append("x", updateProfile.profile.socialLinks.x || "");
+        formData.append("portfolio", updateProfile.profile.socialLinks.portfolio || "");
+      }
+
+      // Append profilePhoto
+      if (updateProfile.profile.profilePhoto) {
+        formData.append("profilePhoto", updateProfile.profile.profilePhoto);
+      }
+
+
+      const response = await updateProfileApi(formData, headers);
+      console.log("Profile update response:", response);
+
+      if (response.status === 200) {
+        toast.success("Profile updated succesfully!");
+        dispatch(updateProfileInfo({
+          first_name: response.data.user.first_name,
+          last_name: response.data.user.last_name,
+          profilePic: response.data.user.profile?.profilePhoto || "",
+        }));
+        fetchData()
+        setEditProfile(!editProfile)
+      }
+    } catch (error) {
+      console.error("Error updating profile.", error);
+      toast.error(error?.response?.data?.message || "Something went wrong!");
+    }
+  }
+
+  // Adding Company Logic
+  const handleAddCompany = async (e) => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${token}`
+      }
+
+      const formData = new FormData()
+      formData.append('name', newCompany.name);
+      formData.append('description', newCompany.description);
+      formData.append('website', newCompany.website);
+      formData.append('location', newCompany.location);
+      if (newCompany.logo) {
+        formData.append('logo', newCompany.logo);
+      }
+
+      console.log("Company Data: ", formData);
+
+      const response = await createCompanyApi(formData, headers)
+      setIsEditing(false)
+      setShowCompanyModel(false)
+
+    } catch (error) {
+      console.error("Error adding company:", error);
+      toast.error("Error adding company")
+    }
+  }
+
+  // Editing Company Logic
+  const handleEditCompany = async (companyId) => {
+    try {
+      const headers = {
+        Authorization: `Bearer ${token}`
+      }
+
+      const formData = new FormData();
+      formData.append("name", newCompany.name);
+      formData.append("description", newCompany.description);
+      formData.append("website", newCompany.website);
+      formData.append("location", newCompany.location);
+
+      if (logoFile) {
+        formData.append("logo", logoFile);
+      }
+
+      const response = await updateCompanyApi(companyId, headers, formData)
+
+      if (response.data.success) {
+        setNewCompany(response.data.company);
+        toast.success("Company updated successfully!");
+        setShowCompanyModel(false)
+        fetchData()
+        setIsEditing(false)
+      }
+    } catch (error) {
+      console.error("Edit error:", error.response?.data || error.message);
+      toast.error("Failed to update company.")
+    }
+  };
+
+
+  if (loading) {
+    return <div className="p-8 text-lg">Loading recruiter profile...</div>;
+  }
+
+
   return (
-    <>
-      <div className='max-w-7xl mx-auto bg-base-300 border fade-in border-gray-200 rounded-2xl my-4 p-2'>
-        <h1 className='text-2xl text-center font-semibold py-2'>Complete Your Profile</h1>
-        <div className="grid grid-cols-1 gap-2">
-          {/* Right Profile */}
-          <div className='rounded-xl sm:col-span-1 p-4 bg-base-200'>
-            {/* Name */}
-            <div className="flex space-x-2">
-              <input type="text" placeholder="First Name" className="input input-bordered w-1/2" />
-              <input type="text" placeholder="Last Name" className="input input-bordered w-1/2" />
-            </div>
-            {/* Phone and Email */}
-            <div className="flex space-x-2 my-2">
-              <input type="text" placeholder="Phone" className="input input-bordered w-1/2" />
-              <input type="email" placeholder="Email" className="input input-bordered w-1/2" />
-            </div>
-            {/* Adress */}
-            <div className="flex space-x-2 my-2">
-              <input type="text" placeholder="Place" className="input input-bordered w-1/3" />
-              <input type="text" placeholder="State" className="input input-bordered w-1/3" />
-              <input type="number" placeholder="PIN Code" className="input input-bordered appearance-none w-1/3" style={{ appearance: 'none', MozAppearance: 'textfield' }} />
-            </div>
-            {/* Qualification */}
-            <div className="flex space-x-2 my-2">
-              <select className="select select-bordered text-slate-500 w-1/2">
-                <option disabled selected>Qualification</option>
-                <option>B-Tech</option>
-                <option>Degree</option>
-                <option>Diploma</option>
-              </select>
-              <input type="text" placeholder='Company Name' className='input input-bordered w-1/2' />
-            </div>
-            {/* Other */}
-            <div className="flex space-x-2 my-2">
-              <select className="select w-1/2" disabled>
-                <option>Role : Selected as Recruiter</option>
-              </select>
-              <label className="form-control w-1/2">
-                <input type="file" className="file-input file-input-bordered file-input-accent-content w-full" />
-                <div className="label">
-                  <span className="label-text-alt text-slate-500">Select ID</span>
-                </div>
-              </label>
-            </div>
-            {/* Skills Section */}
-            
-            {/* Socials */}
-            <div className="flex space-x-2 my-2 mb-4">
-              <label className="input input-bordered flex items-center gap-2 w-1/3">
-                <i className="fa-brands fa-sm fa-github" />
-                <input type="text" className="grow text-sm" placeholder="Github Link" />
-              </label>
-              <label className="input input-bordered flex items-center gap-2 w-1/3">
-                <i className="fa-brands fa-sm fa-x-twitter" />
-                <input type="text" className="grow text-sm" placeholder="Twitter Link" />
-              </label>
-              <label className="input input-bordered flex items-center gap-2 w-1/3">
-                <i className="fa-solid fa-sm fa-user-tie" />
-                <input type="text" className="grow text-sm" placeholder="Portfolio Link" />
-              </label>
-            </div>
-            {/* Actions */}
-            <div className="flex space-x-2">
-              <Link to={'/cdashboard'}>
-                <button className='btn btn-accent shadow'>Save</button>
-              </Link>
+    <div className="min-h-screen bg-gradient-to-br bg-base-300">
+      {/* Header */}
+      <div className="flex justify-center py-4 items-center">
+        <div className="flex items-center space-x-3">
+          <div className="w-10 h-10 bg-base-100 rounded-full flex items-center justify-center">
+            <UserPen />
+          </div>
+          <h1 className="text-2xl font-bold text-base-content">
+            Recruiter Profile
+          </h1>
+        </div>
+      </div>
 
-              <button className='btn btn-accent-content btn-outline shadow'>Edit</button>
-            </div>
+      <div className="max-w-full mx-auto px-6">
+        <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
+          {/* Main Content */}
+          <div className="xl:col-span-4 space-y-8">
 
+            {/* Personal Info Section */}
+            <PersonalInfoSection
+              profile={profile}
+              updateProfile={updateProfile}
+              setUpdateProfile={setUpdateProfile}
+              preview={preview}
+              setPreview={setPreview}
+              handleChange={handleChange}
+              handleFileChange={handleFileChange}
+              handleUpdateProfile={handleUpdateProfile}
+              editProfile={editProfile}
+              setEditProfile={setEditProfile}
+            />
+
+            <CompanyInfoSection
+              companyData={companyData}
+              newCompany={newCompany}
+              setNewCompany={setNewCompany}
+              token={token}
+              handleAddCompany={handleAddCompany}
+              handleFileChange={handleFileChange}
+              setLogoFile={setLogoFile}
+              showCompanyModel={showCompanyModel}
+              setShowCompanyModel={setShowCompanyModel}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+              handleEditCompany={handleEditCompany}
+            />
           </div>
         </div>
-
       </div>
-    </>
+    </div>
   )
 }
 
