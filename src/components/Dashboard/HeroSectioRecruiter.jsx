@@ -37,25 +37,61 @@ function HeroSectioRecruiter() {
                                             ></textarea>
                                         </div>
 
-                                        {/* Location */}
-                                        <div className="mb-4">
-                                            <label className="block text-sm font-medium">Location</label>
-                                            <input
-                                                type="text"
-                                                placeholder="Enter job location"
-                                                className="mt-1 w-full border rounded-md p-2"
-                                            />
+                                        <div className='flex justify-between gap-2'>
+                                            {/* Location */}
+                                            <div className="mb-4">
+                                                <label className="block text-sm font-medium">Location</label>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Enter job location"
+                                                    className="mt-1 w-full border rounded-md p-2"
+                                                />
+                                            </div>
+                                            {/* Salary */}
+                                            <div className="mb-4">
+                                                <label className="block text-sm font-medium">Salary</label>
+                                                <input
+                                                    type="number"
+                                                    placeholder="Enter Salary"
+                                                    className="mt-1 w-full border rounded-md p-2"
+                                                />
+                                            </div>
                                         </div>
 
-                                        {/* Job Type */}
-                                        <div className="mb-4">
-                                            <label className="block text-sm font-medium">Job Type</label>
-                                            <select className="mt-1 w-full border rounded-md p-2">
-                                                <option>Full-time</option>
-                                                <option>Part-time</option>
-                                                <option>Remote</option>
-                                            </select>
+                                        <div className='flex items-center justify-between'>
+                                            {/* Job Type */}
+                                            <div className="mb-4">
+                                                <label className="block text-sm font-medium">Job Type</label>
+                                                <select className="mt-1 w-full border rounded-md p-2">
+                                                    <option>Full-time</option>
+                                                    <option>Part-time</option>
+                                                    <option>Remote</option>
+                                                    <option>Hybrid</option>
+                                                </select>
+                                            </div>
+
+                                            {/* Experience Level */}
+                                            <div className="mb-4">
+                                                <label className="block text-sm font-medium">Experience Level</label>
+                                                <select className="mt-1 w-full border rounded-md p-2">
+                                                    <option>Any</option>
+                                                    <option>Minimum 1year</option>
+                                                    <option>2+ Years</option>
+                                                    <option>5+ Years</option>
+                                                </select>
+                                            </div>
+
+                                            {/* Openings */}
+                                            <div className="mb-4">
+                                                <label className="block text-sm font-medium">No of Openings</label>
+                                                <input
+                                                    type="number"
+                                                    placeholder="Enter Openings"
+                                                    className="mt-1 border rounded-md p-2"
+                                                />
+                                            </div>
                                         </div>
+
 
                                         {/* Buttons */}
                                         <div className="flex justify-end space-x-4">
