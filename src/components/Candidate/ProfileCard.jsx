@@ -2,12 +2,12 @@ import React from 'react'
 import { useSelector } from 'react-redux';
 import BASE_URL from '../../services/baseUrl';
 
-function ProfileCard({ onOptionSelect, activeId}) {
+function ProfileCard({ onOptionSelect, activeId }) {
     const options = [
-        { id: 'dashboard', icon: 'fa-house', label:'Dashboard'},
-        { id: 'myapplications', icon: 'fa-list-check', label:'My Applications'},
-        { id: 'findjobs', icon: 'fa-briefcase', label:'Find Jobs'},
-        { id: 'myprofile', icon: 'fa-id-card-clip', label:'My Profile'},
+        { id: 'dashboard', icon: 'fa-house', label: 'Dashboard' },
+        { id: 'myapplications', icon: 'fa-list-check', label: 'My Applications' },
+        { id: 'findjobs', icon: 'fa-briefcase', label: 'Find Jobs' },
+        { id: 'myprofile', icon: 'fa-id-card-clip', label: 'My Profile' },
 
     ];
 
@@ -27,21 +27,45 @@ function ProfileCard({ onOptionSelect, activeId}) {
                     <p className="text-gray-500">Freelance Web Designer</p>
                 </div>
 
-                {/* Options */}
-                <div className='bg-base-200 mt-4 rounded-lg p-2'>
-                    <ul className='text-sm font-semibold'>
+                {/* Options with Glassmorphism */}
+                <div className='bg-base-200 flex-1 mt-4 rounded-xl p-3 shadow-inner border border-base-300'>
+                    <ul className='text-sm font-semibold space-y-2'>
                         {options.map((option) => (
                             <li
                                 key={option.id}
-                                className={`p-2 cursor-pointer rounded-md ${activeId === option.id ? 'bg-base-content text-base-100' : ''}`}
+                                className={`group relative overflow-hidden rounded-xl transition-all duration-300 cursor-pointer transform hover:scale-105 ${activeId === option.id
+                                        ? 'bg-neutral text-neutral-content shadow-lg scale-105 border-2 border-neutral'
+                                        : 'bg-base-100 text-base-content shadow-md hover:shadow-lg hover:bg-base-300 border-2 border-base-300 hover:border-neutral/30'
+                                    } px-4 py-3 min-h-12`}
                                 onClick={() => onOptionSelect(option.id)}
                             >
-                                <i className={`fa-solid ${option.icon} me-2`} />
-                                {option.label}
+                                <div className="flex items-center gap-3">
+                                    <div className={`w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-200 ${activeId === option.id
+                                            ? 'bg-neutral-content/20 text-neutral-content'
+                                            : 'bg-base-200 text-base-content/70 group-hover:bg-base-300 group-hover:text-base-content'
+                                        }`}>
+                                        <i className={`fa-solid ${option.icon} text-sm`} />
+                                    </div>
+                                    <span className="font-medium text-sm">{option.label}</span>
+                                </div>
+
+                                {/* Hover effect overlay */}
+                                {activeId !== option.id && (
+                                    <div className="absolute inset-0 bg-neutral/0 group-hover:bg-neutral/10 rounded-xl transition-all duration-300"></div>
+                                )}
                             </li>
                         ))}
 
-                        <li className='p-2 hover:bg-base-100 cursor-pointer rounded-md'><i className="fa-solid fa-sm fa-gear me-2" />Settings</li>
+                        {/* Settings option */}
+                        <li className='group relative overflow-hidden rounded-xl transition-all duration-300 cursor-pointer transform hover:scale-105 bg-base-100 text-base-content shadow-md hover:shadow-lg hover:bg-base-300 border-2 border-base-300 hover:border-neutral/30 px-4 py-3 min-h-12'>
+                            <div className="flex items-center gap-3">
+                                <div className="w-7 h-7 rounded-lg flex items-center justify-center transition-all duration-200 bg-base-200 text-base-content/70 group-hover:bg-base-300 group-hover:text-base-content">
+                                    <i className="fa-solid fa-sm fa-gear text-sm" />
+                                </div>
+                                <span className="font-medium text-sm">Settings</span>
+                            </div>
+                            <div className="absolute inset-0 bg-neutral/0 group-hover:bg-neutral/10 rounded-xl transition-all duration-300"></div>
+                        </li>
                     </ul>
                 </div>
 
