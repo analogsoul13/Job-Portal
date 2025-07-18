@@ -6,5 +6,9 @@ export const getCompaniesByUser = async (headers) => {
 }
 
 export const createCompanyApi = async (formData, headers) => {
-    return await commonApi(`${BASE_URL}/api/v1/company/register`, "POST", formData, headers)
+    return await commonApi(`${BASE_URL}/api/v1/company/register`, "POST", headers, formData)
+}
+
+export const updateCompanyApi = async (companyId, headers, formData) => {
+    return await commonApi(`${BASE_URL}/api/v1/company/update/${companyId}`, "PUT", headers, formData)
 }
