@@ -31,7 +31,7 @@ function RecruiterDashboard() {
     <>
       <div className='max-w-full fade-in bg-base-100 flex flex-col lg:flex-row mb-4'>
         {/* Left Section SideBar */}
-        <div className='lg:w-1/12'>
+        <div className='lg:w-2/12'>
           <SideBar onOptionSelect={setActiveSection} activeId={activeSection} />
         </div>
         {/* Data Lists Section / shown only when clicked candidates */}
