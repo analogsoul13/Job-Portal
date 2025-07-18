@@ -43,6 +43,7 @@ const PersonalInfoSection = ({
                             <h1 className='text-md md:text-xl text-base-content font-semibold'>{profile?.first_name} {profile?.last_name}</h1>
                             <p className='text-gray-500 text-xs md:text-sm'>Full Stack Web Developer</p>
                             <p className='text-base-content cursor-pointer hover:text-blue-400 text-xs'>{profile?.email}</p>
+                            <p className='text-accent cursor-pointer hover:text-blue-400 text-xs'>{profile?.role}</p>
                         </div>
                     </div>
                     <div className='flex w-1/4 justify-center items-center'>
