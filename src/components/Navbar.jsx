@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import ProfileCard from './Candidate/ProfileCard'
 import { useSelector, useDispatch } from 'react-redux'
@@ -10,11 +10,20 @@ import { persistor } from '../redux/store'
 function Navbar({ onOptionSelect, activeId }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [showPopup, setShowPopup] = useState(false)
-    // For user is logged in or not
+    const [scrolled, setScrolled] = useState(false)
     const { isLoggedIn, userRole, userInfo } = useSelector((state) => state.auth)
     const userName = userInfo?.first_name
     const nav = useNavigate()
     const dispatch = useDispatch()
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 10)
+        }
+
+        window.addEventListener('scroll', handleScroll)
+        return () => window.removeEventListener('scroll', handleScroll)
+    }, [])
 
     const handleToggleMenu = () => {
         setIsMenuOpen(!isMenuOpen)
@@ -42,7 +51,7 @@ function Navbar({ onOptionSelect, activeId }) {
 
     return (
         <>
-            <div className="bg-base-100 navbar font-custom sm:px-6 ">
+            <div className={`bg-base-100 navbar font-custom sm:px-6 sticky top-0 z-40 backdrop-blur-md transition-shadow ${scrolled ? 'shadow-md' : 'shadow-none'}`}>
                 < div className="navbar-start">
                     {/* Hamburger Icon for Profile Card */}
                     {isLoggedIn && (
@@ -94,7 +103,7 @@ function Navbar({ onOptionSelect, activeId }) {
                     {isLoggedIn ? (
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-full h-full border-4 border-base-300 shadow-2xl rounded-full">
+                                <div className="w-full h-full border-2 border-base-300 shadow-2xl rounded-full">
                                     {userInfo?.profilePic ? (
                                         <img className='object-cover object-center'
                                             alt="Profile Picture"
@@ -142,35 +151,6 @@ function Navbar({ onOptionSelect, activeId }) {
                                     </label>
                                 </li>
                             </ul>
-                            {/* Popup for logout */}
-                            {
-                                showPopup && (
-                                    <div className="fixed inset-0 flex fade-in items-center justify-center bg-black bg-opacity-50 z-50">
-                                        <div className="bg-base-100 rounded-lg shadow-lg p-6 w-96">
-                                            <h3 className="text-lg mb-4">Confirm Logout</h3>
-                                            <p className="text-base-content mb-6">
-                                                Are you sure you want to log out?
-                                            </p>
-                                            <div className="flex justify-end gap-4">
-                                                <button
-                                                    onClick={handleCancel}
-                                                    className="btn btn-neutral text-xs"
-                                                >
-                                                    Cancel
-                                                </button>
-                                                <button
-                                                    onClick={handleLogout}
-                                                    className="btn btn-error text-xs text-base-300"
-                                                >
-                                                    Logout
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                )
-                            }
-
                         </div>
                     ) : (
                         <div className="form-control">
@@ -181,6 +161,35 @@ function Navbar({ onOptionSelect, activeId }) {
 
                 </div>
             </div>
+
+            {/* Popup for logout */}
+            {
+                showPopup && (
+                    <div className="fixed inset-0 flex fade-in items-center justify-center bg-black bg-opacity-50 z-50">
+                        <div className="bg-base-100 rounded-lg shadow-lg p-6 w-96">
+                            <h3 className="text-lg mb-4">Confirm Logout</h3>
+                            <p className="text-base-content mb-6">
+                                Are you sure you want to log out?
+                            </p>
+                            <div className="flex justify-end gap-4">
+                                <button
+                                    onClick={handleCancel}
+                                    className="btn btn-neutral text-xs"
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    onClick={handleLogout}
+                                    className="btn btn-error text-xs text-base-300"
+                                >
+                                    Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                )
+            }
 
 
             {/* Mobile Sidebar (visible only when logged in) */}
