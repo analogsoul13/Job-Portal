@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux'
 import { getUserProfile } from '../../services/profileServices'
-import { createCompanyApi, getCompaniesByUser, updateCompanyApi } from '../../services/companyServices';
+import { createCompanyApi, deleteCompanyApi, getCompaniesByUser, updateCompanyApi } from '../../services/companyServices';
 import { toast } from 'react-toastify';
 import PersonalInfoSection from './PersonalInfoSection';
 import CompanyInfoSection from './CompanyInfoSection';
@@ -18,6 +18,8 @@ function RecruiterProfile() {
 
   const [companyData, setCompanyData] = useState(null)
   const [showCompanyModel, setShowCompanyModel] = useState(false)
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
+  const [deleteCompanyId, setDeleteCompanyId] = useState(null)
   const [logoFile, setLogoFile] = useState(null);
   const [isEditing, setIsEditing] = useState(null)
 
@@ -193,7 +195,8 @@ function RecruiterProfile() {
       const response = await createCompanyApi(formData, headers)
       setIsEditing(false)
       setShowCompanyModel(false)
-
+      fetchData()
+      // Check here again not using the response
     } catch (error) {
       console.error("Error adding company:", error);
       toast.error("Error adding company")
@@ -231,6 +234,23 @@ function RecruiterProfile() {
       toast.error("Failed to update company.")
     }
   };
+
+  // Deleting company Logic
+  const handleDeleteCompany = async(companyId) => {
+    try {
+      const headers = {
+        Authorization : `Bearer ${token}`
+      }
+      const response = await deleteCompanyApi(companyId, headers)
+      toast.success(response.data.message)
+      setCompanyData(null)
+    } catch (error) {
+      toast.error(error.response?.data?.message || "Failed to delete company")
+    } finally {
+      setShowDeleteModal(false)
+      setDeleteCompanyId(null)
+    }
+  }
 
 
   if (loading) {
@@ -281,6 +301,11 @@ function RecruiterProfile() {
               setLogoFile={setLogoFile}
               showCompanyModel={showCompanyModel}
               setShowCompanyModel={setShowCompanyModel}
+              showDeleteModal={showDeleteModal}
+              setShowDeleteModal={setShowDeleteModal}
+              deleteCompanyId={deleteCompanyId}
+              setDeleteCompanyId={setDeleteCompanyId}
+              handleDeleteCompany={handleDeleteCompany}
               isEditing={isEditing}
               setIsEditing={setIsEditing}
               handleEditCompany={handleEditCompany}
