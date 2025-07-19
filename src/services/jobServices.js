@@ -1,6 +1,11 @@
 import BASE_URL from "./baseUrl";
 import commonApi from "./commonApi";
 
+export const createJobApi = async (finalJobData, headers) => {
+    return await commonApi(`${BASE_URL}/api/v1/jobs`, "POST", headers, finalJobData)
+}
+
+
 // Get all jobs
 export const getAllJobsApi = async (queryString, headers) => {
     return await commonApi(`${BASE_URL}/api/v1/jobs?${queryString}`, "GET", headers)
