@@ -12,3 +12,7 @@ export const createCompanyApi = async (formData, headers) => {
 export const updateCompanyApi = async (companyId, headers, formData) => {
     return await commonApi(`${BASE_URL}/api/v1/company/update/${companyId}`, "PUT", headers, formData)
 }
+
+export const deleteCompanyApi = async (companyId, headers) => {
+    return await commonApi(`${BASE_URL}/api/v1/company/delete/${companyId}`, "DELETE", headers)
+}
