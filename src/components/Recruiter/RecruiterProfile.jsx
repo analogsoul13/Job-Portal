@@ -9,7 +9,7 @@ import CompanyInfoSection from './CompanyInfoSection';
 import { updateProfileApi } from '../../services/profileServices';
 import { UserPen } from 'lucide-react';
 import { useDispatch } from 'react-redux';
-import { updateProfileInfo } from '../../redux/slices/authSlice';
+import { removeCompanyInfo, updateCompanyInfo, updateProfileInfo } from '../../redux/slices/authSlice';
 
 function RecruiterProfile() {
   const [editProfile, setEditProfile] = useState(false)
@@ -193,10 +193,15 @@ function RecruiterProfile() {
       console.log("Company Data: ", formData);
 
       const response = await createCompanyApi(formData, headers)
-      setIsEditing(false)
-      setShowCompanyModal(false)
-      fetchData()
-      // Check here again not using the response
+
+      if (response.data.success) {
+        dispatch(updateCompanyInfo(response.data.company))
+        toast.success("Company Added Succesfully")
+        setIsEditing(false)
+        setShowCompanyModal(false)
+        fetchData()
+      }
+
     } catch (error) {
       console.error("Error adding company:", error);
       toast.error("Error adding company")
@@ -224,6 +229,7 @@ function RecruiterProfile() {
 
       if (response.data.success) {
         setNewCompany(response.data.company);
+        dispatch(updateCompanyInfo(response.data.company))
         toast.success("Company updated successfully!");
         setShowCompanyModal(false)
         fetchData()
@@ -236,14 +242,17 @@ function RecruiterProfile() {
   };
 
   // Deleting company Logic
-  const handleDeleteCompany = async(companyId) => {
+  const handleDeleteCompany = async (companyId) => {
     try {
       const headers = {
-        Authorization : `Bearer ${token}`
+        Authorization: `Bearer ${token}`
       }
+
       const response = await deleteCompanyApi(companyId, headers)
+      dispatch(removeCompanyInfo())
       toast.success(response.data.message)
       setCompanyData(null)
+
     } catch (error) {
       toast.error(error.response?.data?.message || "Failed to delete company")
     } finally {
