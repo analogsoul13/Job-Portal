@@ -9,6 +9,11 @@ function CompanyInfoSection({
     setLogoFile,
     handleAddCompany,
     showCompanyModel,
+    showDeleteModal,
+    setShowDeleteModal,
+    deleteCompanyId,
+    setDeleteCompanyId,
+    handleDeleteCompany,
     setShowCompanyModel,
     isEditing,
     setIsEditing,
@@ -103,9 +108,19 @@ function CompanyInfoSection({
                     <div className="mt-4 pt-4 border-t border-gray-200">
                         <button
                             onClick={handleEditClick}
-                            className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white px-4 py-2 rounded-full font-medium transition-all duration-200 transform hover:scale-105 shadow-lg text-sm"
+                            className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-base-100 px-4 py-2 rounded-full font-medium transition-all duration-200 transform hover:scale-105 shadow-lg text-sm"
                         >
                             ✏️ Edit Company Details
+                        </button>
+
+                        <button
+                            onClick={() => {
+                                setShowDeleteModal(true)
+                                setDeleteCompanyId(companyData._id)
+                            }}
+                            className="bg-gradient-to-r ml-3 from-red-500 to-red-800 hover:from-red-800 hover:to-red-600 text-base-100 px-4 py-2 rounded-full font-medium transition-all duration-200 transform hover:scale-105 shadow-lg text-sm"
+                        >
+                            Delete Company
                         </button>
                     </div>
                 </div>
@@ -248,6 +263,33 @@ function CompanyInfoSection({
             </div>
         )
     }
+
+            {/* Delete company confirmation model */}
+            {showDeleteModal && (
+                <div className="fixed inset-0 flex fade-in items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-base-100 rounded-lg shadow-lg p-6 w-96">
+                        <h3 className="text-lg mb-4">Confirm Deletion</h3>
+                        <p className="text-base-content mb-6">
+                            Are you sure you want to delete this company?
+                        </p>
+                        <div className="flex justify-end gap-4">
+                            <button 
+                                onClick={() => setShowDeleteModal(false)} 
+                                className="btn btn-neutral text-base-100 text-xs">
+                                Cancel
+                            </button>
+
+                            <button
+                                onClick={() => handleDeleteCompany(deleteCompanyId)}
+                                className="btn btn-error text-xs text-base-100"
+                            >
+                                Yes, Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
     </>
     )
 }
