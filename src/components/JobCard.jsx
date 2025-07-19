@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useSelector } from 'react-redux'
 import { applyForJobApi } from '../services/jobServices'
 import { toast } from 'react-toastify'
+import BASE_URL from '../services/baseUrl'
 
 function JobCard({ job, showApplyButton = true, applicationStatus = null }) {
     const token = useSelector((state) => state.auth.token)
@@ -32,7 +33,7 @@ function JobCard({ job, showApplyButton = true, applicationStatus = null }) {
             <div className='card rounded-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 ease-in-out bg-base-100 shadow fade-in overflow-hidden w-auto h-full'>
                 <div className="card-body">
                     <div className='flex justify-between'>
-                        <img className='rounded-full h-6 w-6' src="https://e7.pngegg.com/pngimages/882/225/png-clipart-google-logo-google-logo-google-search-icon-google-text-logo.png" alt="" />
+                        <img className='rounded-full h-6 w-6' src={`${BASE_URL}${job.company.logo}`} alt="" />
                         <div className="badge badge-warning text-slate-100 text-xs">Featured</div>
                     </div>
 
