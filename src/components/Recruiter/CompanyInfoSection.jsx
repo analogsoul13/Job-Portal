@@ -109,7 +109,7 @@ function CompanyInfoSection({
                     <div className="mt-4 pt-4 border-t border-gray-200">
                         <button
                             onClick={handleEditClick}
-                            className="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-base-100 px-4 py-2 rounded-full font-medium transition-all duration-200 transform hover:scale-105 shadow-lg text-sm"
+                            className="bg-gradient-to-r from-accent to-info hover:from-info hover:to-accent text-base-100 px-4 py-2 rounded-full font-medium transition-all duration-200 transform hover:scale-105 shadow-lg text-sm"
                         >
                             ✏️ Edit Company Details
                         </button>
