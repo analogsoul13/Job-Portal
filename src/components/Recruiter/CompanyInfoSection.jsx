@@ -8,13 +8,14 @@ function CompanyInfoSection({
     setNewCompany,
     setLogoFile,
     handleAddCompany,
-    showCompanyModel,
+    showCompanyModal,
+    setShowCompanyModal,
     showDeleteModal,
     setShowDeleteModal,
     deleteCompanyId,
     setDeleteCompanyId,
     handleDeleteCompany,
-    setShowCompanyModel,
+    
     isEditing,
     setIsEditing,
     handleEditCompany }) {
@@ -43,7 +44,7 @@ function CompanyInfoSection({
                 logo: null
             })
             setLogoPreview(`${BASE_URL}${companyData.logo}` || null)
-            setShowCompanyModel(true)
+            setShowCompanyModal(true)
             setIsEditing(true)
         }
 
@@ -138,7 +139,7 @@ function CompanyInfoSection({
                     </div>
 
                     <button
-                        onClick={() => setShowCompanyModel(true)}
+                        onClick={() => setShowCompanyModal(true)}
                         className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-8 py-3 rounded-full font-medium transition-all duration-200 transform hover:scale-105 shadow-lg inline-flex items-center space-x-2"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,13 +153,13 @@ function CompanyInfoSection({
 
             {/* Add Company Modal */ }
     {
-        showCompanyModel && (
+        showCompanyModal && (
             <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
                 <div className="bg-base-100 rounded-3xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
                     <div className="flex items-center justify-between mb-6">
                         <h3 className="text-2xl font-bold text-base-content">{isEditing ? 'Edit Company' : '🏢 Add New Company'}</h3>
                         <button
-                            onClick={() => setShowCompanyModel(false)}
+                            onClick={() => setShowCompanyModal(false)}
                             className="w-10 h-10 bg-gray-100 hover:bg-gray-200 rounded-full flex items-center justify-center transition-colors duration-200"
                         >
                             <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -244,7 +245,7 @@ function CompanyInfoSection({
                     <div className="flex justify-end space-x-4 mt-8 pt-6 border-t border-gray-200">
                         <button
                             onClick={() => {
-                                setShowCompanyModel(false)
+                                setShowCompanyModal(false)
                                 setNewCompany({ name: '', website: '', description: '', location: '', logo: null })
                             }}
                             className="btn btn-outline btn-error transition-all duration-200 transform hover:scale-105 disabled:scale-100 disabled:cursor-not-allowed shadow-md"

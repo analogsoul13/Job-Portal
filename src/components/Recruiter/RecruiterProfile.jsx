@@ -17,7 +17,7 @@ function RecruiterProfile() {
   const [profile, setProfile] = useState(null)
 
   const [companyData, setCompanyData] = useState(null)
-  const [showCompanyModel, setShowCompanyModel] = useState(false)
+  const [showCompanyModal, setShowCompanyModal] = useState(false)
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [deleteCompanyId, setDeleteCompanyId] = useState(null)
   const [logoFile, setLogoFile] = useState(null);
@@ -194,7 +194,7 @@ function RecruiterProfile() {
 
       const response = await createCompanyApi(formData, headers)
       setIsEditing(false)
-      setShowCompanyModel(false)
+      setShowCompanyModal(false)
       fetchData()
       // Check here again not using the response
     } catch (error) {
@@ -225,7 +225,7 @@ function RecruiterProfile() {
       if (response.data.success) {
         setNewCompany(response.data.company);
         toast.success("Company updated successfully!");
-        setShowCompanyModel(false)
+        setShowCompanyModal(false)
         fetchData()
         setIsEditing(false)
       }
@@ -299,8 +299,8 @@ function RecruiterProfile() {
               handleAddCompany={handleAddCompany}
               handleFileChange={handleFileChange}
               setLogoFile={setLogoFile}
-              showCompanyModel={showCompanyModel}
-              setShowCompanyModel={setShowCompanyModel}
+              showCompanyModal={showCompanyModal}
+              setShowCompanyModal={setShowCompanyModal}
               showDeleteModal={showDeleteModal}
               setShowDeleteModal={setShowDeleteModal}
               deleteCompanyId={deleteCompanyId}
