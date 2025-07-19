@@ -20,6 +20,7 @@ const authSlice = createSlice({
                     first_name: user.first_name,
                     last_name: user.last_name,
                     profilePic: user.profile?.profilePhoto || "", // Avoid undefined errors
+                    company: user.profile?.company || null,
                 };
                 state.token = action.payload?.token || null; // Store token in Redux
                 localStorage.setItem("token", action.payload?.token);
@@ -43,8 +44,18 @@ const authSlice = createSlice({
                 };
             }
         },
+        updateCompanyInfo: (state, action) => {
+            if (state.userInfo) {
+                state.userInfo.company = action.payload;
+            }
+        },
+        removeCompanyInfo: (state) => {
+            if(state.userInfo) {
+                state.userInfo.company = null;
+            }
+        }
     },
 });
 
-export const { login, logout, updateProfileInfo } = authSlice.actions
+export const { login, logout, updateProfileInfo, updateCompanyInfo, removeCompanyInfo } = authSlice.actions
 export default authSlice.reducer
