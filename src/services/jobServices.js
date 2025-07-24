@@ -26,3 +26,8 @@ export const applyForJobApi = async (jobId, headers) => {
 export const getAppliedJobsApi = async (headers) => {
     return await commonApi(`${BASE_URL}/api/v1/application/get`, "GET", headers)
 }
+
+
+export const getJobsByRecruiterApi = async (headers) => {
+    return await commonApi(`${BASE_URL}/api/v1/jobs/recruiter`, "GET", headers)
+}
