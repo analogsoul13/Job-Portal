@@ -37,7 +37,7 @@ function JobCard({ job, showApplyButton = true, applicationStatus = null }) {
                         <div className="badge badge-warning text-slate-100 text-xs">Featured</div>
                     </div>
 
-                    <h4>{job.company.name}</h4>
+                    <h4>{job?.company?.name}</h4>
                     <h2 className="card-title text-base-content">{job.title}</h2>
                     <div className='flex justify-between'>
                         <p className='text-xs text-slate-500'><i className="fa-solid fa-location-dot me-2" />{job.location}</p>
@@ -47,6 +47,10 @@ function JobCard({ job, showApplyButton = true, applicationStatus = null }) {
                     <div>
                         <h3 className='text-sm text-slate-600'>Job Description</h3>
                         <p className='text-xs text-slate-500'>{job.description}</p>
+                    </div>
+
+                    <div>
+                        <p className='text-xs'>Posted By {job.created_by.first_name} {job.created_by.last_name}</p>
                     </div>
                     <div className='flex justify-between items-center mt-2'>
                         {showApplyButton ? (
