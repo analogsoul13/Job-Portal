@@ -193,7 +193,7 @@ function Navbar({ onOptionSelect, activeId }) {
 
 
             {/* Mobile Sidebar (visible only when logged in) */}
-            {isLoggedIn && (
+            {userRole === 'candidate' && isLoggedIn && (
                 <div className={`fixed md:hidden top-0 right-0 w-64 shadow h-full z-50 transition-transform duration-300 ease-in-out 
                 ${isMenuOpen
                         ? 'translate-x-0'
