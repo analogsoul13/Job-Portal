@@ -67,7 +67,7 @@ function FindJobs() {
           <SearchBar filters={filters} setFilters={setFilters} />
           <JobFilter filters={filters} setFilters={setFilters} />
         </div>
-        <div className='max-w-full grid sm:grid-cols-3 gap-6 border p-4 rounded-lg'>
+        <div className='max-w-full grid sm:grid-cols-3 gap-6 p-4 rounded-lg'>
           {jobs.length > 0 ? (
             jobs.map((job) => <JobCard key={job._id} job={job} />)
           ) : (
