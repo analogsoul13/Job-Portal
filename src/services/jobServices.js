@@ -31,3 +31,7 @@ export const getAppliedJobsApi = async (headers) => {
 export const getJobsByRecruiterApi = async (headers) => {
     return await commonApi(`${BASE_URL}/api/v1/jobs/recruiter`, "GET", headers)
 }
+
+export const deleteJobApi = async (jobId, headers) => {
+    return await commonApi(`${BASE_URL}/api/v1/jobs/${jobId}`, "DELETE", headers)
+}
