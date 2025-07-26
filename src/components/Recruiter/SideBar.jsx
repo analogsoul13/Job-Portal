@@ -15,7 +15,7 @@ function SideBar({ onOptionSelect, activeId }) {
 
     return (
         <>
-            <div className='bg-base-100 rounded-2xl shadow-lg border border-base-300 sm:col-span-1 p-4 w-full min-h-full flex flex-col'>
+            <div className='bg-base-100 shadow-lg border border-base-300 sm:col-span-1 p-4 w-full min-h-full flex flex-col'>
                 {/* Profile Picture */}
                 <div className="w-full hidden lg:flex lg:flex-col items-center rounded-xl border-2 p-4 border-base-300 overflow-hidden bg-base-200 shadow-md hover:shadow-lg transition-all duration-300">
                     <div className="relative group">
